@@ -1,0 +1,3 @@
+# Editor / OS noise, machine-specific - never commit these
+.vscode/
+.DS_Store
