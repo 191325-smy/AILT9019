@@ -1,0 +1,19 @@
+# Dependencies for the AILT9019 matcher.
+#
+#   python -m pip install -r requirements.txt
+#
+# Only needed for the model stage (matcher.py). Everything else - schema,
+# seeding, filtering, the CLI - is standard library only and runs without this.
+
+langchain
+langchain-deepseek
+
+# reads app/.env so the API key lives in a file, not in your shell history
+python-dotenv
+
+# pydantic arrives with langchain and builds the structured-output schema in
+# matcher.py. Listed explicitly so a resolver change can't drop it quietly.
+pydantic
+
+# Optional, only if you switch to OpenAI: MATCH_MODEL=openai:gpt-4o-mini
+# langchain-openai

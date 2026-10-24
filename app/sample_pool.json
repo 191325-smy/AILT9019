@@ -1,0 +1,374 @@
+[
+  {
+    "account_id": 1,
+    "username": "alice_chen",
+    "display_name": "Alice Chen",
+    "contact_info": "alice@test.com",
+    "city": "HK",
+    "preferred_role": "Frontend",
+    "languages": [
+      "Mandarin",
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 2,
+    "username": "bob_liu",
+    "display_name": "Bob Liu",
+    "contact_info": "bob@test.com",
+    "city": "HK",
+    "preferred_role": "Backend",
+    "languages": [
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 3,
+    "username": "carol_wang",
+    "display_name": "Carol Wang",
+    "contact_info": "carol@test.com",
+    "city": "HK",
+    "preferred_role": "Database",
+    "languages": [
+      "Cantonese"
+    ],
+    "in_team": 1
+  },
+  {
+    "account_id": 4,
+    "username": "david_zhao",
+    "display_name": "David Zhao",
+    "contact_info": "david@test.com",
+    "city": "HK",
+    "preferred_role": "Agentic Development",
+    "languages": [
+      "Mandarin",
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 5,
+    "username": "emma_sun",
+    "display_name": "Emma Sun",
+    "contact_info": "emma@test.com",
+    "city": "HK",
+    "preferred_role": "Other",
+    "languages": [
+      "Mandarin"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 6,
+    "username": "frank_zhou",
+    "display_name": "Frank Zhou",
+    "contact_info": "frank@test.com",
+    "city": "HK",
+    "preferred_role": "Frontend",
+    "languages": [
+      "English",
+      "Cantonese"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 7,
+    "username": "grace_wu",
+    "display_name": "Grace Wu",
+    "contact_info": "grace@test.com",
+    "city": "HK",
+    "preferred_role": "Backend",
+    "languages": [
+      "Mandarin",
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 8,
+    "username": "henry_xu",
+    "display_name": "Henry Xu",
+    "contact_info": "henry@test.com",
+    "city": "HK",
+    "preferred_role": "Database",
+    "languages": [
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 9,
+    "username": "ivy_huang",
+    "display_name": "Ivy Huang",
+    "contact_info": "ivy@test.com",
+    "city": "HK",
+    "preferred_role": "Agentic Development",
+    "languages": [
+      "Mandarin"
+    ],
+    "in_team": 1
+  },
+  {
+    "account_id": 10,
+    "username": "jack_lin",
+    "display_name": "Jack Lin",
+    "contact_info": "jack@test.com",
+    "city": "HK",
+    "preferred_role": "Other",
+    "languages": [
+      "Cantonese"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 11,
+    "username": "karen_he",
+    "display_name": "Karen He",
+    "contact_info": "karen@test.com",
+    "city": "HK",
+    "preferred_role": "Frontend",
+    "languages": [
+      "Mandarin",
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 12,
+    "username": "leo_gao",
+    "display_name": "Leo Gao",
+    "contact_info": "leo@test.com",
+    "city": "HK",
+    "preferred_role": "Backend",
+    "languages": [
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 13,
+    "username": "mia_luo",
+    "display_name": "Mia Luo",
+    "contact_info": "mia@test.com",
+    "city": "HK",
+    "preferred_role": "Database",
+    "languages": [
+      "Mandarin",
+      "Cantonese"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 14,
+    "username": "nathan_zheng",
+    "display_name": "Nathan Zheng",
+    "contact_info": "nathan@test.com",
+    "city": "HK",
+    "preferred_role": "Agentic Development",
+    "languages": [
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 15,
+    "username": "olivia_liang",
+    "display_name": "Olivia Liang",
+    "contact_info": "olivia@test.com",
+    "city": "HK",
+    "preferred_role": "Other",
+    "languages": [
+      "Mandarin"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 16,
+    "username": "peter_song",
+    "display_name": "Peter Song",
+    "contact_info": "peter@test.com",
+    "city": "SH",
+    "preferred_role": "Frontend",
+    "languages": [
+      "Mandarin",
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 17,
+    "username": "queenie_tang",
+    "display_name": "Queenie Tang",
+    "contact_info": "queenie@test.com",
+    "city": "SH",
+    "preferred_role": "Backend",
+    "languages": [
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 18,
+    "username": "ryan_feng",
+    "display_name": "Ryan Feng",
+    "contact_info": "ryan@test.com",
+    "city": "SH",
+    "preferred_role": "Database",
+    "languages": [
+      "Mandarin"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 19,
+    "username": "sophia_cao",
+    "display_name": "Sophia Cao",
+    "contact_info": "sophia@test.com",
+    "city": "SH",
+    "preferred_role": "Agentic Development",
+    "languages": [
+      "Mandarin",
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 20,
+    "username": "tom_yao",
+    "display_name": "Tom Yao",
+    "contact_info": "tom@test.com",
+    "city": "SH",
+    "preferred_role": "Other",
+    "languages": [
+      "Cantonese"
+    ],
+    "in_team": 1
+  },
+  {
+    "account_id": 21,
+    "username": "uma_pan",
+    "display_name": "Uma Pan",
+    "contact_info": "uma@test.com",
+    "city": "SH",
+    "preferred_role": "Frontend",
+    "languages": [
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 22,
+    "username": "victor_qin",
+    "display_name": "Victor Qin",
+    "contact_info": "victor@test.com",
+    "city": "SH",
+    "preferred_role": "Backend",
+    "languages": [
+      "Mandarin",
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 23,
+    "username": "wendy_jiang",
+    "display_name": "Wendy Jiang",
+    "contact_info": "wendy@test.com",
+    "city": "SH",
+    "preferred_role": "Database",
+    "languages": [
+      "Mandarin"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 24,
+    "username": "xander_guo",
+    "display_name": "Xander Guo",
+    "contact_info": "xander@test.com",
+    "city": "SH",
+    "preferred_role": "Agentic Development",
+    "languages": [
+      "English",
+      "Mandarin"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 25,
+    "username": "yuki_han",
+    "display_name": "Yuki Han",
+    "contact_info": "yuki@test.com",
+    "city": "SH",
+    "preferred_role": "Other",
+    "languages": [
+      "Cantonese"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 26,
+    "username": "zoe_shi",
+    "display_name": "Zoe Shi",
+    "contact_info": "zoe@test.com",
+    "city": "SH",
+    "preferred_role": "Frontend",
+    "languages": [
+      "English"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 27,
+    "username": "aaron_deng",
+    "display_name": "Aaron Deng",
+    "contact_info": "aaron@test.com",
+    "city": "SH",
+    "preferred_role": "Backend",
+    "languages": [
+      "Mandarin"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 28,
+    "username": "bella_ma",
+    "display_name": "Bella Ma",
+    "contact_info": "bella@test.com",
+    "city": "SH",
+    "preferred_role": "Database",
+    "languages": [
+      "English",
+      "Mandarin"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 29,
+    "username": "cody_lei",
+    "display_name": "Cody Lei",
+    "contact_info": "cody@test.com",
+    "city": "SH",
+    "preferred_role": "Agentic Development",
+    "languages": [
+      "Mandarin"
+    ],
+    "in_team": 0
+  },
+  {
+    "account_id": 30,
+    "username": "diana_fan",
+    "display_name": "Diana Fan",
+    "contact_info": "diana@test.com",
+    "city": "SH",
+    "preferred_role": "Other",
+    "languages": [
+      "English",
+      "Cantonese"
+    ],
+    "in_team": 0
+  }
+]

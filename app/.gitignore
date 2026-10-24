@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+
+# virtual environment - recreate with: python3 -m venv .venv
+.venv/
+
+# generated at runtime by seed.py - rebuild with one command
+*.db
+*.db-journal
+
+# local secrets - copy .env.example and fill it in. NEVER commit a key.
+.env
+
+.DS_Store
