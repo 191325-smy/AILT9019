@@ -12,7 +12,7 @@ python3 match.py alice_chen
 That's the whole thing. `seed.py` creates `ailt9019.db` from `schema.sql` and
 fills it with 30 synthetic profiles from `seed.sql`.
 
-Requires Python 3.8+. Nothing to `pip install`.
+Requires Python 3.9+. Nothing to `pip install`.
 
 ## What each file is
 
