@@ -4,7 +4,7 @@ No database server, no driver, no credentials. SQLite ships with Python, and the
 database is a single file.
 
 ```bash
-cd app
+cd matching
 python3 seed.py
 python3 match.py alice_chen
 ```
@@ -63,7 +63,7 @@ Then open `.env` and paste your key:
 DEEPSEEK_API_KEY=sk-...
 ```
 
-That's the whole configuration. `matcher.py` reads `app/.env` on import, and
+That's the whole configuration. `matcher.py` reads `matching/.env` on import, and
 with the key present it defaults to `deepseek:deepseek-chat`. Override the model
 in the same file if you want another provider:
 
@@ -109,7 +109,7 @@ Only two, both in `filters.py` so they're visible and testable:
 Languages are **not** filtered. They're passed to the model as a signal, so a
 candidate whose role differs can still be suggested.
 
-`in_team` is set only by `seed.sql`. The app never flips it, so the same input
+`in_team` is set only by `seed.sql`. The logic never flips it, so the same input
 always yields the same pool and the same shortlist.
 
 ## How the team is assembled

@@ -1,15 +1,19 @@
 # AILT9019 — Teammate Matcher
 
-A demo app that turns a pool of course profiles into a **team**: instead of
-ranking classmates one by one, it picks people who cover different roles, so the
-result can start working together immediately.
+The matching engine for a course project: it turns a pool of profiles into a
+**team**. Instead of ranking classmates one by one, it picks people who cover
+different roles, so the result can start working together immediately.
+
+This folder is the **logic layer only** — accounts, the signup form, the web UI
+and the HTTP API are built separately. Everything here is plain Python with no
+web framework, so it can be imported by the backend rather than run as a site.
 
 Built for AILT9019 (AI Literacy II, HKU). Runs on SQLite, needs no server, and
 works with **zero installs**.
 
 ```bash
 git clone https://github.com/191325-smy/AILT9019.git
-cd AILT9019/app
+cd AILT9019/matching
 python3 seed.py              # builds ailt9019.db from schema.sql + seed.sql
 python3 match.py alice_chen   # prints the filtered pool and the shortlist
 ```
@@ -87,7 +91,7 @@ are chosen, so they only appear for people who actually made the shortlist.
 Out of the box nothing is called. To use DeepSeek:
 
 ```bash
-cd app
+cd matching
 cp .env.example .env      # then paste your key after DEEPSEEK_API_KEY=
 python3 -m venv .venv
 source .venv/bin/activate
@@ -95,7 +99,7 @@ pip install -r requirements.txt
 python3 match.py alice_chen   # source: model
 ```
 
-`matcher.py` reads `app/.env` on import and defaults to `deepseek:deepseek-chat`
+`matcher.py` reads `matching/.env` on import and defaults to `deepseek:deepseek-chat`
 when a key is present. One call, temperature 0, no agent and no tools: the model
 returns `account_id` values with a one-sentence reason, and any id not in the
 candidate list is discarded.
@@ -111,7 +115,7 @@ still completes with `source: fallback:<reason>` instead of a traceback.
 ```
 .
 ├── .gitignore
-└── app
+└── matching              the logic layer (this folder)
     ├── SETUP.md          detailed setup, error table, reset instructions
     ├── schema.sql        two tables: accounts, profiles
     ├── seed.sql          30 synthetic profiles (15 HK, 15 SH)
@@ -125,6 +129,23 @@ still completes with `source: fallback:<reason>` instead of a traceback.
     └── .env.example      template; the real .env is git-ignored
 ```
 
+The web frontend and the backend that serves it are separate work; they are not
+in this folder. To reuse this logic from a backend, import it rather than shell
+out:
+
+```python
+import db, matcher
+from filters import candidates_for_model
+
+conn = db.get_conn()
+me = db.load_profile_by_username(conn, "alice_chen")
+candidates, dropped, pool = candidates_for_model(me, db.load_pool(conn))
+picks, source = matcher.pick(me, candidates)
+```
+
+`matcher.pick()` returns `[{"profile": {...}, "reason": "..."}]` plus the
+`source` string, so an API layer can serialise it directly.
+
 `ailt9019.db` is generated and git-ignored — `python3 seed.py` recreates it in
 under a second. `python3 seed.py --reset` rebuilds it after a schema change.
 
@@ -136,8 +157,8 @@ This is a course demo, not a product:
   are invented; `contact_info` values are placeholders like `david@test.com`.
 - SQLite is a single file, chosen so the workflow is reproducible offline.
 - The interface is a CLI. There is no signup form or web UI in this repository.
-- `in_team` is set only by `seed.sql`; the app never flips it, so the same input
-  always produces the same pool.
+- `in_team` is set only by `seed.sql`; the logic never flips it, so the same
+  input always produces the same pool.
 
 ## When it breaks
 
@@ -149,4 +170,4 @@ This is a course demo, not a product:
 | `source: fallback:AuthenticationError` | bad or expired key | check `DEEPSEEK_API_KEY` in `.env` |
 | `UNIQUE constraint failed` | `seed.sql` applied twice | `python3 seed.py --reset` |
 
-`app/SETUP.md` has the longer version, including how to read the raw tables.
+`matching/SETUP.md` has the longer version, including how to read the raw tables.
