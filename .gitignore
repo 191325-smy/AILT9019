@@ -1,3 +1,14 @@
 # Editor / OS noise, machine-specific - never commit these
 .vscode/
 .DS_Store
+
+# Local backend environment, credentials and runtime data
+.venv/
+.env
+__pycache__/
+*.pyc
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.test-tmp/

@@ -4,9 +4,10 @@ The matching engine for a course project: it turns a pool of profiles into a
 **team**. Instead of ranking classmates one by one, it picks people who cover
 different roles, so the result can start working together immediately.
 
-This folder is the **logic layer only** — accounts, the signup form, the web UI
-and the HTTP API are built separately. Everything here is plain Python with no
-web framework, so it can be imported by the backend rather than run as a site.
+`matching/` is the **logic layer**, written in plain Python so a backend can
+import it. `backend/` adds a FastAPI service for registration, login, logout and
+authenticated profile reads/writes using the same SQLite database. The web UI
+and mutual-consent contact exchange are separate work.
 
 Built for AILT9019 (AI Literacy II, HKU). Runs on SQLite, needs no server, and
 works with **zero installs**.
@@ -19,6 +20,22 @@ python3 match.py alice_chen   # prints the filtered pool and the shortlist
 ```
 
 Requires Python 3.9+. There is nothing to `pip install` for the commands above.
+
+## Login and profile API
+
+For the new backend, use Python 3.10+ and follow [backend setup and frontend
+integration](backend/README.md). It preserves existing data, hashes passwords,
+and restricts profile writes to the logged-in account.
+
+```bash
+python -m pip install -r backend/requirements.txt
+python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000
+```
+
+Open `http://127.0.0.1:8000/docs` to register a synthetic account, log in and try
+the protected profile endpoints. Existing fixture hashes such as `hash1` are
+placeholders; register a new test account for login. The matching CLI above
+still runs independently without these dependencies.
 
 ## What you should see
 
@@ -115,12 +132,13 @@ still completes with `source: fallback:<reason>` instead of a traceback.
 ```
 .
 ├── .gitignore
+├── backend               FastAPI accounts/profile service; see backend/README.md
 └── matching              the logic layer (this folder)
     ├── SETUP.md          detailed setup, error table, reset instructions
     ├── schema.sql        two tables: accounts, profiles
     ├── seed.sql          30 synthetic profiles (15 HK, 15 SH)
     ├── seed.py           applies both .sql files to ailt9019.db
-    ├── db.py             the only file that writes SQL
+    ├── db.py             matching database readers
     ├── filters.py        hard constraints + signals (pure, no I/O)
     ├── matcher.py        model call + deterministic fallback
     ├── match.py          CLI: load -> filter -> shortlist -> print
@@ -129,9 +147,9 @@ still completes with `source: fallback:<reason>` instead of a traceback.
     └── .env.example      template; the real .env is git-ignored
 ```
 
-The web frontend and the backend that serves it are separate work; they are not
-in this folder. To reuse this logic from a backend, import it rather than shell
-out:
+The accounts/profile API is in `backend/`. The web UI, contact-consent flow and
+matching HTTP endpoint remain separate work. From the `matching/` directory,
+the existing logic can be reused directly:
 
 ```python
 import db, matcher
@@ -156,7 +174,8 @@ This is a course demo, not a product:
 - All 30 profiles are **synthetic**. Names, emails and preferences in `seed.sql`
   are invented; `contact_info` values are placeholders like `david@test.com`.
 - SQLite is a single file, chosen so the workflow is reproducible offline.
-- The interface is a CLI. There is no signup form or web UI in this repository.
+- Matching has a CLI, and accounts/profiles have a FastAPI interface. There is
+  no signup form or web UI in this repository.
 - `in_team` is set only by `seed.sql`; the logic never flips it, so the same
   input always produces the same pool.
 
