@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Teammate Matcher</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">🎯 Teammate Matcher</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="alert-container"></div>
+
+        <div class="auth-container">
+            <div class="auth-card">
+                <h1>Create Account</h1>
+                <p class="auth-subtitle">Join the teammate matching platform</p>
+
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="username">Username *</label>
+                        <input type="text" id="username" name="username" required
+                               placeholder="e.g. john_doe" pattern="[a-zA-Z0-9_]+"
+                               title="Only letters, numbers, and underscore">
+                        <small class="form-hint">Letters, numbers, and underscore only</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" name="password" required
+                               placeholder="Choose a password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="display_name">Display Name *</label>
+                        <input type="text" id="display_name" name="display_name" required
+                               placeholder="e.g. John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact_info">Contact Email</label>
+                        <input type="email" id="contact_info" name="contact_info"
+                               placeholder="e.g. john@example.com">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">Cohort City *</label>
+                            <select id="city" name="city" required>
+                                <option value="HK">Hong Kong (HK)</option>
+                                <option value="SH">Shanghai (SH)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="preferred_role">Preferred Role *</label>
+                            <select id="preferred_role" name="preferred_role" required>
+                                <option value="Frontend">Frontend</option>
+                                <option value="Backend">Backend</option>
+                                <option value="Database">Database</option>
+                                <option value="Agentic Development">Agentic Development</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="languages">Languages</label>
+                        <input type="text" id="languages" name="languages"
+                               placeholder="e.g. Mandarin, English, Cantonese">
+                        <small class="form-hint">Comma-separated list</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="index.html">Sign in</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>AILT9019 - AI Literacy for Computing and Data Science | HKU 2026-27</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

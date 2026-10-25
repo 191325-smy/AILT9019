@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Teammate Matcher</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="dashboard.html" class="nav-brand"> Teammate Matcher</a>
+            <div class="nav-links" id="nav-links">
+                <a href="edit-profile.html">Edit Profile</a>
+                <a href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="alert-container"></div>
+
+        <div class="dashboard">
+            <div class="dashboard-header">
+                <h1>Hello, <span id="user-display-name">User</span>! 👋</h1>
+                <p class="dashboard-subtitle">Find your perfect project teammates</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Profile Card -->
+                <div class="card profile-card">
+                    <div class="card-header">
+                        <h2>👤 Your Profile</h2>
+                        <a href="edit-profile.html" class="btn btn-sm btn-secondary">Edit</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="profile-info">
+                            <div class="info-row">
+                                <span class="info-label">Username:</span>
+                                <span class="info-value" id="profile-username">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">City:</span>
+                                <span class="info-value">
+                                    <span class="badge badge-city" id="profile-city">-</span>
+                                </span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Role:</span>
+                                <span class="info-value">
+                                    <span class="badge badge-role" id="profile-role">-</span>
+                                </span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Languages:</span>
+                                <span class="info-value" id="profile-languages">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Contact:</span>
+                                <span class="info-value" id="profile-contact">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Status:</span>
+                                <span class="info-value">
+                                    <span class="badge badge-warning" id="profile-status">Looking for teammates</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Match Card -->
+                <div class="card match-card">
+                    <div class="card-header">
+                        <h2>🎯 Find Teammates</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="match-description">
+                            Our AI-powered matching algorithm will find you the best teammates based on:
+                        </p>
+                        <ul class="match-features">
+                            <li>✓ Same cohort city (HK or SH)</li>
+                            <li>✓ Complementary roles (Frontend, Backend, Database, etc.)</li>
+                            <li>✓ Shared languages for better communication</li>
+                            <li>✓ Availability (not already in a team)</li>
+                        </ul>
+                        <button id="match-btn" class="btn btn-primary btn-block btn-lg">
+                            🔍 Run Matching Algorithm
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works -->
+            <div class="card how-it-works">
+                <div class="card-header">
+                    <h2>📋 How It Works</h2>
+                </div>
+                <div class="card-body">
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Hard Filter</h3>
+                                <p>First, we filter out people who can't match with you (different city, already in a team, or yourself).</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Signal Analysis</h3>
+                                <p>For remaining candidates, we analyze shared languages and role compatibility.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>AI Matching</h3>
+                                <p>Our AI model (or deterministic fallback) picks the top 5 teammates who best complement your skills.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>AILT9019 - AI Literacy for Computing and Data Science | HKU 2026-27</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Populate dashboard with current user data
+        document.addEventListener('DOMContentLoaded', () => {
+            if (currentUser) {
+                document.getElementById('user-display-name').textContent = currentUser.display_name;
+                document.getElementById('profile-username').textContent = currentUser.username;
+                document.getElementById('profile-city').textContent = currentUser.city;
+                document.getElementById('profile-role').textContent = currentUser.preferred_role;
+                document.getElementById('profile-languages').textContent = (currentUser.languages || []).join(', ') || 'Not specified';
+                document.getElementById('profile-contact').textContent = currentUser.contact_info || 'Not provided';
+
+                const statusBadge = document.getElementById('profile-status');
+                if (currentUser.in_team) {
+                    statusBadge.textContent = 'Already in a team';
+                    statusBadge.className = 'badge badge-success';
+                } else {
+                    statusBadge.textContent = 'Looking for teammates';
+                    statusBadge.className = 'badge badge-warning';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "alice_chen",
+      "password": "demo",
+      "display_name": "Alice Chen",
+      "contact_info": "alice@test.com",
+      "city": "HK",
+      "preferred_role": "Frontend",
+      "languages": ["Mandarin", "English"],
+      "in_team": false
+    },
+    {
+      "id": 2,
+      "username": "bob_liu",
+      "password": "demo",
+      "display_name": "Bob Liu",
+      "contact_info": "bob@test.com",
+      "city": "HK",
+      "preferred_role": "Backend",
+      "languages": ["English"],
+      "in_team": false
+    },
+    {
+      "id": 3,
+      "username": "carol_wang",
+      "password": "demo",
+      "display_name": "Carol Wang",
+      "contact_info": "carol@test.com",
+      "city": "HK",
+      "preferred_role": "Database",
+      "languages": ["Cantonese"],
+      "in_team": true
+    },
+    {
+      "id": 4,
+      "username": "david_zhao",
+      "password": "demo",
+      "display_name": "David Zhao",
+      "contact_info": "david@test.com",
+      "city": "HK",
+      "preferred_role": "Agentic Development",
+      "languages": ["Mandarin", "English"],
+      "in_team": false
+    },
+    {
+      "id": 5,
+      "username": "grace_wu",
+      "password": "demo",
+      "display_name": "Grace Wu",
+      "contact_info": "grace@test.com",
+      "city": "HK",
+      "preferred_role": "Backend",
+      "languages": ["Mandarin", "English"],
+      "in_team": false
+    }
+  ],
+  "sample_matches": {
+    "alice_chen": [
+      {
+        "rank": 1,
+        "display_name": "David Zhao",
+        "preferred_role": "Agentic Development",
+        "city": "HK",
+        "contact_info": "david@test.com",
+        "reason": "Agentic Development pairs with your Frontend; can talk in English, Mandarin.",
+        "shared_languages": ["Mandarin", "English"],
+        "role_fit": "complement"
+      },
+      {
+        "rank": 2,
+        "display_name": "Grace Wu",
+        "preferred_role": "Backend",
+        "city": "HK",
+        "contact_info": "grace@test.com",
+        "reason": "Backend pairs with your Frontend; can talk in English, Mandarin.",
+        "shared_languages": ["Mandarin", "English"],
+        "role_fit": "complement"
+      },
+      {
+        "rank": 3,
+        "display_name": "Bob Liu",
+        "preferred_role": "Backend",
+        "city": "HK",
+        "contact_info": "bob@test.com",
+        "reason": "Backend pairs with your Frontend; can talk in English.",
+        "shared_languages": ["English"],
+        "role_fit": "complement"
+      }
+    ]
+  },
+  "filter_summary": {
+    "different cohort (SH)": 14,
+    "already in a team": 3,
+    "that's you": 1
+  },
+  "stats": {
+    "total_pool": 30,
+    "eligible": 12,
+    "filtered_out": 18,
+    "recommended": 5
+  }
+}
