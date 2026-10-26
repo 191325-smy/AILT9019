@@ -1,7 +1,6 @@
 """FastAPI app: account lifecycle, profiles, and teammate matching."""
 
 import os
-import sys
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -15,11 +14,7 @@ from .models import AccountPublic, Credentials, LoginResponse, ProfilePublic, Pr
 from .security import hash_password, new_token, verify_password
 from .store import DuplicateUsername, Store
 
-# Add parent directory to path so we can import matching module
-ROOT_DIR = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT_DIR))
-
-from matching.db import get_conn, load_profile, load_pool
+from matching.db import load_pool
 from matching.filters import candidates_for_model
 from matching import matcher
 
@@ -40,7 +35,9 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
     if not isinstance(ttl, int) or isinstance(ttl, bool) or not 1 <= ttl <= 604800:
         raise ValueError("SESSION_TTL_SECONDS must be an integer from 1 to 604800.")
     origins = allowed_origins if allowed_origins is not None else [
-        origin.strip() for origin in os.getenv("ALLOWED_ORIGINS", "").split(",") if origin.strip()]
+        origin.strip() for origin in os.getenv(
+            "ALLOWED_ORIGINS", "http://localhost:8001,http://127.0.0.1:8001"
+        ).split(",") if origin.strip()]
     if "*" in origins:
         raise ValueError("Configure explicit ALLOWED_ORIGINS rather than '*'.")
     store = Store(path)
@@ -59,7 +56,7 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
     @application.middleware("http")
     async def private_responses(request: Request, call_next):
         response = await call_next(request)
-        if request.url.path.startswith(("/auth/", "/profiles/")):
+        if request.url.path.startswith(("/auth/", "/profiles/", "/matches")):
             response.headers["Cache-Control"] = "no-store"
         return response
 
@@ -131,8 +128,7 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
             )
 
         # Get all profiles from database
-        conn = get_conn()
-        try:
+        with store.connection() as conn:
             pool = load_pool(conn)
 
             # Run matching algorithm
@@ -169,8 +165,6 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
                 },
                 "filter_summary": dropped_summary
             }
-        finally:
-            conn.close()
 
     @application.get("/matches/me")
     def get_my_matches(account=Depends(current_account)):

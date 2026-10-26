@@ -1,9 +1,10 @@
 # Accounts and profile API
 
 This FastAPI backend adds registration, login, logout and authenticated profile
-reads/writes to the existing SQLite matching project. It uses the existing
-`accounts` and `profiles` tables and adds an `auth_sessions` table. It does not
-add a web UI, a matching API or the mutual-consent contact-exchange workflow.
+reads/writes and teammate matching to the existing SQLite project. It uses the
+existing `accounts` and `profiles` tables and adds an `auth_sessions` table.
+The web UI in `ui/` calls these APIs. Mutual-consent contact exchange remains
+future work; use synthetic contact details for this course demonstration.
 
 ## Start locally
 
@@ -48,7 +49,7 @@ The app reads process environment variables; it does not automatically load
 |---|---|---|
 | `DB_PATH` | `matching/ailt9019.db` in this repository | SQLite file used by the backend |
 | `SESSION_TTL_SECONDS` | `3600` | Token lifetime, from 1 to 604800 seconds |
-| `ALLOWED_ORIGINS` | Empty | Comma-separated frontend origins allowed by CORS |
+| `ALLOWED_ORIGINS` | `http://localhost:8001,http://127.0.0.1:8001` | Comma-separated frontend origins allowed by CORS |
 
 For a frontend running at `http://localhost:5173`, set this before starting
 Uvicorn in PowerShell:
@@ -84,6 +85,8 @@ Protected routes require `Authorization: Bearer <access_token>`.
 | `POST /auth/logout` | Bearer token | `204`, no response body; revokes that token |
 | `GET /profiles/me` | Bearer token | `200` with the current user's profile |
 | `PUT /profiles/me` | Bearer token and full editable profile | `200` with the saved profile |
+| `POST /matches` | Bearer token; a saved profile is required | `200` with `picks`, `source`, `stats` and `filter_summary` |
+| `GET /matches/me` | Bearer token | Alias for the current profile |
 
 Registration/login usernames are trimmed and lowercased. They must contain
 3-32 letters `a-z`, digits or underscores. Passwords must contain 8-128

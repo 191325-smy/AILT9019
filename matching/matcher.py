@@ -31,7 +31,10 @@ import os
 import sys
 from pathlib import Path
 
-from filters import MAX_MATCHES, diverse_picks, fallback_reason
+if __package__:
+    from .filters import MAX_MATCHES, diverse_picks, fallback_reason
+else:
+    from filters import MAX_MATCHES, diverse_picks, fallback_reason
 
 
 def _load_env():

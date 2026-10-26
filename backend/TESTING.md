@@ -1,8 +1,9 @@
 # Backend verification
 
-Verified on **25 October 2026**, using Python 3.12.14 on Windows, against the
-existing matching baseline `b1c81c484b571e59b25583b28e9527b635f4fde2` plus this
-backend addition. No original matching source or fixture files were changed.
+Verified on **26 October 2026**, using Python 3.12.14 on Windows, against
+integration baseline `0a5b0e3d0dc3765dbc1c6878b5d13ba64e997c97` plus these
+startup and integration fixes. Fixtures are unchanged; the matching import
+supports both package/API use and direct CLI use.
 
 ## Automated API suite
 
@@ -11,7 +12,7 @@ python -m pip install -r backend/requirements-test.txt
 python -m unittest discover -s backend/tests -v
 ```
 
-Result: **19 tests passed; 0 failures; 0 errors.**
+Result: **23 tests passed; 0 failures; 0 errors.**
 
 The suite checks:
 
@@ -28,6 +29,10 @@ The suite checks:
   passwords; newly registered users coexist with those fixtures.
 - Saved profiles remaining readable by `matching.db`.
 - Private responses using `Cache-Control: no-store` and explicit-origin CORS.
+- Matching uses the same configured database as accounts and profiles, returns
+  five unique eligible same-city candidates with reasons, and excludes self.
+- Matching rejects missing login/missing profile, handles an empty pool, and
+  accepts CORS preflight from the default recording frontend.
 
 The test databases are isolated under the ignored `.test-tmp/` directory and
 their SQLite handles are closed before cleanup. No AI API is used.
@@ -40,8 +45,23 @@ disposable database. Actual HTTP requests verified `/health`, `/docs` and
 of the logged-out token. The service was shut down and temporary data cleanup
 completed successfully.
 
-Result: **PASS**. This confirms local service operation; it does not claim that
-a frontend has been connected or a public deployment has been tested.
+Result: **PASS**. Public deployment has not been tested.
+
+## Browser workflow
+
+Edge browser automation exercised the actual UI against local Uvicorn and HTTP
+servers, using an isolated database seeded with the 30 synthetic classmates:
+
+- Registration creates an account, signs in and saves the full profile.
+- Dashboard reload fetches the saved profile from the backend.
+- HK matching displays five candidates with reasons and the fallback label.
+- Editing city to SH changes the saved data and returns five SH candidates.
+- Logout revokes the server session; signing in again restores the edited data.
+
+Result: **PASS**, with 17 actual API responses and zero page-script errors.
+The browser check used deterministic fallback; it does not validate live-model
+quality, time-overlap ranking or mutual-consent contact sharing. See
+[the recording walkthrough](../RECORDING.md) for a manual reproduction.
 
 ## Tested direct dependencies
 

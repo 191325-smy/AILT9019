@@ -24,7 +24,7 @@
                 <form id="register-form" class="auth-form">
                     <div class="form-group">
                         <label for="username">Username *</label>
-                        <input type="text" id="username" name="username" required
+                        <input type="text" id="username" name="username" required minlength="3" maxlength="32"
                                placeholder="e.g. john_doe" pattern="[a-zA-Z0-9_]+"
                                title="Only letters, numbers, and underscore">
                         <small class="form-hint">Letters, numbers, and underscore only</small>
@@ -32,8 +32,8 @@
 
                     <div class="form-group">
                         <label for="password">Password *</label>
-                        <input type="password" id="password" name="password" required
-                               placeholder="Choose a password">
+                        <input type="password" id="password" name="password" required minlength="8" maxlength="128"
+                               placeholder="Choose a password (at least 8 characters)">
                     </div>
 
                     <div class="form-group">

@@ -12,6 +12,7 @@ let authToken = null;
 document.addEventListener('DOMContentLoaded', () => {
     checkAuth();
     setupEventListeners();
+    if (window.location.pathname.endsWith('dashboard.html')) loadDashboard();
 });
 
 // Check authentication status from localStorage
@@ -27,7 +28,7 @@ function checkAuth() {
 
     // Redirect if needed
     const currentPage = window.location.pathname.split('/').pop();
-    if (currentPage === 'dashboard.html' && !currentUser) {
+    if (['dashboard.html', 'edit-profile.html', 'results.html'].includes(currentPage) && !currentUser) {
         window.location.href = 'index.html';
     }
 }
@@ -39,7 +40,7 @@ function updateNavbar() {
         navLinks.innerHTML = `
             <a href="dashboard.html">Dashboard</a>
             <a href="edit-profile.html">Edit Profile</a>
-            <a href="#" onclick="logout()">Logout (${currentUser.username})</a>
+            <a href="#" onclick="logout(); return false;">Logout (${escapeHtml(currentUser.username)})</a>
         `;
     }
 }
@@ -91,7 +92,12 @@ async function apiCall(endpoint, options = {}) {
 
     if (!response.ok) {
         const error = await response.json().catch(() => ({ detail: 'Request failed' }));
-        throw new Error(error.detail || `HTTP ${response.status}`);
+        const detail = Array.isArray(error.detail)
+            ? error.detail.map(item => `${item.loc.slice(1).join('.')}: ${item.msg}`).join('; ')
+            : error.detail;
+        const failure = new Error(detail || `HTTP ${response.status}`);
+        failure.status = response.status;
+        throw failure;
     }
 
     return response;
@@ -140,14 +146,66 @@ async function handleRegister(e) {
             method: 'POST',
             body: JSON.stringify({ username, password })
         });
-
-        showAlert('success', 'Registration successful! Please log in.');
+        // The account and profile are separate API resources.
+        const loginResponse = await apiCall('/auth/login', {
+            method: 'POST', body: JSON.stringify({ username, password })
+        });
+        authToken = (await loginResponse.json()).access_token;
+        localStorage.setItem('authToken', authToken);
+        const meResponse = await apiCall('/auth/me');
+        currentUser = await meResponse.json();
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        await apiCall('/profiles/me', {
+            method: 'PUT', body: JSON.stringify(profileFromForm())
+        });
+        showAlert('success', 'Account and profile saved successfully!');
         setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 1000);
+            window.location.href = 'dashboard.html';
+        }, 500);
     } catch (error) {
-        showAlert('error', error.message || 'Registration failed.');
+        if (currentUser && authToken) {
+            showAlert('error', `Account created, but profile was not saved: ${error.message}. Open Edit Profile to complete it.`);
+            updateNavbar();
+        } else {
+            showAlert('error', error.message || 'Registration failed.');
+        }
     }
+}
+
+function profileFromForm() {
+    return {
+        display_name: document.getElementById('display_name').value,
+        contact_info: document.getElementById('contact_info').value || null,
+        city: document.getElementById('city').value,
+        preferred_role: document.getElementById('preferred_role').value,
+        languages: document.getElementById('languages').value.split(',').map(l => l.trim()).filter(Boolean)
+    };
+}
+
+async function loadDashboard() {
+    if (!currentUser || !authToken) return;
+    document.getElementById('profile-username').textContent = currentUser.username;
+    document.getElementById('user-display-name').textContent = currentUser.username;
+    try {
+        const response = await apiCall('/profiles/me');
+        const profile = await response.json();
+        document.getElementById('user-display-name').textContent = profile.display_name;
+        document.getElementById('profile-city').textContent = profile.city;
+        document.getElementById('profile-role').textContent = profile.preferred_role;
+        document.getElementById('profile-languages').textContent = profile.languages.join(', ') || 'Not specified';
+        document.getElementById('profile-contact').textContent = profile.contact_info || 'Not provided';
+        const badge = document.getElementById('profile-status');
+        badge.textContent = profile.in_team ? 'Already in a team' : 'Looking for teammates';
+        badge.className = profile.in_team ? 'badge badge-success' : 'badge badge-warning';
+    } catch (error) {
+        showAlert('error', error.status === 404 ? 'Please open Edit Profile and save your information before matching.' : error.message);
+    }
+}
+
+function escapeHtml(value) {
+    const span = document.createElement('span');
+    span.textContent = String(value ?? '');
+    return span.innerHTML.replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 }
 
 // Handle edit profile
@@ -309,10 +367,12 @@ function loadResults() {
     // Update source badge
     const sourceBadge = document.querySelector('.source-badge');
     if (sourceBadge) {
-        if (source.includes('model')) {
-            sourceBadge.textContent = '🤖 AI Model';
-        } else {
+        if (source.startsWith('fallback')) {
             sourceBadge.textContent = '⚙️ Deterministic Fallback';
+        } else if (source === 'empty') {
+            sourceBadge.textContent = 'No eligible candidates';
+        } else {
+            sourceBadge.textContent = '🤖 AI Model';
         }
     }
 
@@ -320,7 +380,7 @@ function loadResults() {
     const filterTags = document.getElementById('filter-tags');
     if (filterTags && Object.keys(filterSummary).length > 0) {
         filterTags.innerHTML = Object.entries(filterSummary)
-            .map(([reason, count]) => `<span class="filter-tag">${count} ${reason}</span>`)
+            .map(([reason, count]) => `<span class="filter-tag">${escapeHtml(count)} ${escapeHtml(reason)}</span>`)
             .join('');
     }
 
@@ -335,22 +395,22 @@ function loadResults() {
                     <div class="pick-rank">#${match.rank}</div>
                     <div class="pick-content">
                         <div class="pick-header">
-                            <h3>${match.display_name}</h3>
-                            <span class="badge badge-role">${match.preferred_role}</span>
+                            <h3>${escapeHtml(match.display_name)}</h3>
+                            <span class="badge badge-role">${escapeHtml(match.preferred_role)}</span>
                         </div>
                         <div class="pick-details">
                             <div class="detail-item">
                                 <span class="detail-icon">📍</span>
-                                <span>${match.city}</span>
+                                <span>${escapeHtml(match.city)}</span>
                             </div>
                             <div class="detail-item">
                                 <span class="detail-icon"></span>
-                                <span>${match.contact_info}</span>
+                                <span>${escapeHtml(match.contact_info || 'Not provided')}</span>
                             </div>
                             ${match.shared_languages && match.shared_languages.length > 0 ? `
                                 <div class="detail-item">
                                     <span class="detail-icon">🗣️</span>
-                                    <span>${match.shared_languages.join(', ')}</span>
+                                    <span>${escapeHtml(match.shared_languages.join(', '))}</span>
                                 </div>
                             ` : ''}
                             ${match.role_fit === 'complement' ? `
@@ -361,10 +421,10 @@ function loadResults() {
                             ` : ''}
                         </div>
                         <div class="pick-reason">
-                            <strong>Why:</strong> ${match.reason}
+                            <strong>Why:</strong> ${escapeHtml(match.reason)}
                         </div>
                         <div class="pick-actions">
-                            <a href="mailto:${match.contact_info}" class="btn btn-sm btn-secondary">
+                            <a href="mailto:${escapeHtml(match.contact_info || '')}" class="btn btn-sm btn-secondary">
                                 📧 Contact
                             </a>
                         </div>

@@ -1,14 +1,7 @@
-#!/bin/bash
-# Start the frontend UI server
-
-echo "=================================="
-echo "AILT9019 Teammate Matcher - Frontend"
-echo "=================================="
-echo ""
-echo "Starting frontend server at http://localhost:8001"
-echo "Open your browser and go to: http://localhost:8001"
-echo "Press Ctrl+C to stop"
-echo ""
-
-cd ui
-python -m http.server 8001
+#!/bin/sh
+set -eu
+cd "$(dirname "$0")"
+DEMO_PYTHON=python3
+if [ -x .venv/bin/python ]; then DEMO_PYTHON=.venv/bin/python; fi
+echo 'Open http://localhost:8001/index.html'
+exec "$DEMO_PYTHON" -m http.server 8001 --bind 127.0.0.1 --directory ui

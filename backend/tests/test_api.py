@@ -14,6 +14,7 @@ import tempfile
 import unittest
 from contextlib import closing
 from pathlib import Path
+from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
@@ -333,6 +334,55 @@ class BackendAPITests(unittest.TestCase):
         with closing(sqlite3.connect(self.db_path)) as conn, conn:
             self.assertEqual(conn.execute("SELECT COUNT(*) FROM profiles").fetchone()[0], 1)
             self.assertEqual(conn.execute("SELECT COUNT(*) FROM accounts").fetchone()[0], 1)
+
+    def test_matches_use_the_same_database_as_accounts_and_profiles(self):
+        # This database is passed to create_app, not matching.db's global path.
+        # Seeding only this file catches accidental reads of a different DB.
+        with closing(sqlite3.connect(self.db_path)) as conn, conn:
+            conn.executescript((ROOT / "matching" / "seed.sql").read_text(encoding="utf-8"))
+        user = self.register()
+        token = self.login()
+        self.save(token)
+        with patch("backend.app.matcher.model_name", return_value=None):
+            response = self.client.post("/matches", headers=self.headers(token))
+        self.assertEqual(response.status_code, 200, response.text)
+        data = response.json()
+        self.assertEqual(data["stats"]["total_pool"], 31)
+        self.assertEqual(len(data["picks"]), 5)
+        self.assertTrue(data["source"].startswith("fallback:"))
+        self.assertEqual(response.headers.get("cache-control"), "no-store")
+        ids = [p["account_id"] for p in data["picks"]]
+        self.assertEqual(len(set(ids)), 5)
+        self.assertNotIn(user["id"], ids)
+        with closing(sqlite3.connect(self.db_path)) as conn:
+            for pick in data["picks"]:
+                self.assertEqual(pick["city"], PROFILE["city"])
+                self.assertTrue(pick["reason"].strip())
+                self.assertEqual(conn.execute("SELECT in_team FROM profiles WHERE account_id = ?", (pick["account_id"],)).fetchone()[0], 0)
+
+    def test_matches_require_login_and_a_saved_profile(self):
+        self.assertEqual(self.client.post("/matches").status_code, 401)
+        self.register()
+        token = self.login()
+        self.assertEqual(self.client.post("/matches", headers=self.headers(token)).status_code, 404)
+
+    def test_matches_handle_an_empty_eligible_pool(self):
+        self.register()
+        token = self.login()
+        self.save(token)
+        response = self.client.post("/matches", headers=self.headers(token))
+        self.assertEqual(response.status_code, 200, response.text)
+        self.assertEqual(response.json()["picks"], [])
+        self.assertEqual(response.json()["stats"]["eligible"], 0)
+
+    def test_default_cors_accepts_the_recording_frontend(self):
+        response = self.client.options("/matches", headers={
+            "Origin": "http://localhost:8001",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "authorization,content-type",
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers.get("access-control-allow-origin"), "http://localhost:8001")
 
     def test_frontend_cors_preflight_uses_explicit_origin(self):
         allowed = "http://localhost:5173"

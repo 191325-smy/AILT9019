@@ -75,8 +75,7 @@ Frontend will be at: http://localhost:8001
 ### 5. Use the Application
 
 1. Open http://localhost:8001 in your browser
-2. Register a new account or use demo accounts:
-   - Username: `alice_chen` (you'll need to register first)
+2. Register a new username with a password of at least 8 characters. Seeded accounts such as `alice_chen` have placeholder password hashes and cannot log in.
 3. Complete your profile (city, role, languages)
 4. Click "Run Matching Algorithm" to find teammates!
 
@@ -108,7 +107,12 @@ Requires Python 3.9+. There is nothing to `pip install` for the CLI.
 - `POST /matches` - Run matching algorithm
 - `GET /matches/me` - Get your profile (alias)
 
-All endpoints except `/auth/register` and `/auth/login` require authentication via `Authorization: Bearer <token>` header.
+Account, profile and matching routes require `Authorization: Bearer <token>`,
+except registration and login. Health and API documentation are public.
+
+For a complete browser walkthrough and recording steps, see
+[RECORDING.md](RECORDING.md). Verification results are in
+[backend/TESTING.md](backend/TESTING.md).
 
 ## What you should see (CLI)
 
@@ -238,8 +242,9 @@ still completes with `source: fallback:<reason>` instead of a traceback.
 └── start-frontend.bat    Frontend startup script (Windows)
 ```
 
-The accounts/profile API is in `backend/`. The web UI, contact-consent flow and
-matching HTTP endpoint remain separate work. From the `matching/` directory,
+The accounts/profile and matching APIs are in `backend/`, connected to the web UI.
+Mutual-consent contact sharing and time-overlap preferences remain future work.
+From the `matching/` directory,
 the existing logic can be reused directly:
 
 ```python
