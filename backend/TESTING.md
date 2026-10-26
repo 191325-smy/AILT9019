@@ -7,8 +7,10 @@ supports both package/API use and direct CLI use.
 
 ## Automated API suite
 
+Run both commands from the repository root:
+
 ```bash
-python -m pip install -r backend/requirements-test.txt
+python -m pip install -r requirements.txt
 python -m unittest discover -s backend/tests -v
 ```
 
@@ -73,8 +75,8 @@ quality, time-overlap ranking or mutual-consent contact sharing. See
 | pwdlib with Argon2 | 0.3.1 |
 | HTTPX (tests) | 0.28.1 |
 
-The requirement files pin these tested direct versions. Backend setup and the
-frontend request contract are in [README.md](README.md).
+The root `requirements.txt` pins these tested direct versions. Backend setup
+and the frontend request contract are in [README.md](README.md).
 
 ## Real model verification
 

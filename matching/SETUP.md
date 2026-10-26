@@ -49,15 +49,17 @@ from the deterministic fallback.
 ## Turning the model on
 
 Out of the box nothing is called - the shortlist is ranked by rule and labelled
-`source: fallback`. To use a real model:
+`source: fallback`. To use a real model, work from the repository root so the
+shared environment from the README is used:
 
 ```bash
+cd ..                                   # repository root
 source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env
+python -m pip install -r requirements.txt
+cp matching/.env.example matching/.env
 ```
 
-Then open `.env` and paste your key:
+Then open `matching/.env` and paste your key:
 
 ```
 DEEPSEEK_API_KEY=sk-...
@@ -146,8 +148,8 @@ python3 seed.py --reset
 
 Nothing deletes `ailt9019.db` - `--reset` drops the tables and recreates them.
 
-For the web UI, install the existing backend and matching dependency files
-into the same root environment. Set `MATCH_MODEL=deepseek:deepseek-flash`
+For the web UI, install the root `requirements.txt` into the shared
+environment. Set `MATCH_MODEL=deepseek:deepseek-flash`
 in `matching/.env` when using Flash, then restart the backend. Flash/V4
 structured output uses non-thinking mode; the original model-selection,
 prompt, parser and fallback remain in the existing `matcher.py`.

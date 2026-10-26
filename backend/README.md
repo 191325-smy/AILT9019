@@ -29,7 +29,7 @@ source .venv/bin/activate
 Install and start:
 
 ```bash
-python -m pip install -r backend/requirements.txt
+python -m pip install -r requirements.txt
 python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000
 ```
 
@@ -221,8 +221,10 @@ experiments, not the file containing saved accounts and profiles.
 
 ## Tests
 
+Both commands run from the repository root:
+
 ```bash
-python -m pip install -r backend/requirements-test.txt
+python -m pip install -r requirements.txt
 python -m unittest discover -s backend/tests -v
 ```
 

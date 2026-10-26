@@ -50,7 +50,8 @@ def _load_env():
         if env_path.exists():
             print(
                 f"warning: {env_path.name} exists but python-dotenv is not installed, "
-                "so the key was not read - run: pip install -r requirements.txt",
+                "so the key was not read - run: python -m pip install -r "
+                "requirements.txt from the repository root",
                 file=sys.stderr,
             )
         return

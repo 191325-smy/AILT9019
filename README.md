@@ -10,7 +10,9 @@ This project has three parts:
 - **`ui/`** - Web frontend interface
 
 Built for AILT9019 (AI Literacy II, HKU). Runs on SQLite, needs no server, and
-works with **zero installs** for the CLI.
+works with **zero installs** for the CLI. This is an AI application, so adding a
+DeepSeek API key is recommended; without one, matching still returns a ranked
+shortlist from the deterministic fallback.
 
 ## Quick Start
 
@@ -21,15 +23,32 @@ git clone https://github.com/191325-smy/AILT9019.git
 cd AILT9019
 ```
 
-### 2. Seed the Database
+### 2. Install Dependencies
+
+The repository root has one `requirements.txt` covering all three parts: the
+matching model stage, the FastAPI backend and the backend tests.
 
 ```bash
-cd matching
-python seed.py              # builds ailt9019.db from schema.sql + seed.sql
-cd ..
+python3 -m venv .venv            # Windows: python -m venv .venv
+source .venv/bin/activate        # Windows cmd: .venv\Scripts\activate
+python -m pip install -r requirements.txt
 ```
 
-### 3. Start the Backend
+On Windows PowerShell the activate line is `.venv\Scripts\Activate.ps1`.
+
+The CLI, seeder and filter logic still run on the standard library alone; these
+packages are needed for the model call, the API and its tests.
+
+### 3. Seed the Database
+
+```bash
+python matching/seed.py     # builds matching/ailt9019.db from schema.sql + seed.sql
+```
+
+Re-running is safe: it only seeds an empty database. `start-backend.sh` does
+this for you when `matching/ailt9019.db` is missing.
+
+### 4. Start the Backend
 
 **Windows:**
 ```bash
@@ -42,16 +61,16 @@ chmod +x start-backend.sh
 ./start-backend.sh
 ```
 
-Or manually:
+Or manually, from the repository root:
 ```bash
-pip install -r backend/requirements.txt
-python -m uvicorn backend.app:app --reload --host 0.0.0.0 --port 8000
+source .venv/bin/activate
+python -m uvicorn backend.app:app --reload --host 127.0.0.1 --port 8000
 ```
 
 Backend will be at: http://localhost:8000
 API docs: http://localhost:8000/docs
 
-### 4. Start the Frontend
+### 5. Start the Frontend
 
 **Windows:**
 ```bash
@@ -64,20 +83,30 @@ chmod +x start-frontend.sh
 ./start-frontend.sh
 ```
 
-Or manually:
+Or manually, from the repository root:
 ```bash
-cd ui
-python -m http.server 8001
+python -m http.server 8001 --directory ui
 ```
 
 Frontend will be at: http://localhost:8001
 
-### 5. Use the Application
+### 6. Use the Application
 
 1. Open http://localhost:8001 in your browser
 2. Register a new username with a password of at least 8 characters. Seeded accounts such as `alice_chen` have placeholder password hashes and cannot log in.
 3. Complete your profile (city, role, languages)
 4. Click "Run Matching Algorithm" to find teammates!
+
+Matching runs without any setup, but this is an AI application: add a DeepSeek
+API key for the intended experience. Put it in `matching/.env`:
+
+```bash
+cp matching/.env.example matching/.env     # then set DEEPSEEK_API_KEY=sk-...
+```
+
+The backend reads that file at startup, so restart it after editing. Setup
+details and model selection are in
+[Using the DeepSeek API](#using-the-deepseek-api-recommended).
 
 ## CLI Usage (without web UI)
 
@@ -107,6 +136,10 @@ Requires Python 3.9+. There is nothing to `pip install` for the CLI.
 - `POST /matches` - Run matching algorithm
 - `GET /matches/me` - Get your profile (alias)
 
+`POST /matches` calls the DeepSeek API when `DEEPSEEK_API_KEY` is set in
+`matching/.env`; without it the response comes from the deterministic fallback.
+See [Using the DeepSeek API](#using-the-deepseek-api-recommended).
+
 Account, profile and matching routes require `Authorization: Bearer <token>`,
 except registration and login. Health and API documentation are public.
 
@@ -135,8 +168,9 @@ shortlist: 5 of 12   (source: fallback:no DEEPSEEK_API_KEY or MATCH_MODEL)
 ```
 
 Pick 5 repeats `Backend` on purpose — see [How matching works](#how-matching-works).
-`source:` tells you whether the wording came from the model or from the
-deterministic fallback.
+This sample is the no-key output; with a key the same run prints
+`source: deepseek:deepseek-chat` (or whichever model `MATCH_MODEL` selects) and
+the reasons come from the model.
 
 Other profiles worth trying:
 
@@ -180,39 +214,62 @@ allowed, they just rank last.
 The model never sees `contact_info`. Contact details are attached after the picks
 are chosen, so they only appear for people who actually made the shortlist.
 
-## Using a real model
+## Using the DeepSeek API (recommended)
 
-The existing matcher already calls the model when configured. For the web
-application, install both dependency files into the same root environment:
+Adding a key is recommended: this is an AI application, and with a key DeepSeek
+writes the shortlist and a reason for every pick. Without one, matching still
+works - the shortlist is ranked by rule and every result says `fallback`. The
+install from step 2 already includes the model packages.
 
-```bash
-python -m pip install -r backend/requirements.txt -r matching/requirements.txt
-```
+**1. Get a key.** Create one at <https://platform.deepseek.com/api_keys>; it
+looks like `sk-...`.
 
-Fill `DEEPSEEK_API_KEY` in the ignored `matching/.env`. For the current Flash
-model, also set `MATCH_MODEL=deepseek:deepseek-flash`, then restart the backend.
-The original default remains unchanged. Flash/V4 structured output uses
-non-thinking mode because the API rejects forced tool choice in thinking
-mode. No separate model service or check command is needed.
-
-For CLI-only setup:
+**2. Create the env file**, from the repository root with the environment from
+step 2:
 
 ```bash
-cd matching
-cp .env.example .env      # then paste your key after DEEPSEEK_API_KEY=
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python3 match.py alice_chen   # source: model
+cp matching/.env.example matching/.env
 ```
 
-`matcher.py` reads `matching/.env` on import and defaults to `deepseek:deepseek-chat`
-when a key is present. One call, temperature 0, no agent and no tools: the model
-returns `account_id` values with a one-sentence reason, and any id not in the
-candidate list is discarded.
+**3. Paste the key**, and the model for the current Flash API, into
+`matching/.env`, so the file looks like this:
 
-Keep `deepseek-chat`. `deepseek-reasoner` does not support the tool calling that
-`with_structured_output` relies on, so it would fall back on every call.
+```
+# matching/.env
+DEEPSEEK_API_KEY=sk-...
+MATCH_MODEL=deepseek:deepseek-flash
+```
+
+Without `MATCH_MODEL` the matcher uses `deepseek:deepseek-chat`, so that line is
+optional; the original default is unchanged. `matching/.env` is git-ignored, so
+the key is never committed. An exported variable wins over the file if you would
+rather not store it: `DEEPSEEK_API_KEY=sk-... ./start-backend.sh`.
+
+**4. Restart the backend** so it re-reads the file - `matcher.py` loads
+`matching/.env` once at import:
+
+```bash
+# Ctrl+C in the backend window, then
+./start-backend.sh
+```
+
+Then match from the UI, or from the CLI to see the raw result:
+
+```bash
+python matching/match.py alice_chen      # source: deepseek:deepseek-flash
+```
+
+The results page shows **AI Model** when the call succeeded and
+**Deterministic Fallback** when it did not; the CLI prints the reason in the
+`source:` field. No separate model service or check command is needed.
+
+One call, temperature 0, no agent and no tools: the model returns `account_id`
+values with a one-sentence reason, and any id outside the candidate list is
+discarded. Flash and the V4 models reject a forced structured-output tool in
+thinking mode, so `matcher.py` disables thinking for those ids.
+`deepseek-reasoner` remains unsupported because it has no tool calling at all.
+To use another provider, set `MATCH_MODEL` in the same file, for example
+`MATCH_MODEL=openai:gpt-4o-mini` (needs `langchain-openai` installed).
 
 If the key is missing, the packages are absent, or the request fails, the run
 still completes with `source: fallback:<reason>` instead of a traceback.
@@ -222,12 +279,12 @@ still completes with `source: fallback:<reason>` instead of a traceback.
 ```
 .
 ── .gitignore
+├── requirements.txt      One environment: matching + API + tests
 ├── backend               FastAPI service (accounts, profiles, matching)
 │   ├── app.py            Main API routes
 │   ├── models.py         Request/response models
 │   ├── store.py          Database operations
 │   ├── security.py       Password hashing + tokens
-│   ├── requirements.txt  Python dependencies
 │   └── tests/            API tests
 ├── matching              The matching logic layer
 │   ├── SETUP.md          Detailed setup instructions
@@ -238,8 +295,7 @@ still completes with `source: fallback:<reason>` instead of a traceback.
 │   ├── filters.py        Hard constraints + signals
 │   ├── matcher.py        Model call + fallback
 │   ├── match.py          CLI interface
-│   ├── sample_pool.json  JSON fixture data
-│   └── requirements.txt  Model dependencies
+│   └── sample_pool.json  JSON fixture data
 ── ui                    Web frontend
 │   ├── index.html        Login page
 │   ├── register.html     Registration page
@@ -294,8 +350,8 @@ This is a course demo, not a product:
 |---|---|---|
 | `no such table: profiles` | no database file | `python3 seed.py` |
 | `no account with username '...'` | typo, or database not seeded | usernames look like `alice_chen` |
-| `source: fallback:ModuleNotFoundError` | key set but packages missing | `pip install -r requirements.txt` |
-| `source: fallback:AuthenticationError` | bad or expired key | check `DEEPSEEK_API_KEY` in `.env` |
+| `source: fallback:ModuleNotFoundError` | key set but packages missing | `pip install -r requirements.txt` from the repository root |
+| `source: fallback:AuthenticationError` | bad or expired key | check `DEEPSEEK_API_KEY` in `matching/.env` |
 | `UNIQUE constraint failed` | `seed.sql` applied twice | `python3 seed.py --reset` |
 
 `matching/SETUP.md` has the longer version, including how to read the raw tables.

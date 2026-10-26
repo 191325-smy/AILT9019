@@ -3,7 +3,7 @@
 Start `start-backend.bat` and `start-frontend.bat` on Windows, then open
 http://localhost:8001/index.html. Keep both server windows running.
 The scripts use the root `.venv` if it exists, otherwise Python on PATH.
-The backend requires Python 3.10+; dependencies are in `backend/requirements.txt`.
+The backend requires Python 3.10+; dependencies are in the root `requirements.txt`.
 
 Register a new username with a password of at least 8 characters. Use synthetic
 details: Demo Student, demo@example.com, HK, Frontend, English and Mandarin.
@@ -29,6 +29,6 @@ five SH picks, server-side logout and re-login. This does not validate live
 model quality or resolve the earlier evaluation pack's model edge cases.
 
 Real AI matching uses the existing matcher and its `matching/.env` configuration.
-For Flash, set `MATCH_MODEL=deepseek:deepseek-flash`, install both existing
-dependency files in the root environment and restart the backend. The final
+For Flash, set `MATCH_MODEL=deepseek:deepseek-flash`, install the root
+`requirements.txt` in the shared environment and restart the backend. The final
 59-second recording shows this path with the AI Model label.

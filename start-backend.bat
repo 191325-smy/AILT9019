@@ -5,7 +5,7 @@ set "DEMO_PYTHON=python"
 if exist ".venv\Scripts\python.exe" set "DEMO_PYTHON=%CD%\.venv\Scripts\python.exe"
 "%DEMO_PYTHON%" -c "import fastapi, uvicorn, pwdlib" 2>nul
 if errorlevel 1 (
-    "%DEMO_PYTHON%" -m pip install -r backend\requirements.txt
+    "%DEMO_PYTHON%" -m pip install -r requirements.txt
     if errorlevel 1 exit /b 1
 )
 if not exist "matching\ailt9019.db" (

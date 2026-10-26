@@ -1,0 +1,32 @@
+# AILT9019 - Teammate Matcher
+# One environment for the whole project: matching layer + backend API + tests.
+#
+#   python3 -m venv .venv
+#   source .venv/bin/activate
+#   python -m pip install -r requirements.txt
+#
+# The matching layer still runs with the standard library alone (seed, filters,
+# CLI). The packages below are needed for the model stage, the API and its tests.
+
+# --- matching: model stage ------------------------------------------------
+langchain
+langchain-deepseek
+python-dotenv          # reads matching/.env so the key never lives in a shell
+
+# --- backend: API -------------------------------------------------------
+fastapi==0.162.0
+uvicorn==0.54.0
+pwdlib[argon2]==0.3.1
+
+# --- shared, pinned once ------------------------------------------------
+# langchain builds the structured-output schema; fastapi validates the API
+# models. One pin satisfies both, so a resolver change cannot split them.
+pydantic==2.14.1
+
+# --- backend: tests -----------------------------------------------------
+# backend/tests/test_api.py uses unittest + fastapi.testclient, both of which
+# need httpx. No pytest required.
+httpx==0.28.1
+
+# Optional: only if you switch to OpenAI via MATCH_MODEL=openai:gpt-4o-mini
+# langchain-openai
