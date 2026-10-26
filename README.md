@@ -182,30 +182,40 @@ are chosen, so they only appear for people who actually made the shortlist.
 
 ## Using a real model
 
-Out of the box nothing is called. To use DeepSeek:
+The existing matcher already calls the model when configured. For the web
+application, install both dependency files into the same root environment:
 
 ```bash
-python -m pip install -r backend/requirements-ai.txt
-# Copy matching/.env.example to matching/.env only if .env does not exist.
-# Fill DEEPSEEK_API_KEY locally; never commit or share the key.
-python matching/check_model.py          # configuration only; no API call
-python matching/check_model.py --live   # one real call with synthetic profiles
+python -m pip install -r backend/requirements.txt -r matching/requirements.txt
 ```
 
-`matcher.py` reads `matching/.env` on import and defaults to
-`deepseek:deepseek-flash` when a key is present. Restart the backend after
-editing the file. The web UI's existing `/matches` request then invokes the
-model and displays **AI Model** only when the model produced the result.
+Fill `DEEPSEEK_API_KEY` in the ignored `matching/.env`. For the current Flash
+model, also set `MATCH_MODEL=deepseek:deepseek-flash`, then restart the backend.
+The original default remains unchanged. Flash/V4 structured output uses
+non-thinking mode because the API rejects forced tool choice in thinking
+mode. No separate model service or check command is needed.
 
-The model returns candidate IDs and reasons through structured tool output;
-it has no external tools or agent loop. DeepSeek uses non-thinking mode to
-support the forced tool choice, a 30-second timeout and no automatic retries.
-Current model names and tool-choice requirements are documented by
-[DeepSeek](https://api-docs.deepseek.com/api/create-chat-completion/).
+For CLI-only setup:
+
+```bash
+cd matching
+cp .env.example .env      # then paste your key after DEEPSEEK_API_KEY=
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python3 match.py alice_chen   # source: model
+```
+
+`matcher.py` reads `matching/.env` on import and defaults to `deepseek:deepseek-chat`
+when a key is present. One call, temperature 0, no agent and no tools: the model
+returns `account_id` values with a one-sentence reason, and any id not in the
+candidate list is discarded.
+
+Keep `deepseek-chat`. `deepseek-reasoner` does not support the tool calling that
+`with_structured_output` relies on, so it would fall back on every call.
 
 If the key is missing, the packages are absent, or the request fails, the run
 still completes with `source: fallback:<reason>` instead of a traceback.
-The live check treats fallback as a failure rather than calling it AI success.
 
 ## Repo layout
 

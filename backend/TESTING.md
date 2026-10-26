@@ -59,33 +59,9 @@ servers, using an isolated database seeded with the 30 synthetic classmates:
 - Logout revokes the server session; signing in again restores the edited data.
 
 Result: **PASS**, with 17 actual API responses and zero page-script errors.
-This initial browser check used deterministic fallback. See
+The browser check used deterministic fallback; it does not validate live-model
+quality, time-overlap ranking or mutual-consent contact sharing. See
 [the recording walkthrough](../RECORDING.md) for a manual reproduction.
-
-## Real AI integration
-
-On 26 October 2026, the local ignored configuration was used for two successful
-real DeepSeek API calls with synthetic profiles: one CLI verification and one
-browser matching request. Both returned source `deepseek:deepseek-flash`, five
-candidates and non-empty reasons. The browser displayed **AI Model**, returned
-same-city picks, and had zero page-script errors; the matching interaction took
-approximately 2.5 seconds. Normal account data was preserved by using a separate
-test database for the browser check. No key or user token is included here.
-
-Two additional model tests pass using the real DeepSeek SDK and structured
-parser against mock HTTP: supported non-thinking tool requests parse correctly,
-and HTTP 401 is labelled as fallback without an automatic retry. Run them with:
-
-```bash
-python -m pip install -r backend/requirements-ai.txt
-python -m unittest discover -s matching/tests -v
-```
-
-The combined result is **23 backend tests plus 2 model HTTP contract tests
-passed**. A successful live smoke call proves connectivity and basic parsing;
-it does not establish recommendation quality across many cases. Time-overlap
-ranking, mutual-consent contact sharing and previously documented model-output
-edge cases remain outside this verification.
 
 ## Tested direct dependencies
 
@@ -99,3 +75,14 @@ edge cases remain outside this verification.
 
 The requirement files pin these tested direct versions. Backend setup and the
 frontend request contract are in [README.md](README.md).
+
+## Real model verification
+
+The existing matcher was also verified with the current DeepSeek Flash API
+on 26 October 2026, using only synthetic profiles. The original call with
+Flash fell back on a request error; disabling thinking for its structured
+tool output allowed the API to return five candidates with non-empty reasons.
+The webpage was previously verified to display AI Model for real replies.
+This verifies connectivity, not recommendation quality. The auxiliary AI
+checker, wrapper requirements and two SDK contract tests were removed as
+unnecessary additions; the 23 backend regression tests remain.

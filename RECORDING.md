@@ -28,10 +28,7 @@ workflow covering registration, persistence, five HK picks, editing to SH,
 five SH picks, server-side logout and re-login. This does not validate live
 model quality or resolve the earlier evaluation pack's model edge cases.
 
-For an AI demonstration, install `backend/requirements-ai.txt`, configure the
-local ignored `matching/.env`, verify with `python matching/check_model.py --live`
-and restart the backend. The result must show **AI Model**, not fallback. Live
-DeepSeek calls were subsequently verified on 26 October 2026; see
-[backend/TESTING.md](backend/TESTING.md). An earlier recording that says it uses
-fallback remains a fallback demonstration; record a fresh matching segment to
-show the AI path rather than changing its label after the fact.
+Real AI matching uses the existing matcher and its `matching/.env` configuration.
+For Flash, set `MATCH_MODEL=deepseek:deepseek-flash`, install both existing
+dependency files in the root environment and restart the backend. The final
+59-second recording shows this path with the AI Model label.

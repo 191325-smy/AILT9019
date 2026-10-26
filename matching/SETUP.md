@@ -64,7 +64,7 @@ DEEPSEEK_API_KEY=sk-...
 ```
 
 That's the whole configuration. `matcher.py` reads `matching/.env` on import, and
-with the key present it defaults to `deepseek:deepseek-flash`. Override the model
+with the key present it defaults to `deepseek:deepseek-chat`. Override the model
 in the same file if you want another provider:
 
 ```
@@ -78,17 +78,8 @@ One call, temperature 0, no agent, no tools. If the key is missing or the call
 fails, it falls back instead of crashing and the `source:` field says why - e.g.
 `fallback:ModuleNotFoundError` or `fallback:AuthenticationError`.
 
-DeepSeek structured output uses tool calling with thinking disabled. See the
-[current API documentation](https://api-docs.deepseek.com/api/create-chat-completion/)
-for supported model names and tool-choice requirements. The caller uses a
-30-second timeout and no automatic retries.
-
-For the web application, install the model and backend dependencies into the
-same root environment: `python -m pip install -r backend/requirements-ai.txt`
-from the repository root. A `.venv` created inside `matching/` is not used by
-the root startup scripts. Restart the backend after editing `matching/.env`.
-Run `python matching/check_model.py --live` from the root to verify one real
-request using synthetic fixtures. A fallback response does not pass this check.
+Keep `deepseek-chat` for this: `deepseek-reasoner` does not support the tool
+calling that `with_structured_output` relies on.
 
 **For anyone marking this:** `.env` is git-ignored and is never in the repo. A
 fresh clone runs in fallback mode until they add their own key — which is
@@ -154,3 +145,9 @@ python3 seed.py --reset
 ```
 
 Nothing deletes `ailt9019.db` - `--reset` drops the tables and recreates them.
+
+For the web UI, install the existing backend and matching dependency files
+into the same root environment. Set `MATCH_MODEL=deepseek:deepseek-flash`
+in `matching/.env` when using Flash, then restart the backend. Flash/V4
+structured output uses non-thinking mode; the original model-selection,
+prompt, parser and fallback remain in the existing `matcher.py`.

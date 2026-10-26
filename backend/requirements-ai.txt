@@ -1,3 +1,0 @@
-# Install both the web service and the optional real-model integration.
--r requirements.txt
--r ../matching/requirements.txt
