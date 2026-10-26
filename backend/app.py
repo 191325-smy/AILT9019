@@ -1,6 +1,7 @@
-"""FastAPI app: account lifecycle and authenticated writes to one's own profile."""
+"""FastAPI app: account lifecycle, profiles, and teammate matching."""
 
 import os
+import sys
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -13,6 +14,14 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from .models import AccountPublic, Credentials, LoginResponse, ProfilePublic, ProfileWrite
 from .security import hash_password, new_token, verify_password
 from .store import DuplicateUsername, Store
+
+# Add parent directory to path so we can import matching module
+ROOT_DIR = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT_DIR))
+
+from matching.db import get_conn, load_profile, load_pool
+from matching.filters import candidates_for_model
+from matching import matcher
 
 
 DEFAULT_DB = Path(__file__).resolve().parents[1] / "matching" / "ailt9019.db"
@@ -109,6 +118,70 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
     @application.put("/profiles/me", response_model=ProfilePublic)
     def save_profile(values: ProfileWrite, account=Depends(current_account)):
         return store.save_profile(account["id"], values.model_dump())
+
+    @application.post("/matches")
+    def run_match(account=Depends(current_account)):
+        """Run the teammate matching algorithm for the current user."""
+        # Get current user's profile
+        me = store.load_profile(account["id"])
+        if me is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Profile not created yet; save it with PUT /profiles/me."
+            )
+
+        # Get all profiles from database
+        conn = get_conn()
+        try:
+            pool = load_pool(conn)
+
+            # Run matching algorithm
+            candidates, dropped, _ = candidates_for_model(me, pool)
+            picks, source = matcher.pick(me, candidates)
+
+            # Format response
+            formatted_picks = []
+            for i, p in enumerate(picks, 1):
+                profile = p["profile"]
+                formatted_picks.append({
+                    "rank": i,
+                    "account_id": profile["account_id"],
+                    "display_name": profile["display_name"],
+                    "preferred_role": profile.get("preferred_role", "Other"),
+                    "city": profile.get("city", "Unknown"),
+                    "contact_info": profile.get("contact_info", "Not provided"),
+                    "reason": p["reason"],
+                    "shared_languages": profile.get("signals", {}).get("shared_languages", []),
+                    "role_fit": profile.get("signals", {}).get("role_fit", "unknown")
+                })
+
+            # Count dropped reasons
+            from collections import Counter
+            dropped_summary = dict(Counter(why for _, why in dropped))
+
+            return {
+                "picks": formatted_picks,
+                "source": source,
+                "stats": {
+                    "total_pool": len(pool),
+                    "eligible": len(candidates),
+                    "filtered_out": len(dropped)
+                },
+                "filter_summary": dropped_summary
+            }
+        finally:
+            conn.close()
+
+    @application.get("/matches/me")
+    def get_my_matches(account=Depends(current_account)):
+        """Get the current user's profile (alias for /profiles/me for UI convenience)."""
+        profile = store.load_profile(account["id"])
+        if profile is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Profile not created yet; save it with PUT /profiles/me."
+            )
+        return profile
 
     return application
 

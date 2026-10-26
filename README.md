@@ -4,40 +4,113 @@ The matching engine for a course project: it turns a pool of profiles into a
 **team**. Instead of ranking classmates one by one, it picks people who cover
 different roles, so the result can start working together immediately.
 
-`matching/` is the **logic layer**, written in plain Python so a backend can
-import it. `backend/` adds a FastAPI service for registration, login, logout and
-authenticated profile reads/writes using the same SQLite database. The web UI
-and mutual-consent contact exchange are separate work.
+This project has three parts:
+- **`matching/`** - The matching logic layer (plain Python)
+- **`backend/`** - FastAPI service for accounts, profiles, and matching
+- **`ui/`** - Web frontend interface
 
 Built for AILT9019 (AI Literacy II, HKU). Runs on SQLite, needs no server, and
-works with **zero installs**.
+works with **zero installs** for the CLI.
+
+## Quick Start
+
+### 1. Clone and Setup
 
 ```bash
 git clone https://github.com/191325-smy/AILT9019.git
-cd AILT9019/matching
-python3 seed.py              # builds ailt9019.db from schema.sql + seed.sql
-python3 match.py alice_chen   # prints the filtered pool and the shortlist
+cd AILT9019
 ```
 
-Requires Python 3.9+. There is nothing to `pip install` for the commands above.
-
-## Login and profile API
-
-For the new backend, use Python 3.10+ and follow [backend setup and frontend
-integration](backend/README.md). It preserves existing data, hashes passwords,
-and restricts profile writes to the logged-in account.
+### 2. Seed the Database
 
 ```bash
-python -m pip install -r backend/requirements.txt
-python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000
+cd matching
+python seed.py              # builds ailt9019.db from schema.sql + seed.sql
+cd ..
 ```
 
-Open `http://127.0.0.1:8000/docs` to register a synthetic account, log in and try
-the protected profile endpoints. Existing fixture hashes such as `hash1` are
-placeholders; register a new test account for login. The matching CLI above
-still runs independently without these dependencies.
+### 3. Start the Backend
 
-## What you should see
+**Windows:**
+```bash
+start-backend.bat
+```
+
+**Mac/Linux:**
+```bash
+chmod +x start-backend.sh
+./start-backend.sh
+```
+
+Or manually:
+```bash
+pip install -r backend/requirements.txt
+python -m uvicorn backend.app:app --reload --host 0.0.0.0 --port 8000
+```
+
+Backend will be at: http://localhost:8000
+API docs: http://localhost:8000/docs
+
+### 4. Start the Frontend
+
+**Windows:**
+```bash
+start-frontend.bat
+```
+
+**Mac/Linux:**
+```bash
+chmod +x start-frontend.sh
+./start-frontend.sh
+```
+
+Or manually:
+```bash
+cd ui
+python -m http.server 8001
+```
+
+Frontend will be at: http://localhost:8001
+
+### 5. Use the Application
+
+1. Open http://localhost:8001 in your browser
+2. Register a new account or use demo accounts:
+   - Username: `alice_chen` (you'll need to register first)
+3. Complete your profile (city, role, languages)
+4. Click "Run Matching Algorithm" to find teammates!
+
+## CLI Usage (without web UI)
+
+You can also use the matching engine directly from command line:
+
+```bash
+cd matching
+python seed.py              # builds ailt9019.db from schema.sql + seed.sql
+python match.py alice_chen  # prints the filtered pool and the shortlist
+```
+
+Requires Python 3.9+. There is nothing to `pip install` for the CLI.
+
+## API Endpoints
+
+### Authentication
+- `POST /auth/register` - Register new account
+- `POST /auth/login` - Login (returns token)
+- `GET /auth/me` - Get current user info
+- `POST /auth/logout` - Logout
+
+### Profiles
+- `GET /profiles/me` - Get your profile
+- `PUT /profiles/me` - Update your profile
+
+### Matching
+- `POST /matches` - Run matching algorithm
+- `GET /matches/me` - Get your profile (alias)
+
+All endpoints except `/auth/register` and `/auth/login` require authentication via `Authorization: Bearer <token>` header.
+
+## What you should see (CLI)
 
 ```
 me: Alice Chen (HK, Frontend)
@@ -131,20 +204,38 @@ still completes with `source: fallback:<reason>` instead of a traceback.
 
 ```
 .
-├── .gitignore
-├── backend               FastAPI accounts/profile service; see backend/README.md
-└── matching              the logic layer (this folder)
-    ├── SETUP.md          detailed setup, error table, reset instructions
-    ├── schema.sql        two tables: accounts, profiles
-    ├── seed.sql          30 synthetic profiles (15 HK, 15 SH)
-    ├── seed.py           applies both .sql files to ailt9019.db
-    ├── db.py             matching database readers
-    ├── filters.py        hard constraints + signals (pure, no I/O)
-    ├── matcher.py        model call + deterministic fallback
-    ├── match.py          CLI: load -> filter -> shortlist -> print
-    ├── sample_pool.json  mirror of seed.sql, for the no-database path
-    ├── requirements.txt  only needed for the model stage
-    └── .env.example      template; the real .env is git-ignored
+── .gitignore
+├── backend               FastAPI service (accounts, profiles, matching)
+│   ├── app.py            Main API routes
+│   ├── models.py         Request/response models
+│   ├── store.py          Database operations
+│   ├── security.py       Password hashing + tokens
+│   ├── requirements.txt  Python dependencies
+│   └── tests/            API tests
+├── matching              The matching logic layer
+│   ├── SETUP.md          Detailed setup instructions
+│   ├── schema.sql        Database schema
+│   ├── seed.sql          30 synthetic profiles
+│   ├── seed.py           Database seeder
+│   ├── db.py             Database readers
+│   ├── filters.py        Hard constraints + signals
+│   ├── matcher.py        Model call + fallback
+│   ├── match.py          CLI interface
+│   ├── sample_pool.json  JSON fixture data
+│   └── requirements.txt  Model dependencies
+── ui                    Web frontend
+│   ├── index.html        Login page
+│   ├── register.html     Registration page
+│   ├── dashboard.html    Main dashboard
+│   ├── results.html      Match results
+│   ├── edit-profile.html Profile editor
+│   ├── css/style.css     Styling
+│   ├── js/app.js         Frontend logic
+│   └── data/mock-data.json  Demo data
+├── start-backend.sh      Backend startup script (Mac/Linux)
+├── start-backend.bat     Backend startup script (Windows)
+├── start-frontend.sh     Frontend startup script (Mac/Linux)
+└── start-frontend.bat    Frontend startup script (Windows)
 ```
 
 The accounts/profile API is in `backend/`. The web UI, contact-consent flow and
@@ -174,8 +265,8 @@ This is a course demo, not a product:
 - All 30 profiles are **synthetic**. Names, emails and preferences in `seed.sql`
   are invented; `contact_info` values are placeholders like `david@test.com`.
 - SQLite is a single file, chosen so the workflow is reproducible offline.
-- Matching has a CLI, and accounts/profiles have a FastAPI interface. There is
-  no signup form or web UI in this repository.
+- The project has a CLI (`matching/match.py`), a FastAPI backend (`backend/`),
+  and a web UI (`ui/`). All three can be used independently or together.
 - `in_team` is set only by `seed.sql`; the logic never flips it, so the same
   input always produces the same pool.
 

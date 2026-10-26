@@ -1,31 +1,26 @@
 // AILT9019 Teammate Matcher - UI JavaScript
+// Connects to FastAPI backend at http://localhost:8000
 
-// Mock data storage
+// API Configuration
+const API_BASE_URL = 'http://localhost:8000';
+
+// State
 let currentUser = null;
-let mockData = null;
-
-// Load mock data
-async function loadMockData() {
-    try {
-        const response = await fetch('data/mock-data.json');
-        mockData = await response.json();
-        console.log('Mock data loaded:', mockData);
-    } catch (error) {
-        console.error('Failed to load mock data:', error);
-    }
-}
+let authToken = null;
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', async () => {
-    await loadMockData();
+document.addEventListener('DOMContentLoaded', () => {
     checkAuth();
     setupEventListeners();
 });
 
-// Check authentication status
+// Check authentication status from localStorage
 function checkAuth() {
+    const storedToken = localStorage.getItem('authToken');
     const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
+
+    if (storedToken && storedUser) {
+        authToken = storedToken;
         currentUser = JSON.parse(storedUser);
         updateNavbar();
     }
@@ -77,84 +72,185 @@ function setupEventListeners() {
     }
 }
 
+// API call helper
+async function apiCall(endpoint, options = {}) {
+    const url = `${API_BASE_URL}${endpoint}`;
+    const config = {
+        ...options,
+        headers: {
+            'Content-Type': 'application/json',
+            ...options.headers
+        }
+    };
+
+    if (authToken) {
+        config.headers['Authorization'] = `Bearer ${authToken}`;
+    }
+
+    const response = await fetch(url, config);
+
+    if (!response.ok) {
+        const error = await response.json().catch(() => ({ detail: 'Request failed' }));
+        throw new Error(error.detail || `HTTP ${response.status}`);
+    }
+
+    return response;
+}
+
 // Handle login
-function handleLogin(e) {
+async function handleLogin(e) {
     e.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Mock authentication
-    const user = mockData.users.find(u => u.username === username && u.password === password);
+    try {
+        const response = await apiCall('/auth/login', {
+            method: 'POST',
+            body: JSON.stringify({ username, password })
+        });
 
-    if (user) {
+        const data = await response.json();
+        authToken = data.access_token;
+        localStorage.setItem('authToken', authToken);
+
+        // Get user info
+        const meResponse = await apiCall('/auth/me');
+        const user = await meResponse.json();
+
         currentUser = user;
         localStorage.setItem('currentUser', JSON.stringify(user));
-        showAlert('success', `Welcome back, ${user.display_name}!`);
+
+        showAlert('success', `Welcome back, ${user.username}!`);
         setTimeout(() => {
             window.location.href = 'dashboard.html';
         }, 500);
-    } else {
-        showAlert('error', 'Invalid username or password. Try: alice_chen / demo');
+    } catch (error) {
+        showAlert('error', error.message || 'Login failed. Please check your credentials.');
     }
 }
 
 // Handle register
-function handleRegister(e) {
+async function handleRegister(e) {
     e.preventDefault();
     const username = document.getElementById('username').value;
-    const display_name = document.getElementById('display_name').value;
+    const password = document.getElementById('password').value;
 
-    // Mock registration
-    showAlert('success', 'Registration successful! Please log in.');
-    setTimeout(() => {
-        window.location.href = 'index.html';
-    }, 1000);
+    try {
+        await apiCall('/auth/register', {
+            method: 'POST',
+            body: JSON.stringify({ username, password })
+        });
+
+        showAlert('success', 'Registration successful! Please log in.');
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1000);
+    } catch (error) {
+        showAlert('error', error.message || 'Registration failed.');
+    }
 }
 
 // Handle edit profile
-function handleEditProfile(e) {
+async function handleEditProfile(e) {
     e.preventDefault();
-    showAlert('success', 'Profile updated successfully!');
-    setTimeout(() => {
-        window.location.href = 'dashboard.html';
-    }, 1000);
+
+    const display_name = document.getElementById('display_name').value;
+    const contact_info = document.getElementById('contact_info').value;
+    const city = document.getElementById('city').value;
+    const preferred_role = document.getElementById('preferred_role').value;
+    const languages = document.getElementById('languages').value
+        .split(',')
+        .map(l => l.trim())
+        .filter(l => l);
+
+    try {
+        await apiCall('/profiles/me', {
+            method: 'PUT',
+            body: JSON.stringify({
+                display_name,
+                contact_info: contact_info || null,
+                city,
+                preferred_role,
+                languages
+            })
+        });
+
+        showAlert('success', 'Profile updated successfully!');
+        setTimeout(() => {
+            window.location.href = 'dashboard.html';
+        }, 1000);
+    } catch (error) {
+        showAlert('error', error.message || 'Failed to update profile.');
+    }
 }
 
 // Populate edit form with current user data
-function populateEditForm() {
-    if (!currentUser) return;
+async function populateEditForm() {
+    if (!currentUser || !authToken) return;
 
-    document.getElementById('display_name').value = currentUser.display_name || '';
-    document.getElementById('contact_info').value = currentUser.contact_info || '';
-    document.getElementById('city').value = currentUser.city || 'HK';
-    document.getElementById('preferred_role').value = currentUser.preferred_role || 'Other';
-    document.getElementById('languages').value = (currentUser.languages || []).join(', ');
-    document.getElementById('in_team').checked = currentUser.in_team || false;
+    try {
+        const response = await apiCall('/profiles/me');
+        const profile = await response.json();
+
+        document.getElementById('display_name').value = profile.display_name || '';
+        document.getElementById('contact_info').value = profile.contact_info || '';
+        document.getElementById('city').value = profile.city || 'HK';
+        document.getElementById('preferred_role').value = profile.preferred_role || 'Other';
+        document.getElementById('languages').value = (profile.languages || []).join(', ');
+        document.getElementById('in_team').checked = profile.in_team === 1;
+    } catch (error) {
+        console.error('Failed to load profile:', error);
+    }
 }
 
 // Run matching algorithm
-function runMatching() {
-    if (!currentUser) {
+async function runMatching() {
+    if (!currentUser || !authToken) {
         showAlert('error', 'Please log in first.');
         return;
     }
 
-    // Mock matching - redirect to results page with user data
-    const matches = mockData.sample_matches[currentUser.username] || [];
-    localStorage.setItem('currentMatches', JSON.stringify(matches));
-    localStorage.setItem('matchStats', JSON.stringify(mockData.stats));
-    localStorage.setItem('filterSummary', JSON.stringify(mockData.filter_summary));
+    try {
+        const response = await apiCall('/matches', {
+            method: 'POST'
+        });
 
-    window.location.href = 'results.html';
+        const data = await response.json();
+
+        // Store results for results page
+        localStorage.setItem('currentMatches', JSON.stringify(data.picks));
+        localStorage.setItem('matchStats', JSON.stringify(data.stats));
+        localStorage.setItem('filterSummary', JSON.stringify(data.filter_summary));
+        localStorage.setItem('matchSource', data.source);
+
+        window.location.href = 'results.html';
+    } catch (error) {
+        showAlert('error', error.message || 'Failed to run matching.');
+    }
 }
 
 // Logout
-function logout() {
+async function logout() {
+    if (authToken) {
+        try {
+            await apiCall('/auth/logout', {
+                method: 'POST'
+            });
+        } catch (error) {
+            console.error('Logout API call failed:', error);
+        }
+    }
+
+    localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');
     localStorage.removeItem('currentMatches');
     localStorage.removeItem('matchStats');
     localStorage.removeItem('filterSummary');
+    localStorage.removeItem('matchSource');
+
+    authToken = null;
     currentUser = null;
+
     showAlert('info', 'You have been logged out.');
     setTimeout(() => {
         window.location.href = 'index.html';
@@ -183,6 +279,7 @@ function loadResults() {
     const matches = JSON.parse(localStorage.getItem('currentMatches') || '[]');
     const stats = JSON.parse(localStorage.getItem('matchStats') || '{}');
     const filterSummary = JSON.parse(localStorage.getItem('filterSummary') || '{}');
+    const source = localStorage.getItem('matchSource') || 'unknown';
 
     if (!currentUser) {
         window.location.href = 'index.html';
@@ -190,15 +287,34 @@ function loadResults() {
     }
 
     // Update user info
-    document.getElementById('user-name').textContent = currentUser.display_name;
-    document.getElementById('user-city').textContent = currentUser.city;
-    document.getElementById('user-role').textContent = currentUser.preferred_role;
+    document.getElementById('user-name').textContent = currentUser.username;
+
+    // Load profile for display
+    apiCall('/profiles/me')
+        .then(response => response.json())
+        .then(profile => {
+            document.getElementById('user-city').textContent = profile.city;
+            document.getElementById('user-role').textContent = profile.preferred_role;
+        })
+        .catch(error => {
+            console.error('Failed to load profile:', error);
+        });
 
     // Update stats
     document.getElementById('stat-total').textContent = stats.total_pool || 0;
     document.getElementById('stat-eligible').textContent = stats.eligible || 0;
     document.getElementById('stat-filtered').textContent = stats.filtered_out || 0;
     document.getElementById('stat-recommended').textContent = matches.length;
+
+    // Update source badge
+    const sourceBadge = document.querySelector('.source-badge');
+    if (sourceBadge) {
+        if (source.includes('model')) {
+            sourceBadge.textContent = '🤖 AI Model';
+        } else {
+            sourceBadge.textContent = '⚙️ Deterministic Fallback';
+        }
+    }
 
     // Update filter summary
     const filterTags = document.getElementById('filter-tags');
@@ -228,7 +344,7 @@ function loadResults() {
                                 <span>${match.city}</span>
                             </div>
                             <div class="detail-item">
-                                <span class="detail-icon">📧</span>
+                                <span class="detail-icon"></span>
                                 <span>${match.contact_info}</span>
                             </div>
                             ${match.shared_languages && match.shared_languages.length > 0 ? `
