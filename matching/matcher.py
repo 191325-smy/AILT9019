@@ -11,9 +11,9 @@ The model only ever sees account_id, display_name, preferred_role, city and
 the signals. It never sees contact_info - contact is attached afterwards, only
 for the profiles it actually picked.
 
-Configure in `app/.env` (git-ignored, copy from `.env.example`):
+Configure in `matching/.env` (git-ignored, copy from `.env.example`):
     DEEPSEEK_API_KEY=sk-...             # picked up automatically
-    MATCH_MODEL=deepseek:deepseek-chat  # optional, this is the default
+    MATCH_MODEL=deepseek:deepseek-flash  # optional, this is the default
 
 Real environment variables win over .env, so CI can still override them.
 
@@ -38,7 +38,7 @@ else:
 
 
 def _load_env():
-    """Read app/.env so a key survives a new terminal.
+    """Read matching/.env so a key survives a new terminal.
 
     no-op when python-dotenv isn't installed, and it never overrides a variable
     that is already set - so a real env var still wins.
@@ -59,7 +59,7 @@ def _load_env():
 
 _load_env()
 
-DEFAULT_MODEL = "deepseek:deepseek-chat"   # deepseek-reasoner has no tool calling
+DEFAULT_MODEL = "deepseek:deepseek-flash"
 
 SYSTEM = (
     "You assemble a project team for a university course. "
@@ -165,7 +165,14 @@ def pick(me, candidates, limit=MAX_MATCHES):
     try:
         from langchain.chat_models import init_chat_model
 
-        llm = init_chat_model(name, temperature=0)
+        options = {"temperature": 0}
+        if name.startswith("deepseek:"):
+            # Structured output forces a tool choice. DeepSeek requires
+            # non-thinking mode for a forced tool choice; bound the wait for
+            # an interactive web demo and avoid automatic paid retries.
+            options.update(timeout=30, max_retries=0, max_tokens=2000,
+                           extra_body={"thinking": {"type": "disabled"}})
+        llm = init_chat_model(name, **options)
         structured = llm.with_structured_output(_schema())
 
         messages = [

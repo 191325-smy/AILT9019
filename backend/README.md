@@ -6,6 +6,12 @@ existing `accounts` and `profiles` tables and adds an `auth_sessions` table.
 The web UI in `ui/` calls these APIs. Mutual-consent contact exchange remains
 future work; use synthetic contact details for this course demonstration.
 
+To enable the real AI model, install `backend/requirements-ai.txt` in the same
+environment, fill the ignored `matching/.env`, run
+`python matching/check_model.py --live`, then restart the backend. See the
+[root README](../README.md#using-a-real-model). A fresh clone without a local
+key uses deterministic fallback and labels the source accordingly.
+
 ## Start locally
 
 Use Python 3.10 or newer and run these commands from the repository root:

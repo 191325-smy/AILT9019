@@ -27,3 +27,11 @@ Local verification on 2026-10-26: 23 backend tests passed, plus an Edge browser
 workflow covering registration, persistence, five HK picks, editing to SH,
 five SH picks, server-side logout and re-login. This does not validate live
 model quality or resolve the earlier evaluation pack's model edge cases.
+
+For an AI demonstration, install `backend/requirements-ai.txt`, configure the
+local ignored `matching/.env`, verify with `python matching/check_model.py --live`
+and restart the backend. The result must show **AI Model**, not fallback. Live
+DeepSeek calls were subsequently verified on 26 October 2026; see
+[backend/TESTING.md](backend/TESTING.md). An earlier recording that says it uses
+fallback remains a fallback demonstration; record a fresh matching segment to
+show the AI path rather than changing its label after the fact.

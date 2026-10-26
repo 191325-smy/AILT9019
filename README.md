@@ -185,24 +185,27 @@ are chosen, so they only appear for people who actually made the shortlist.
 Out of the box nothing is called. To use DeepSeek:
 
 ```bash
-cd matching
-cp .env.example .env      # then paste your key after DEEPSEEK_API_KEY=
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python3 match.py alice_chen   # source: model
+python -m pip install -r backend/requirements-ai.txt
+# Copy matching/.env.example to matching/.env only if .env does not exist.
+# Fill DEEPSEEK_API_KEY locally; never commit or share the key.
+python matching/check_model.py          # configuration only; no API call
+python matching/check_model.py --live   # one real call with synthetic profiles
 ```
 
-`matcher.py` reads `matching/.env` on import and defaults to `deepseek:deepseek-chat`
-when a key is present. One call, temperature 0, no agent and no tools: the model
-returns `account_id` values with a one-sentence reason, and any id not in the
-candidate list is discarded.
+`matcher.py` reads `matching/.env` on import and defaults to
+`deepseek:deepseek-flash` when a key is present. Restart the backend after
+editing the file. The web UI's existing `/matches` request then invokes the
+model and displays **AI Model** only when the model produced the result.
 
-Keep `deepseek-chat`. `deepseek-reasoner` does not support the tool calling that
-`with_structured_output` relies on, so it would fall back on every call.
+The model returns candidate IDs and reasons through structured tool output;
+it has no external tools or agent loop. DeepSeek uses non-thinking mode to
+support the forced tool choice, a 30-second timeout and no automatic retries.
+Current model names and tool-choice requirements are documented by
+[DeepSeek](https://api-docs.deepseek.com/api/create-chat-completion/).
 
 If the key is missing, the packages are absent, or the request fails, the run
 still completes with `source: fallback:<reason>` instead of a traceback.
+The live check treats fallback as a failure rather than calling it AI success.
 
 ## Repo layout
 
