@@ -46,7 +46,7 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
         ).split(",") if origin.strip()]
     if "*" in origins:
         raise ValueError("Configure explicit ALLOWED_ORIGINS rather than '*'.")
-    store = Store(path)
+    store = Store(database)
 
     @asynccontextmanager
     async def lifespan(application):
