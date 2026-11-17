@@ -30,7 +30,14 @@ def unauthorised():
 
 def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | None = None,
                allowed_origins: list[str] | None = None) -> FastAPI:
-    path = Path(db_path if db_path is not None else os.getenv("DB_PATH", str(DEFAULT_DB))).expanduser().resolve()
+    if db_path is not None:
+        database = str(db_path)
+    else:
+        database = os.getenv("DATABASE_URL")
+
+    if not database:
+        database = os.getenv("DB_PATH", str(DEFAULT_DB))
+        ttl = session_ttl_seconds if session_ttl_seconds is not None else int(os.getenv("SESSION_TTL_SECONDS", "3600"))
     ttl = session_ttl_seconds if session_ttl_seconds is not None else int(os.getenv("SESSION_TTL_SECONDS", "3600"))
     if not isinstance(ttl, int) or isinstance(ttl, bool) or not 1 <= ttl <= 604800:
         raise ValueError("SESSION_TTL_SECONDS must be an integer from 1 to 604800.")
