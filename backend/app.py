@@ -50,8 +50,8 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
     application = FastAPI(title="AILT9019 Accounts and Profiles", version="1.0.0", lifespan=lifespan)
     application.state.store = store
     application.add_middleware(CORSMiddleware, allow_origins=origins,
-                               allow_methods=["GET", "POST", "PUT"],
-                               allow_headers=["Authorization", "Content-Type"], allow_credentials=False)
+                               allow_methods=["*"],
+                               allow_headers=["*"], allow_credentials=False)
 
     @application.middleware("http")
     async def private_responses(request: Request, call_next):
