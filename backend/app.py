@@ -42,7 +42,7 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
         raise ValueError("SESSION_TTL_SECONDS must be an integer from 1 to 604800.")
     origins = allowed_origins if allowed_origins is not None else [
         origin.strip() for origin in os.getenv(
-            "ALLOWED_ORIGINS", "http://localhost:8001,http://127.0.0.1:8001"
+            "ALLOWED_ORIGINS", "https://ailt9019-frontend.onrender.com,https://191325-smy.github.io,http://localhost:8001,http://127.0.0.1:8001"
         ).split(",") if origin.strip()]
     if "*" in origins:
         raise ValueError("Configure explicit ALLOWED_ORIGINS rather than '*'.")
