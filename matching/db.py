@@ -10,6 +10,8 @@ Override the location if you want it elsewhere:
     DB_PATH=/tmp/demo.db python match.py alice_chen
 """
 
+"""Database readers for SQLite and PostgreSQL."""
+
 import json
 import os
 import sqlite3
@@ -19,8 +21,6 @@ DB_PATH = os.getenv("DB_PATH", os.path.join(HERE, "ailt9019.db"))
 
 JSON_COLUMNS = ("languages",)
 
-# Every column the matcher or the result card needs. Keep this list in sync with
-# the table: SELECT * would drag password_hash along if the tables are ever joined.
 PROFILE_FIELDS = (
     "account_id, display_name, contact_info, city, preferred_role, "
     "languages, in_team"
@@ -28,50 +28,88 @@ PROFILE_FIELDS = (
 
 
 def get_conn():
+    """Open the configured database."""
+    database_url = os.getenv("DATABASE_URL")
+
+    if database_url:
+        import psycopg
+        from psycopg.rows import dict_row
+
+        return psycopg.connect(
+            database_url,
+            row_factory=dict_row,
+        )
+
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     return conn
 
 
+def _placeholder(conn):
+    """Return the parameter placeholder for the active database."""
+    if conn.__class__.__module__.startswith("psycopg"):
+        return "%s"
+    return "?"
+
+
 def _decode(row):
-    """SQLite stores the JSON columns as text. Turn them into real lists."""
+    """Convert database rows into normal Python dictionaries."""
     if row is None:
         return None
+
     row = dict(row)
+
     for col in JSON_COLUMNS:
         value = row.get(col)
+
         if value is None:
             row[col] = []
+
         elif isinstance(value, (str, bytes)):
             row[col] = json.loads(value) if value else []
+
     return row
 
 
 def load_profile(conn, account_id):
+    placeholder = _placeholder(conn)
+
     row = conn.execute(
-        f"SELECT {PROFILE_FIELDS} FROM profiles WHERE account_id = ?", (account_id,)
+        f"""
+        SELECT {PROFILE_FIELDS}
+        FROM profiles
+        WHERE account_id = {placeholder}
+        """,
+        (account_id,),
     ).fetchone()
+
     return _decode(row)
 
 
 def load_profile_by_username(conn, username):
+    placeholder = _placeholder(conn)
+
+    fields = PROFILE_FIELDS.replace(", ", ", p.")
+
     row = conn.execute(
-        f"SELECT p.{PROFILE_FIELDS.replace(', ', ', p.')} "
-        "FROM profiles p JOIN accounts a ON a.id = p.account_id "
-        "WHERE a.username = ?",
+        f"""
+        SELECT p.{fields}
+        FROM profiles p
+        JOIN accounts a ON a.id = p.account_id
+        WHERE LOWER(a.username) = LOWER({placeholder})
+        """,
         (username,),
     ).fetchone()
+
     return _decode(row)
 
 
 def load_pool(conn):
-    """Every profile, unfiltered.
+    """Load all profiles. Filtering remains in filters.py."""
 
-    Deliberately no WHERE clause: self-exclusion and `in_team` are rules, and
-    rules live in filters.py where they are visible, testable, and apply the
-    same way to the database path and the JSON path. Filtering here as well
-    would create a second source of truth for the same decision.
-    """
-    rows = conn.execute(f"SELECT {PROFILE_FIELDS} FROM profiles").fetchall()
-    return [_decode(r) for r in rows]
+    rows = conn.execute(
+        f"SELECT {PROFILE_FIELDS} FROM profiles"
+    ).fetchall()
+
+    return [_decode(row) for row in rows]
