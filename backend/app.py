@@ -37,7 +37,13 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
 
     if not database:
         database = os.getenv("DB_PATH", str(DEFAULT_DB))
-        ttl = session_ttl_seconds if session_ttl_seconds is not None else int(os.getenv("SESSION_TTL_SECONDS", "3600"))
+
+    ttl = session_ttl_seconds if session_ttl_seconds is not None else int(
+        os.getenv("SESSION_TTL_SECONDS", "3600")
+    )
+
+    if not isinstance(ttl, int) or isinstance(ttl, bool) or not 1 <= ttl <= 604800:
+        raise ValueError("session_ttl_seconds must be an integer between 1 and 604800")
     if not isinstance(ttl, int) or isinstance(ttl, bool) or not 1 <= ttl <= 604800:
         raise ValueError("SESSION_TTL_SECONDS must be an integer from 1 to 604800.")
     origins = allowed_origins if allowed_origins is not None else [
