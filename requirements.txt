@@ -28,5 +28,7 @@ pydantic==2.14.1
 # need httpx. No pytest required.
 httpx==0.28.1
 
+psycopg[binary]
+
 # Optional: only if you switch to OpenAI via MATCH_MODEL=openai:gpt-4o-mini
 # langchain-openai
