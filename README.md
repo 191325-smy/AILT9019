@@ -55,12 +55,8 @@ The backend and the CLI read that file; without `DATABASE_URL` they stop with a
 clear error instead of creating a local file. The same file holds the optional
 `DEEPSEEK_API_KEY`.
 
-Create the tables and load the 30 demo profiles (both steps are safe to re-run):
-
-```bash
-psql "$DATABASE_URL" -f matching/schema.sql
-python matching/seed.py
-```
+The database must already contain the `accounts` and `profiles` tables; manage
+the schema directly with `psql`. Create demo accounts through the app or the API.
 
 ### 4. Start the Backend
 

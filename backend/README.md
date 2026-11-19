@@ -39,9 +39,8 @@ the protected routes. `GET /health` returns `{"status":"ok"}`.
 
 On startup the backend connects to the PostgreSQL database in `DATABASE_URL`
 and creates only the `auth_sessions` table; `accounts` and `profiles` must
-already exist. Create them from the repository root with
-`psql "$DATABASE_URL" -f matching/schema.sql`, then optionally load the demo
-pool with `python matching/seed.py`. Nothing is created on disk.
+already exist. Nothing is created on disk and the repository ships no DDL or
+seed scripts; manage the schema directly with `psql`.
 
 ## Configuration
 
@@ -89,7 +88,7 @@ Protected routes require `Authorization: Bearer <access_token>`.
 | `POST /auth/logout` | Bearer token | `204`, no response body; revokes that token |
 | `GET /profiles/me` | Bearer token | `200` with the current user's profile |
 | `PUT /profiles/me` | Bearer token and full editable profile | `200` with the saved profile |
-| `POST /matches` | Bearer token; a saved profile is required | `200` with `picks`, `source`, `stats` and `filter_summary` |
+| `POST /matches` | Bearer token; a saved profile is required. Optional body `{"use_model": false}` forces the deterministic matcher even when an API key is configured | `200` with `picks`, `source`, `stats` and `filter_summary` |
 | `GET /matches/me` | Bearer token | Alias for the current profile |
 
 Registration/login usernames are trimmed and lowercased. They must contain
@@ -199,12 +198,10 @@ password is public demo data; it is not a credential for any existing account.
 
 ## Existing data and matching
 
-The database is not seeded automatically. Run `python matching/seed.py` from the
-repository root to load the 30 synthetic fixture profiles; it is idempotent, so
-re-running it leaves existing accounts intact. Fixture values such as `hash1` are
-placeholders, not valid login hashes. Register a new test account through the API
-to obtain usable login credentials. Starting the backend does not replace the
-fixture passwords or reset existing data.
+The database is not seeded automatically and the repository ships no seed
+script; register accounts through the API or insert rows with `psql`. Values
+such as `hash1` in old fixtures are placeholders, not valid login hashes.
+Starting the backend does not replace passwords or reset existing data.
 
 The matching CLI reads the same PostgreSQL database, so it sees profiles saved
 by this API:

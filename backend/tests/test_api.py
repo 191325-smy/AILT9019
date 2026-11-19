@@ -455,6 +455,27 @@ class BackendAPITests(unittest.TestCase):
                 self.assertTrue(pick["reason"].strip())
                 self.assertEqual(conn.execute("SELECT in_team FROM profiles WHERE account_id = ?", (pick["account_id"],)).fetchone()[0], 0)
 
+    def test_matches_can_disable_the_model_even_when_one_is_configured(self):
+        with closing(sqlite3.connect(self.db_path)) as conn, conn:
+            conn.executescript(SEED_FIXTURES)
+        self.register()
+        token = self.login()
+        self.save(token)
+        # Pretend a key is configured; the flag must still force the fallback.
+        with patch("backend.app.matcher.model_name", return_value="test:model") as model_name:
+            response = self.client.post(
+                "/matches", json={"use_model": False}, headers=self.headers(token)
+            )
+        self.assertEqual(response.status_code, 200, response.text)
+        self.assertEqual(response.json()["source"], "fallback:model disabled")
+        self.assertEqual(model_name.call_count, 0)
+
+        # No body keeps the historical behaviour: the model is considered.
+        with patch("backend.app.matcher.model_name", return_value=None) as model_name:
+            legacy = self.client.post("/matches", headers=self.headers(token))
+        self.assertEqual(legacy.status_code, 200, legacy.text)
+        self.assertEqual(model_name.call_count, 1)
+
     def test_matches_require_login_and_a_saved_profile(self):
         self.assertEqual(self.client.post("/matches").status_code, 401)
         self.register()

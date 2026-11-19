@@ -10,7 +10,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
-from .models import AccountPublic, Credentials, LoginResponse, ProfilePublic, ProfileWrite
+from .models import (AccountPublic, Credentials, LoginResponse, MatchRequest,
+                     ProfilePublic, ProfileWrite)
 from .security import hash_password, new_token, verify_password
 from .store import DuplicateUsername, Store
 
@@ -58,8 +59,12 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
 
     @asynccontextmanager
     async def lifespan(application):
-        store.initialise()
-        yield
+        try:
+            store.open()
+            store.initialise()
+            yield
+        finally:
+            store.close()
 
     application = FastAPI(title="AILT9019 Accounts and Profiles", version="1.0.0", lifespan=lifespan)
     application.state.store = store
@@ -107,7 +112,7 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
         if not valid:
             raise unauthorised()
         token = new_token()
-        store.create_session(account["id"], token, ttl)
+        store.create_session(account, token, ttl)
         return {"access_token": token, "token_type": "bearer", "expires_in": ttl}
 
     @application.get("/auth/me", response_model=AccountPublic)
@@ -131,8 +136,11 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
         return store.save_profile(account["id"], values.model_dump())
 
     @application.post("/matches")
-    def run_match(account=Depends(current_account)):
+    def run_match(options: MatchRequest | None = None, account=Depends(current_account)):
         """Run the teammate matching algorithm for the current user."""
+        # An absent body keeps the historical behaviour: use the model when configured.
+        use_model = True if options is None else options.use_model
+
         # Get current user's profile
         me = store.load_profile(account["id"])
         if me is None:
@@ -147,7 +155,7 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
 
             # Run matching algorithm
             candidates, dropped, _ = candidates_for_model(me, pool)
-            picks, source = matcher.pick(me, candidates)
+            picks, source = matcher.pick(me, candidates, use_model=use_model)
 
             # Format response
             formatted_picks = []

@@ -39,6 +39,15 @@ class LoginResponse(BaseModel):
     expires_in: int
 
 
+class MatchRequest(BaseModel):
+    """Options for POST /matches; an absent body means the defaults."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    # False forces the deterministic fallback even when the server has an API key.
+    use_model: bool = True
+
+
 class ProfileWrite(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
 
@@ -59,6 +68,13 @@ class ProfileWrite(BaseModel):
     @classmethod
     def trim_text(cls, value):
         return value.strip() if isinstance(value, str) else value
+
+    @field_validator("programming", "github", "debugging", "web", "ai_agent", mode="before")
+    @classmethod
+    def reject_boolean_flags(cls, value):
+        if isinstance(value, bool):
+            raise ValueError("skill flags must be 0 or 1, not booleans")
+        return value
 
     @field_validator("languages")
     @classmethod

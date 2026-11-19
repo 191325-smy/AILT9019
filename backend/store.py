@@ -7,6 +7,7 @@ the shared PostgreSQL database from DATABASE_URL.
 
 import json
 import sqlite3
+import threading
 import time
 from contextlib import contextmanager
 from pathlib import Path
@@ -14,6 +15,9 @@ from pathlib import Path
 from matching import db as matching_db
 
 from .security import token_digest
+
+
+PROFILE_CACHE_SECONDS = 30
 
 
 # Test-only SQLite definitions. The running app uses PostgreSQL, whose tables are
@@ -65,19 +69,54 @@ class Store:
         if not self.is_postgres:
             self.path = Path(self.database).expanduser().resolve()
 
+        self._pool = None
+        # SQLite is the test backend; tests must see direct writes immediately.
+        self._cache_enabled = self.is_postgres
+        self._cache_lock = threading.Lock()
+        self._sessions = {}
+        self._profiles = {}
+
+    def open(self):
+        """Warm the PostgreSQL pool once for the lifetime of the app."""
+
+        if not self.is_postgres or self._pool is not None:
+            return
+
+        from psycopg.rows import dict_row
+        from psycopg_pool import ConnectionPool
+
+        pool = ConnectionPool(
+            self.database,
+            min_size=1,
+            max_size=4,
+            kwargs={"row_factory": dict_row},
+            open=False,
+        )
+        pool.open(wait=True, timeout=30)
+        self._pool = pool
+
+    def close(self):
+        """Release pooled connections and in-process caches."""
+
+        pool, self._pool = self._pool, None
+        if pool is not None:
+            pool.close()
+
+        with self._cache_lock:
+            self._sessions.clear()
+            self._profiles.clear()
+
     @contextmanager
     def connection(self):
-        """Open one connection per operation."""
+        """Borrow a pooled PostgreSQL connection, or a short SQLite one."""
 
         if self.is_postgres:
-            import psycopg
-            from psycopg.rows import dict_row
+            if self._pool is None:
+                self.open()
 
-            with psycopg.connect(
-                self.database,
-                row_factory=dict_row,
-            ) as conn:
-                yield conn
+            with self._pool.connection() as conn:
+                with conn:
+                    yield conn
 
         else:
             conn = sqlite3.connect(
@@ -272,8 +311,31 @@ class Store:
 
             return dict(row) if row else None
 
-    def create_session(self, account_id, token, ttl):
+    def _remember_session(self, token, account, expires_at):
+        """Keep the authenticated account in memory until its DB session ends."""
+
+        now = time.time()
+        if not self._cache_enabled or expires_at <= now:
+            return
+
+        with self._cache_lock:
+            if len(self._sessions) > 256:
+                self._sessions = {
+                    key: value
+                    for key, value in self._sessions.items()
+                    if value[1] > now
+                }
+            self._sessions[token_digest(token)] = (dict(account), expires_at)
+
+    def create_session(self, account, token, ttl):
         now = int(time.time())
+
+        if isinstance(account, dict):
+            account_id = account["id"]
+            username = account.get("username")
+        else:
+            account_id = account
+            username = None
 
         with self.connection() as conn:
 
@@ -297,13 +359,32 @@ class Store:
                 ),
             )
 
+        if username is not None:
+            self._remember_session(
+                token,
+                {"id": account_id, "username": username},
+                now + ttl,
+            )
+
     def session_account(self, token):
+        now = time.time()
+        digest = token_digest(token)
+
+        if self._cache_enabled:
+            with self._cache_lock:
+                cached = self._sessions.get(digest)
+                if cached is not None:
+                    account, expires_at = cached
+                    if expires_at > now:
+                        return dict(account)
+                    self._sessions.pop(digest, None)
+
         with self.connection() as conn:
 
             row = self._execute(
                 conn,
                 """
-                SELECT a.id, a.username
+                SELECT a.id, a.username, s.expires_at
                 FROM accounts AS a
                 JOIN auth_sessions AS s
                   ON s.account_id = a.id
@@ -311,12 +392,17 @@ class Store:
                   AND s.expires_at > ?
                 """,
                 (
-                    token_digest(token),
-                    int(time.time()),
+                    digest,
+                    int(now),
                 ),
             ).fetchone()
 
-            return dict(row) if row else None
+            if not row:
+                return None
+
+            account = {"id": row["id"], "username": row["username"]}
+            self._remember_session(token, account, int(row["expires_at"]))
+            return account
 
     def revoke_session(self, token):
         with self.connection() as conn:
@@ -327,13 +413,26 @@ class Store:
                 (token_digest(token),),
             )
 
+        with self._cache_lock:
+            self._sessions.pop(token_digest(token), None)
+
     def load_profile(self, account_id):
+        now = time.time()
+        if self._cache_enabled:
+            with self._cache_lock:
+                cached = self._profiles.get(account_id)
+                if cached is not None:
+                    profile, expires_at = cached
+                    if expires_at > now:
+                        return dict(profile)
+                    self._profiles.pop(account_id, None)
+
         with self.connection() as conn:
 
             row = self._execute(
                 conn,
-                """
-                SELECT updated_at
+                f"""
+                SELECT {matching_db.PROFILE_FIELDS}, updated_at
                 FROM profiles
                 WHERE account_id = ?
                 """,
@@ -343,15 +442,17 @@ class Store:
             if not row:
                 return None
 
-            profile = matching_db.load_profile(
-                conn,
-                account_id,
-            )
+            profile = matching_db.decode_profile(row)
+            profile["updated_at"] = str(profile["updated_at"])
 
-            return {
-                **profile,
-                "updated_at": str(row["updated_at"]),
-            }
+            with self._cache_lock:
+                if self._cache_enabled:
+                    self._profiles[account_id] = (
+                        profile,
+                        time.time() + PROFILE_CACHE_SECONDS,
+                    )
+
+            return dict(profile)
 
     def save_profile(self, account_id, values):
         with self.connection() as conn:
@@ -416,22 +517,24 @@ class Store:
                 ),
             )
 
-            profile = matching_db.load_profile(
+            row = self._execute(
                 conn,
-                account_id,
-            )
-
-            updated = self._execute(
-                conn,
-                """
-                SELECT updated_at
+                f"""
+                SELECT {matching_db.PROFILE_FIELDS}, updated_at
                 FROM profiles
                 WHERE account_id = ?
                 """,
                 (account_id,),
             ).fetchone()
 
-            return {
-                **profile,
-                "updated_at": str(updated["updated_at"]),
-            }
+            result = matching_db.decode_profile(row)
+            result["updated_at"] = str(result["updated_at"])
+
+        with self._cache_lock:
+            if self._cache_enabled:
+                self._profiles[account_id] = (
+                    result,
+                    time.time() + PROFILE_CACHE_SECONDS,
+                )
+
+        return dict(result)

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Teammate Matcher</title>
-    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
     <nav class="navbar">
@@ -114,8 +114,19 @@
                         <small class="form-hint">Tick the skills you have real experience with.</small>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                    <button type="submit" id="register-submit" class="btn btn-primary btn-block">
+                        <span class="btn-spinner" aria-hidden="true"></span>
+                        <span class="btn-label">Create Account</span>
+                    </button>
                 </form>
+
+                <div id="register-loading" class="loading-overlay" role="status" aria-live="polite" hidden>
+                    <div class="loading-content">
+                        <div class="loading-spinner" aria-hidden="true"></div>
+                        <p id="register-loading-text" class="loading-title">Creating your account...</p>
+                        <p class="loading-hint">Please wait, this can take a few seconds.</p>
+                    </div>
+                </div>
 
                 <div class="auth-footer">
                     <p>Already have an account? <a href="index.html">Sign in</a></p>
@@ -130,6 +141,6 @@
         </div>
     </footer>
 
-    <script src="js/app.js?v=4"></script>
+    <script src="js/app.js?v=7"></script>
 </body>
 </html>

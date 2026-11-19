@@ -261,13 +261,18 @@ def _fallback(me, candidates, limit):
     return picks, "fallback"
 
 
-def pick(me, candidates, limit=MAX_MATCHES):
+def pick(me, candidates, limit=MAX_MATCHES, use_model=True):
     """Return (picks, source) where picks is [{profile, reason}] and source says why.
 
     source is "model" when the model answered, otherwise "fallback:<reason>".
+    use_model=False forces the deterministic ranking even when a key is set.
     """
     if not candidates:
         return [], "empty"
+
+    if not use_model:
+        picks, why = _fallback(me, candidates, limit)
+        return picks, f"{why}:model disabled"
 
     name = model_name()
     if name is None:

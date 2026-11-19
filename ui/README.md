@@ -55,7 +55,7 @@ opening the HTML file directly.
 
 ### 3. Dashboard (dashboard.html)
 - Display current user profile
-- Run matching algorithm button
+- Run matching algorithm button with a "Use AI model" switch; turning it off forces the deterministic matcher even when the server has an API key
 - Matching workflow explanation
 
 ### 4. Match Results (results.html)

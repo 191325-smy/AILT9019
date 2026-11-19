@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Teammate Matcher</title>
-    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <a href="dashboard.html" class="nav-brand">🎯 Teammate Matcher</a>
             <div class="nav-links" id="nav-links">
-                <a href="edit-profile.html">Edit Profile</a>
+                <a href="edit-profile.html?v=4">Edit Profile</a>
                 <a href="#" onclick="logout()">Logout</a>
             </div>
         </div>
@@ -31,7 +31,7 @@
                 <div class="card profile-card">
                     <div class="card-header">
                         <h2>👤 Your Profile</h2>
-                        <a href="edit-profile.html" class="btn btn-sm btn-secondary">Edit</a>
+                        <a href="edit-profile.html?v=4" class="btn btn-sm btn-secondary">Edit</a>
                     </div>
                     <div class="card-body">
                         <div class="profile-info">
@@ -96,6 +96,21 @@
                             <li>✓ Shared languages for better communication</li>
                             <li>✓ Availability (not already in a team)</li>
                         </ul>
+                        <div class="model-toggle">
+                            <div class="model-toggle-copy">
+                                <label for="use-model" class="model-toggle-title">
+                                    Use AI model
+                                    <span class="model-toggle-state" id="use-model-state">On</span>
+                                </label>
+                                <p class="model-toggle-hint" id="use-model-hint">
+                                    Turn off to use the deterministic matcher, even when the server has an API key.
+                                </p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="use-model" checked aria-describedby="use-model-hint">
+                                <span class="switch-slider" aria-hidden="true"></span>
+                            </label>
+                        </div>
                         <button id="match-btn" class="btn btn-primary btn-block btn-lg">
                             🔍 Run Matching Algorithm
                         </button>
@@ -143,6 +158,6 @@
         </div>
     </footer>
 
-    <script src="js/app.js?v=4"></script>
+    <script src="js/app.js?v=7"></script>
 </body>
 </html>

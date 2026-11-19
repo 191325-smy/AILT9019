@@ -10,6 +10,9 @@ const API_BASE_URL = ['localhost', '127.0.0.1'].includes(window.location.hostnam
 let currentUser = null;
 let authToken = null;
 let matchingInFlight = false;
+let registrationInFlight = false;
+let loginInFlight = false;
+const MODEL_PREF_KEY = 'useModel';
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
@@ -42,7 +45,7 @@ function updateNavbar() {
     if (navLinks && currentUser) {
         navLinks.innerHTML = `
             <a href="dashboard.html">Dashboard</a>
-            <a href="edit-profile.html">Edit Profile</a>
+            <a href="edit-profile.html?v=4">Edit Profile</a>
             <a href="#" onclick="logout(); return false;">Logout (${escapeHtml(currentUser.username)})</a>
         `;
     }
@@ -74,6 +77,29 @@ function setupEventListeners() {
     if (matchBtn) {
         matchBtn.addEventListener('click', runMatching);
     }
+
+    initModelToggle();
+}
+
+// Model toggle: the dashboard can force the deterministic matcher even when
+// the server has an API key. The choice is remembered across reloads.
+function initModelToggle() {
+    const toggle = document.getElementById('use-model');
+    if (!toggle) return;
+
+    toggle.checked = localStorage.getItem(MODEL_PREF_KEY) !== 'false';
+    updateModelToggleState(toggle.checked);
+    toggle.addEventListener('change', () => {
+        localStorage.setItem(MODEL_PREF_KEY, toggle.checked ? 'true' : 'false');
+        updateModelToggleState(toggle.checked);
+    });
+}
+
+function updateModelToggleState(enabled) {
+    const state = document.getElementById('use-model-state');
+    if (!state) return;
+    state.textContent = enabled ? 'On' : 'Off';
+    state.classList.toggle('is-off', !enabled);
 }
 
 // API call helper
@@ -109,8 +135,13 @@ async function apiCall(endpoint, options = {}) {
 // Handle login
 async function handleLogin(e) {
     e.preventDefault();
+    if (loginInFlight) return;
+
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+
+    loginInFlight = true;
+    setLoginLoading(true, 'Signing you in...');
 
     try {
         const response = await apiCall('/auth/login', {
@@ -123,17 +154,21 @@ async function handleLogin(e) {
         localStorage.setItem('authToken', authToken);
 
         // Get user info
+        setLoginLoading(true, 'Loading your account...');
         const meResponse = await apiCall('/auth/me');
         const user = await meResponse.json();
 
         currentUser = user;
         localStorage.setItem('currentUser', JSON.stringify(user));
 
+        setLoginLoading(true, 'Signed in! Taking you to your dashboard...');
         showAlert('success', `Welcome back, ${user.username}!`);
         setTimeout(() => {
             window.location.href = 'dashboard.html';
-        }, 500);
+        }, 700);
     } catch (error) {
+        loginInFlight = false;
+        setLoginLoading(false);
         showAlert('error', error.message || 'Login failed. Please check your credentials.');
     }
 }
@@ -141,38 +176,87 @@ async function handleLogin(e) {
 // Handle register
 async function handleRegister(e) {
     e.preventDefault();
+    if (registrationInFlight) return;
+
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+    let accountCreated = false;
+
+    registrationInFlight = true;
+    setRegisterLoading(true, 'Creating your account...');
 
     try {
         await apiCall('/auth/register', {
             method: 'POST',
             body: JSON.stringify({ username, password })
         });
+        accountCreated = true;
+
+        setRegisterLoading(true, 'Signing you in...');
         // The account and profile are separate API resources.
         const loginResponse = await apiCall('/auth/login', {
             method: 'POST', body: JSON.stringify({ username, password })
         });
         authToken = (await loginResponse.json()).access_token;
         localStorage.setItem('authToken', authToken);
+
+        setRegisterLoading(true, 'Loading your account...');
         const meResponse = await apiCall('/auth/me');
         currentUser = await meResponse.json();
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+        setRegisterLoading(true, 'Saving your profile...');
         await apiCall('/profiles/me', {
             method: 'PUT', body: JSON.stringify(profileFromForm())
         });
+
+        setRegisterLoading(true, 'Account created! Taking you to your dashboard...');
         showAlert('success', 'Account and profile saved successfully!');
         setTimeout(() => {
             window.location.href = 'dashboard.html';
-        }, 500);
+        }, 700);
     } catch (error) {
-        if (currentUser && authToken) {
+        registrationInFlight = false;
+        setRegisterLoading(false);
+
+        if (accountCreated && currentUser && authToken) {
             showAlert('error', `Account created, but profile was not saved: ${error.message}. Open Edit Profile to complete it.`);
             updateNavbar();
         } else {
             showAlert('error', error.message || 'Registration failed.');
         }
     }
+}
+
+function setRegisterLoading(loading, message) {
+    setAuthLoading('register', loading, message);
+}
+
+function setLoginLoading(loading, message) {
+    setAuthLoading('login', loading, message);
+}
+
+function setAuthLoading(prefix, loading, message) {
+    const form = document.getElementById(`${prefix}-form`);
+    const button = document.getElementById(`${prefix}-submit`);
+    const overlay = document.getElementById(`${prefix}-loading`);
+    const status = document.getElementById(`${prefix}-loading-text`);
+
+    if (!form || !button || !overlay) return;
+
+    form.setAttribute('aria-busy', loading ? 'true' : 'false');
+    button.disabled = loading;
+    button.classList.toggle('is-loading', loading);
+
+    const label = button.querySelector('.btn-label');
+    if (label) {
+        label.textContent = loading
+            ? (prefix === 'login' ? 'Signing in...' : 'Creating account...')
+            : (prefix === 'login' ? 'Sign In' : 'Create Account');
+    }
+
+    overlay.hidden = !loading;
+    if (message && status) status.textContent = message;
 }
 
 function selectedLanguages() {
@@ -289,6 +373,16 @@ async function handleEditProfile(e) {
 // Populate edit form with current user data
 async function populateEditForm() {
     if (!currentUser || !authToken) return;
+    // An older cached edit page has no programme/roles/skills fields and cannot
+    // be patched in place; reload once through a versioned URL.
+    if (!document.getElementById('programme')) {
+        const url = new URL(window.location.href);
+        if (url.searchParams.get('v') !== '4') {
+            url.searchParams.set('v', '4');
+            window.location.replace(url.toString());
+            return;
+        }
+    }
 
     try {
         const response = await apiCall('/profiles/me');
@@ -330,6 +424,9 @@ function setMatchingState(running) {
             delete button.dataset.label;
         }
     });
+
+    const toggle = document.getElementById('use-model');
+    if (toggle) toggle.disabled = running;
 }
 
 // Run matching algorithm
@@ -344,8 +441,11 @@ async function runMatching() {
     setMatchingState(true);
 
     try {
+        const toggle = document.getElementById('use-model');
+        const useModel = toggle ? toggle.checked : localStorage.getItem(MODEL_PREF_KEY) !== 'false';
         const response = await apiCall('/matches', {
-            method: 'POST'
+            method: 'POST',
+            body: JSON.stringify({ use_model: useModel })
         });
 
         const data = await response.json();
@@ -445,7 +545,9 @@ function loadResults() {
     // Update source badge
     const sourceBadge = document.querySelector('.source-badge');
     if (sourceBadge) {
-        if (source.startsWith('fallback')) {
+        if (source === 'fallback:model disabled') {
+            sourceBadge.textContent = '⚙️ Deterministic (AI off)';
+        } else if (source.startsWith('fallback')) {
             sourceBadge.textContent = '⚙️ Deterministic Fallback';
         } else if (source === 'empty') {
             sourceBadge.textContent = 'No eligible candidates';

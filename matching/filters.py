@@ -119,9 +119,12 @@ def fact_sentence(me, cand):
 
 
 def fallback_reason(me, cand):
-    """One readable sentence citing the same evidence the model is asked to name."""
-    s = cand["signals"]["score"]
-    return f"Fits at {s['total']:.2f}: {fact_sentence(me, cand)}"
+    """One readable sentence citing the same evidence the model is asked to name.
+
+    No numeric score: the deterministic ranking is an implementation detail.
+    """
+    sentence = fact_sentence(me, cand)
+    return sentence[:1].upper() + sentence[1:]
 
 
 def diverse_picks(me, candidates, limit=MAX_MATCHES):

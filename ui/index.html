@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Teammate Matcher</title>
-    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
     <nav class="navbar">
@@ -35,11 +35,22 @@
                         <small class="form-hint">Use the password you chose when registering.</small>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    <button type="submit" id="login-submit" class="btn btn-primary btn-block">
+                        <span class="btn-spinner" aria-hidden="true"></span>
+                        <span class="btn-label">Sign In</span>
+                    </button>
                 </form>
 
+                <div id="login-loading" class="loading-overlay" role="status" aria-live="polite" hidden>
+                    <div class="loading-content">
+                        <div class="loading-spinner" aria-hidden="true"></div>
+                        <p id="login-loading-text" class="loading-title">Signing you in...</p>
+                        <p class="loading-hint">Please wait, this can take a few seconds.</p>
+                    </div>
+                </div>
+
                 <div class="auth-footer">
-                    <p>Don't have an account? <a href="register.html">Register here</a></p>
+                    <p>Don't have an account? <a href="register.html?v=6">Register here</a></p>
                     <div class="demo-accounts">
                         <strong>Course demo:</strong><br>
                         Register a new account to sign in. The seeded classmates are synthetic matching examples.
@@ -55,6 +66,6 @@
         </div>
     </footer>
 
-    <script src="js/app.js?v=4"></script>
+    <script src="js/app.js?v=7"></script>
 </body>
 </html>

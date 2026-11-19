@@ -65,6 +65,12 @@ def _decode(row):
     return row
 
 
+def decode_profile(row):
+    """Decode a raw row selected with PROFILE_FIELDS."""
+
+    return _decode(row)
+
+
 def load_profile(conn, account_id):
     mark = _placeholder(conn)
     row = conn.execute(
