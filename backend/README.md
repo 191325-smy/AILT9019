@@ -39,7 +39,9 @@ the protected routes. `GET /health` returns `{"status":"ok"}`.
 
 On startup the backend connects to the PostgreSQL database in `DATABASE_URL`
 and creates only the `auth_sessions` table; `accounts` and `profiles` must
-already exist. Nothing is created on disk.
+already exist. Create them from the repository root with
+`psql "$DATABASE_URL" -f matching/schema.sql`, then optionally load the demo
+pool with `python matching/seed.py`. Nothing is created on disk.
 
 ## Configuration
 
@@ -50,7 +52,7 @@ reads process environment variables, which take precedence over the file.
 |---|---|---|
 | `DATABASE_URL` | taken from `matching/.env` | PostgreSQL connection string; required, no local fallback |
 | `SESSION_TTL_SECONDS` | `3600` | Token lifetime, from 1 to 604800 seconds |
-| `ALLOWED_ORIGINS` | `http://localhost:8001,http://127.0.0.1:8001` | Comma-separated frontend origins allowed by CORS |
+| `ALLOWED_ORIGINS` | `https://ailt9019-frontend.onrender.com,https://191325-smy.github.io,http://localhost:8001,http://127.0.0.1:8001` | Comma-separated frontend origins allowed by CORS |
 
 For a frontend running at `http://localhost:5173`, set this before starting
 Uvicorn in PowerShell:
@@ -197,8 +199,9 @@ password is public demo data; it is not a credential for any existing account.
 
 ## Existing data and matching
 
-The shared database already contains the 30 synthetic fixture profiles plus any
-accounts registered through the API. Fixture values such as `hash1` are
+The database is not seeded automatically. Run `python matching/seed.py` from the
+repository root to load the 30 synthetic fixture profiles; it is idempotent, so
+re-running it leaves existing accounts intact. Fixture values such as `hash1` are
 placeholders, not valid login hashes. Register a new test account through the API
 to obtain usable login credentials. Starting the backend does not replace the
 fixture passwords or reset existing data.

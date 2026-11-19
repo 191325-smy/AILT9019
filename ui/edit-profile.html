@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile - Teammate Matcher</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="dashboard.html" class="nav-brand"> Teammate Matcher</a>
+            <a href="dashboard.html" class="nav-brand">🎯 Teammate Matcher</a>
             <div class="nav-links" id="nav-links">
                 <a href="dashboard.html">Dashboard</a>
                 <a href="#" onclick="logout()">Logout</a>
@@ -59,10 +59,48 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="languages">Languages</label>
-                        <input type="text" id="languages" name="languages"
-                               placeholder="e.g. Mandarin, English, Cantonese">
-                        <small class="form-hint">Comma-separated list</small>
+                        <span class="form-label">Languages</span>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option"><input type="checkbox" name="languages" value="English"> English</label>
+                            <label class="checkbox-option"><input type="checkbox" name="languages" value="Mandarin"> Mandarin</label>
+                            <label class="checkbox-option"><input type="checkbox" name="languages" value="Cantonese"> Cantonese</label>
+                        </div>
+                        <small class="form-hint">Select the languages you can work in.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="programme">Programme *</label>
+                        <select id="programme" name="programme" required>
+                            <option value="" selected disabled>Select your programme</option>
+                            <option value="AI and Data Science">AI and Data Science</option>
+                            <option value="Applied AI">Applied AI</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="form-label">Roles you can fill</span>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option"><input type="checkbox" name="open_roles" value="Frontend"> Frontend</label>
+                            <label class="checkbox-option"><input type="checkbox" name="open_roles" value="Backend"> Backend</label>
+                            <label class="checkbox-option"><input type="checkbox" name="open_roles" value="Database"> Database</label>
+                            <label class="checkbox-option"><input type="checkbox" name="open_roles" value="Agentic Development"> Agentic Development</label>
+                            <label class="checkbox-option"><input type="checkbox" name="open_roles" value="Other"> Other</label>
+                        </div>
+                        <small class="form-hint">Tick every role you could cover; your preferred role is always included.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="form-label">Skills</span>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option"><input type="checkbox" name="skill" value="programming"> Programming</label>
+                            <label class="checkbox-option"><input type="checkbox" name="skill" value="github"> GitHub</label>
+                            <label class="checkbox-option"><input type="checkbox" name="skill" value="debugging"> Debugging</label>
+                            <label class="checkbox-option"><input type="checkbox" name="skill" value="web"> Web development</label>
+                            <label class="checkbox-option"><input type="checkbox" name="skill" value="ai_agent"> AI / agents</label>
+                        </div>
+                        <small class="form-hint">Tick the skills you have real experience with.</small>
                     </div>
 
                     <div class="form-group">
@@ -87,6 +125,6 @@
         </div>
     </footer>
 
-    <script src="js/app.js"></script>
+    <script src="js/app.js?v=3"></script>
 </body>
 </html>

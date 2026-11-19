@@ -283,6 +283,55 @@ class BackendAPITests(unittest.TestCase):
             self.assertEqual(conn.execute("SELECT COUNT(*) FROM profiles").fetchone()[0], 1)
             self.assertEqual(conn.execute("SELECT COUNT(*) FROM accounts").fetchone()[0], 1)
 
+    def test_profile_accepts_matching_fields_and_validates_roles(self):
+        self.register()
+        token = self.login()
+        profile = dict(
+            PROFILE,
+            programme="Computer Science",
+            open_roles=["Backend", "Database"],
+            programming=1,
+            github=0,
+            debugging=1,
+            web=0,
+            ai_agent=1,
+        )
+        saved = self.save(token, profile)
+        for field in ("programme", "open_roles", "programming", "github",
+                      "debugging", "web", "ai_agent"):
+            self.assertEqual(saved[field], profile[field], field)
+
+        read = self.client.get("/profiles/me", headers=self.headers(token)).json()
+        self.assertEqual(read["open_roles"], ["Backend", "Database"])
+
+        with closing(sqlite3.connect(self.db_path)) as conn:
+            row = conn.execute(
+                "SELECT programme, open_roles, programming, ai_agent FROM profiles"
+            ).fetchone()
+        self.assertEqual(row[0], "Computer Science")
+        self.assertEqual(json.loads(row[1]), ["Backend", "Database"])
+        self.assertEqual(row[2], 1)
+        self.assertEqual(row[3], 1)
+
+        missing_preferred = dict(profile, open_roles=["Frontend"])
+        response = self.client.put(
+            "/profiles/me", headers=self.headers(token), json=missing_preferred
+        )
+        self.assertEqual(response.status_code, 422)
+
+        bad_skill = dict(profile, programming=2)
+        response = self.client.put(
+            "/profiles/me", headers=self.headers(token), json=bad_skill
+        )
+        self.assertEqual(response.status_code, 422)
+
+        # An update that omits the new fields must not erase what is stored.
+        saved = self.save(token, dict(PROFILE, display_name="Renamed Student"))
+        self.assertEqual(saved["programme"], "Computer Science")
+        self.assertEqual(saved["open_roles"], ["Backend", "Database"])
+        self.assertEqual(saved["programming"], 1)
+        self.assertEqual(saved["ai_agent"], 1)
+
     def test_profile_validation_and_mass_assignment_rejection(self):
         self.register()
         token = self.login()

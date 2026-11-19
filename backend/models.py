@@ -2,7 +2,18 @@
 
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator
+from pydantic import (BaseModel, ConfigDict, Field, SecretStr, field_validator,
+                      model_validator)
+
+
+Role = Literal["Frontend", "Backend", "Database", "Agentic Development", "Other"]
+Programme = Literal[
+    "AI and Data Science",
+    "Applied AI",
+    "Computer Science",
+    "Others",
+]
+SkillFlag = Literal[0, 1]
 
 
 class Credentials(BaseModel):
@@ -34,8 +45,15 @@ class ProfileWrite(BaseModel):
     display_name: str = Field(min_length=1, max_length=100)
     contact_info: str | None = Field(default=None, max_length=200)
     city: Literal["HK", "SH"]
-    preferred_role: Literal["Frontend", "Backend", "Database", "Agentic Development", "Other"]
+    preferred_role: Role
     languages: list[Literal["Mandarin", "Cantonese", "English"]] = Field(max_length=3)
+    programme: Programme | None = None
+    open_roles: list[Role] | None = Field(default=None, max_length=5)
+    programming: SkillFlag | None = None
+    github: SkillFlag | None = None
+    debugging: SkillFlag | None = None
+    web: SkillFlag | None = None
+    ai_agent: SkillFlag | None = None
 
     @field_validator("display_name", "contact_info", mode="before")
     @classmethod
@@ -46,6 +64,19 @@ class ProfileWrite(BaseModel):
     @classmethod
     def distinct_languages(cls, value):
         return list(dict.fromkeys(value))
+
+    @field_validator("open_roles")
+    @classmethod
+    def distinct_roles(cls, value):
+        if value is None:
+            return value
+        return list(dict.fromkeys(value))
+
+    @model_validator(mode="after")
+    def roles_include_preferred(self):
+        if self.open_roles and self.preferred_role not in self.open_roles:
+            raise ValueError("open_roles must include preferred_role")
+        return self
 
 
 class ProfilePublic(ProfileWrite):

@@ -37,6 +37,13 @@ CREATE TABLE profiles (
     languages TEXT,
     in_team INTEGER DEFAULT 0,
     updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    programme TEXT,
+    open_roles TEXT,
+    programming INTEGER,
+    github INTEGER,
+    debugging INTEGER,
+    web INTEGER,
+    ai_agent INTEGER,
     FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
 );
 """
@@ -356,9 +363,16 @@ class Store:
                     contact_info,
                     city,
                     preferred_role,
-                    languages
+                    languages,
+                    programme,
+                    open_roles,
+                    programming,
+                    github,
+                    debugging,
+                    web,
+                    ai_agent
                 )
-                VALUES (?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 
                 ON CONFLICT(account_id)
                 DO UPDATE SET
@@ -367,8 +381,17 @@ class Store:
                     city = excluded.city,
                     preferred_role = excluded.preferred_role,
                     languages = excluded.languages,
+                    programme = COALESCE(excluded.programme, profiles.programme),
+                    open_roles = COALESCE(excluded.open_roles, profiles.open_roles),
+                    programming = COALESCE(excluded.programming, profiles.programming),
+                    github = COALESCE(excluded.github, profiles.github),
+                    debugging = COALESCE(excluded.debugging, profiles.debugging),
+                    web = COALESCE(excluded.web, profiles.web),
+                    ai_agent = COALESCE(excluded.ai_agent, profiles.ai_agent),
                     updated_at = CURRENT_TIMESTAMP
             """
+
+            open_roles = values.get("open_roles")
 
             self._execute(
                 conn,
@@ -383,6 +406,13 @@ class Store:
                         values["languages"],
                         ensure_ascii=False,
                     ),
+                    values.get("programme"),
+                    json.dumps(open_roles, ensure_ascii=False) if open_roles is not None else None,
+                    values.get("programming"),
+                    values.get("github"),
+                    values.get("debugging"),
+                    values.get("web"),
+                    values.get("ai_agent"),
                 ),
             )
 

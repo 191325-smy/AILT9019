@@ -42,16 +42,25 @@ tests.
 
 ### 3. Configure the Database
 
-Accounts and profiles live in the shared PostgreSQL database. Copy the env file
-once - it already contains the `DATABASE_URL`:
+Accounts and profiles live in a PostgreSQL database. Copy the env template and
+fill in your own connection string - the example ships with `DATABASE_URL` blank
+on purpose:
 
 ```bash
 cp matching/.env.example matching/.env
+# then edit matching/.env: DATABASE_URL=postgresql://USER:PASSWORD@HOST/DATABASE
 ```
 
 The backend and the CLI read that file; without `DATABASE_URL` they stop with a
 clear error instead of creating a local file. The same file holds the optional
 `DEEPSEEK_API_KEY`.
+
+Create the tables and load the 30 demo profiles (both steps are safe to re-run):
+
+```bash
+psql "$DATABASE_URL" -f matching/schema.sql
+python matching/seed.py
+```
 
 ### 4. Start the Backend
 
@@ -99,7 +108,7 @@ Frontend will be at: http://localhost:8001
 
 1. Open http://localhost:8001 in your browser
 2. Register a new username with a password of at least 8 characters. Seeded accounts such as `alice_chen` have placeholder password hashes and cannot log in.
-3. Complete your profile (city, role, languages)
+3. Complete your profile (city, preferred role, programme, open roles, languages, skills)
 4. Click "Run Matching Algorithm" to find teammates!
 
 Matching runs without any setup, but this is an AI application: add a DeepSeek

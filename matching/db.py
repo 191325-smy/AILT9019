@@ -12,6 +12,7 @@ import json
 import os
 
 JSON_COLUMNS = ("languages", "open_roles")
+LIST_COLUMNS = ("languages",)
 
 PROFILE_FIELDS = (
     "account_id, display_name, contact_info, city, preferred_role, "
@@ -39,6 +40,12 @@ def get_conn():
     )
 
 
+def _placeholder(conn):
+    """The backend tests use SQLite; the running app uses PostgreSQL."""
+    module = type(conn).__module__
+    return "%s" if module.startswith("psycopg") else "?"
+
+
 def _decode(row):
     """Convert database rows into normal Python dictionaries."""
     if row is None:
@@ -50,20 +57,21 @@ def _decode(row):
         value = row.get(col)
 
         if value is None:
-            row[col] = []
+            row[col] = [] if col in LIST_COLUMNS else None
 
         elif isinstance(value, (str, bytes)):
-            row[col] = json.loads(value) if value else []
+            row[col] = json.loads(value) if value else ([] if col in LIST_COLUMNS else None)
 
     return row
 
 
 def load_profile(conn, account_id):
+    mark = _placeholder(conn)
     row = conn.execute(
         f"""
         SELECT {PROFILE_FIELDS}
         FROM profiles
-        WHERE account_id = %s
+        WHERE account_id = {mark}
         """,
         (account_id,),
     ).fetchone()
@@ -73,13 +81,14 @@ def load_profile(conn, account_id):
 
 def load_profile_by_username(conn, username):
     fields = PROFILE_FIELDS.replace(", ", ", p.")
+    mark = _placeholder(conn)
 
     row = conn.execute(
         f"""
         SELECT p.{fields}
         FROM profiles p
         JOIN accounts a ON a.id = p.account_id
-        WHERE LOWER(a.username) = LOWER(%s)
+        WHERE LOWER(a.username) = LOWER({mark})
         """,
         (username,),
     ).fetchone()

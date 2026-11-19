@@ -1,14 +1,17 @@
 # Setup
 
-The matching layer reads the shared PostgreSQL database. There is no local file
-and no seeder: `DATABASE_URL` in `matching/.env` is the only configuration, and
-the CLI stops with a clear error if it is missing.
+The matching layer reads a PostgreSQL database. There is no local file:
+`DATABASE_URL` in `matching/.env` is the only configuration, and the CLI stops
+with a clear error if it is missing. `schema.sql` creates the tables and
+`seed.py` loads 30 synthetic profiles.
 
 ```bash
 cd ..                                        # repository root
-cp matching/.env.example matching/.env       # contains DATABASE_URL
+cp matching/.env.example matching/.env       # then set DATABASE_URL
 source .venv/bin/activate
 python -m pip install -r requirements.txt    # psycopg for PostgreSQL
+psql "$DATABASE_URL" -f matching/schema.sql  # create tables (once)
+python matching/seed.py                      # optional demo profiles, idempotent
 cd matching
 python match.py alice_chen
 ```
@@ -23,6 +26,8 @@ Requires Python 3.9+.
 | `filters.py` | hard constraints + signals, pure functions |
 | `matcher.py` | one model call, plus the deterministic fallback |
 | `match.py` | CLI: load -> filter -> shortlist -> print |
+| `schema.sql` | PostgreSQL DDL: accounts, profiles (15 columns), auth_sessions |
+| `seed.py` | idempotent loader for 30 synthetic demo profiles |
 | `sample_pool.json` | mirror of the fixtures for the no-DB path |
 | `.env.example` | template for `.env` (the real one is git-ignored) |
 
@@ -135,9 +140,10 @@ intended behaviour, not a bug.
 | `JSONDecodeError` in `db._decode` | a row's `languages` isn't valid JSON | fix the row with `psql` |
 | `psycopg.OperationalError` | wrong URL, credentials, or network | check `DATABASE_URL`; a paused Render database also refuses connections |
 
-There is no reset flag and no local file to rebuild: the shared database is
-edited directly with `psql`. Remember that every account and profile row is
-shared by everyone running the app.
+There is no reset flag. To rebuild from scratch, drop the tables and re-run
+`schema.sql` plus `seed.py`; otherwise the shared database is edited directly
+with `psql`. Remember that every account and profile row is shared by everyone
+running the app.
 
 For the web UI, install the root `requirements.txt` into the shared
 environment. Set `MATCH_MODEL=deepseek:deepseek-flash`

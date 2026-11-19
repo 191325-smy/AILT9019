@@ -50,7 +50,8 @@ opening the HTML file directly.
 
 ### 2. Register Page (register.html)
 - New user registration form
-- Fields: username, password, display name, email, city, role, languages
+- Fields: username, password, display name, email, city, preferred role,
+  programme, open roles, languages, skills
 
 ### 3. Dashboard (dashboard.html)
 - Display current user profile
@@ -65,7 +66,7 @@ opening the HTML file directly.
 
 ### 5. Edit Profile (edit-profile.html)
 - Modify personal profile
-- Update city, role, languages, etc.
+- Update city, preferred role, programme, open roles, languages and skills
 
 ## Design Features
 
@@ -84,8 +85,10 @@ opening the HTML file directly.
 
 ## Notes
 
-The frontend calls the backend at `http://localhost:8000`. The default backend
-CORS configuration allows `http://localhost:8001` and `http://127.0.0.1:8001`.
+On `localhost`/`127.0.0.1` the frontend calls the local backend at
+`http://127.0.0.1:8000`; anywhere else it calls the deployed backend at
+`https://ailt9019.onrender.com` (`API_BASE_URL` in `js/app.js`). The default
+backend CORS configuration allows the local origins and the deployed frontend.
 Profile changes persist in PostgreSQL; matching results depend on the saved profile.
 Team status is managed by database fixtures. Time-overlap preferences and mutual
 contact consent remain future work. Use synthetic contacts only in the demo.

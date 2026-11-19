@@ -1,12 +1,15 @@
 // AILT9019 Teammate Matcher - UI JavaScript
-// Connects to FastAPI backend at http://localhost:8000
 
-// API Configuration
-const API_BASE_URL = 'https://ailt9019.onrender.com';
+// API Configuration: local dev talks to the local backend, the deployed site
+// talks to the deployed backend. Change the production URL if it moves.
+const API_BASE_URL = ['localhost', '127.0.0.1'].includes(window.location.hostname)
+    ? 'http://127.0.0.1:8000'
+    : 'https://ailt9019.onrender.com';
 
 // State
 let currentUser = null;
 let authToken = null;
+let matchingInFlight = false;
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
@@ -172,13 +175,39 @@ async function handleRegister(e) {
     }
 }
 
+function selectedLanguages() {
+    return [...document.querySelectorAll('input[name="languages"]:checked')]
+        .map(input => input.value);
+}
+
+function selectedRoles() {
+    return [...document.querySelectorAll('input[name="open_roles"]:checked')]
+        .map(input => input.value);
+}
+
+function selectedSkills() {
+    const skills = {};
+    ['programming', 'github', 'debugging', 'web', 'ai_agent'].forEach(skill => {
+        const box = document.querySelector(`input[name="skill"][value="${skill}"]`);
+        skills[skill] = box && box.checked ? 1 : 0;
+    });
+    return skills;
+}
+
 function profileFromForm() {
+    const preferredRole = document.getElementById('preferred_role').value;
+    const openRoles = selectedRoles();
+    if (!openRoles.includes(preferredRole)) openRoles.push(preferredRole);
+
     return {
         display_name: document.getElementById('display_name').value,
         contact_info: document.getElementById('contact_info').value || null,
         city: document.getElementById('city').value,
-        preferred_role: document.getElementById('preferred_role').value,
-        languages: document.getElementById('languages').value.split(',').map(l => l.trim()).filter(Boolean)
+        preferred_role: preferredRole,
+        languages: selectedLanguages(),
+        programme: document.getElementById('programme').value || null,
+        open_roles: openRoles,
+        ...selectedSkills()
     };
 }
 
@@ -193,6 +222,19 @@ async function loadDashboard() {
         document.getElementById('profile-city').textContent = profile.city;
         document.getElementById('profile-role').textContent = profile.preferred_role;
         document.getElementById('profile-languages').textContent = profile.languages.join(', ') || 'Not specified';
+        document.getElementById('profile-programme').textContent = profile.programme || 'Not specified';
+        document.getElementById('profile-roles').textContent = (profile.open_roles || []).join(', ') || 'Not specified';
+        const skillLabels = {
+            programming: 'Programming',
+            github: 'GitHub',
+            debugging: 'Debugging',
+            web: 'Web',
+            ai_agent: 'AI/agents'
+        };
+        const skills = Object.entries(skillLabels)
+            .filter(([key]) => profile[key] === 1)
+            .map(([, label]) => label);
+        document.getElementById('profile-skills').textContent = skills.join(', ') || 'None listed';
         document.getElementById('profile-contact').textContent = profile.contact_info || 'Not provided';
         const badge = document.getElementById('profile-status');
         badge.textContent = profile.in_team ? 'Already in a team' : 'Looking for teammates';
@@ -212,25 +254,10 @@ function escapeHtml(value) {
 async function handleEditProfile(e) {
     e.preventDefault();
 
-    const display_name = document.getElementById('display_name').value;
-    const contact_info = document.getElementById('contact_info').value;
-    const city = document.getElementById('city').value;
-    const preferred_role = document.getElementById('preferred_role').value;
-    const languages = document.getElementById('languages').value
-        .split(',')
-        .map(l => l.trim())
-        .filter(l => l);
-
     try {
         await apiCall('/profiles/me', {
             method: 'PUT',
-            body: JSON.stringify({
-                display_name,
-                contact_info: contact_info || null,
-                city,
-                preferred_role,
-                languages
-            })
+            body: JSON.stringify(profileFromForm())
         });
 
         showAlert('success', 'Profile updated successfully!');
@@ -254,11 +281,38 @@ async function populateEditForm() {
         document.getElementById('contact_info').value = profile.contact_info || '';
         document.getElementById('city').value = profile.city || 'HK';
         document.getElementById('preferred_role').value = profile.preferred_role || 'Other';
-        document.getElementById('languages').value = (profile.languages || []).join(', ');
+        const chosenLanguages = new Set(profile.languages || []);
+        document.querySelectorAll('input[name="languages"]').forEach(input => {
+            input.checked = chosenLanguages.has(input.value);
+        });
+        document.getElementById('programme').value = profile.programme || '';
+        const chosenRoles = new Set(profile.open_roles || []);
+        chosenRoles.add(profile.preferred_role);
+        document.querySelectorAll('input[name="open_roles"]').forEach(input => {
+            input.checked = chosenRoles.has(input.value);
+        });
+        document.querySelectorAll('input[name="skill"]').forEach(input => {
+            input.checked = profile[input.value] === 1;
+        });
         document.getElementById('in_team').checked = profile.in_team === 1;
     } catch (error) {
         console.error('Failed to load profile:', error);
     }
+}
+
+// Disable every button that can start a match, so a slow model call cannot be
+// fired twice and produce two competing results.
+function setMatchingState(running) {
+    document.querySelectorAll('#match-btn, [data-match-trigger]').forEach(button => {
+        button.disabled = running;
+        if (running) {
+            button.dataset.label = button.textContent.trim();
+            button.textContent = '⏳ Matching...';
+        } else if (button.dataset.label) {
+            button.textContent = button.dataset.label;
+            delete button.dataset.label;
+        }
+    });
 }
 
 // Run matching algorithm
@@ -267,6 +321,10 @@ async function runMatching() {
         showAlert('error', 'Please log in first.');
         return;
     }
+    if (matchingInFlight) return;
+
+    matchingInFlight = true;
+    setMatchingState(true);
 
     try {
         const response = await apiCall('/matches', {
@@ -284,6 +342,9 @@ async function runMatching() {
         window.location.href = 'results.html';
     } catch (error) {
         showAlert('error', error.message || 'Failed to run matching.');
+    } finally {
+        matchingInFlight = false;
+        setMatchingState(false);
     }
 }
 
