@@ -86,8 +86,8 @@ opening the HTML file directly.
 
 The frontend calls the backend at `http://localhost:8000`. The default backend
 CORS configuration allows `http://localhost:8001` and `http://127.0.0.1:8001`.
-Profile changes persist in SQLite; matching results depend on the saved profile.
-Team status is managed by fixture data. Time-overlap preferences and mutual
+Profile changes persist in PostgreSQL; matching results depend on the saved profile.
+Team status is managed by database fixtures. Time-overlap preferences and mutual
 contact consent remain future work. Use synthetic contacts only in the demo.
 
 ## Screenshots

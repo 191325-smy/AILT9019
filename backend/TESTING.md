@@ -27,7 +27,7 @@ The suite checks:
 - Profile updates that preserve the existing account and team status.
 - Profile validation, literal Unicode/SQL-looking text and empty language lists.
 - Data and unexpired sessions surviving an app restart.
-- Preservation of the 30 seeded students and safe rejection of placeholder
+- Preservation of the 30 fixture students and safe rejection of placeholder
   passwords; newly registered users coexist with those fixtures.
 - Saved profiles remaining readable by `matching.db`.
 - Private responses using `Cache-Control: no-store` and explicit-origin CORS.
@@ -36,8 +36,10 @@ The suite checks:
 - Matching rejects missing login/missing profile, handles an empty pool, and
   accepts CORS preflight from the default recording frontend.
 
-The test databases are isolated under the ignored `.test-tmp/` directory and
-their SQLite handles are closed before cleanup. No AI API is used.
+The tests run against a temporary SQLite file created under the ignored
+`.test-tmp/` directory and injected with `create_app(db_path=...)`, so they never
+touch the shared PostgreSQL database. SQLite handles are closed before cleanup.
+No AI API is used.
 
 ## Real HTTP smoke check
 
@@ -52,7 +54,7 @@ Result: **PASS**. Public deployment has not been tested.
 ## Browser workflow
 
 Edge browser automation exercised the actual UI against local Uvicorn and HTTP
-servers, using an isolated database seeded with the 30 synthetic classmates:
+servers, using an isolated database with the 30 synthetic classmates:
 
 - Registration creates an account, signs in and saves the full profile.
 - Dashboard reload fetches the saved profile from the backend.

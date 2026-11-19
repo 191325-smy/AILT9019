@@ -24,7 +24,7 @@ def verify_password(password: str, stored_hash: str | None) -> bool:
     try:
         return _passwords.verify(password, stored_hash)
     except (UnknownHashError, ValueError):
-        # Existing seed.sql deliberately uses non-password placeholders.
+        # The synthetic fixtures use non-password placeholders on purpose.
         _passwords.verify(password, _dummy_hash)
         return False
 

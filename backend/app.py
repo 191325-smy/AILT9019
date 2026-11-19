@@ -19,7 +19,6 @@ from matching.filters import candidates_for_model
 from matching import matcher
 
 
-DEFAULT_DB = Path(__file__).resolve().parents[1] / "matching" / "ailt9019.db"
 bearer = HTTPBearer(auto_error=False)
 
 
@@ -31,12 +30,15 @@ def unauthorised():
 def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | None = None,
                allowed_origins: list[str] | None = None) -> FastAPI:
     if db_path is not None:
+        # Tests inject a temporary SQLite file so they never touch the live DB.
         database = str(db_path)
     else:
         database = os.getenv("DATABASE_URL")
-
-    if not database:
-        database = os.getenv("DB_PATH", str(DEFAULT_DB))
+        if not database:
+            raise RuntimeError(
+                "DATABASE_URL is not set - copy matching/.env.example to "
+                "matching/.env before starting the backend."
+            )
 
     ttl = session_ttl_seconds if session_ttl_seconds is not None else int(
         os.getenv("SESSION_TTL_SECONDS", "3600")
@@ -192,4 +194,7 @@ def create_app(db_path: Path | str | None = None, session_ttl_seconds: int | Non
     return application
 
 
-app = create_app()
+# The ASGI entry point is the factory itself:
+#   uvicorn backend.app:create_app --factory
+# Building the app at import time would make the test suite (and any tooling
+# that imports this module) require a live DATABASE_URL.

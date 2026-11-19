@@ -1,42 +1,37 @@
 # Setup
 
-No database server, no driver, no credentials. SQLite ships with Python, and the
-database is a single file.
+The matching layer reads the shared PostgreSQL database. There is no local file
+and no seeder: `DATABASE_URL` in `matching/.env` is the only configuration, and
+the CLI stops with a clear error if it is missing.
 
 ```bash
+cd ..                                        # repository root
+cp matching/.env.example matching/.env       # contains DATABASE_URL
+source .venv/bin/activate
+python -m pip install -r requirements.txt    # psycopg for PostgreSQL
 cd matching
-python3 seed.py
-python3 match.py alice_chen
+python match.py alice_chen
 ```
 
-That's the whole thing. `seed.py` creates `ailt9019.db` from `schema.sql` and
-fills it with 30 synthetic profiles from `seed.sql`.
-
-Requires Python 3.9+. Nothing to `pip install`.
+Requires Python 3.9+.
 
 ## What each file is
 
 | File | Role |
 |---|---|
-| `schema.sql` | the two tables (`accounts`, `profiles`) |
-| `seed.sql` | 30 fake accounts, 15 HK / 15 SH |
-| `seed.py` | applies both to `ailt9019.db` |
 | `db.py` | the only file that writes SQL |
 | `filters.py` | hard constraints + signals, pure functions |
 | `matcher.py` | one model call, plus the deterministic fallback |
 | `match.py` | CLI: load -> filter -> shortlist -> print |
-| `sample_pool.json` | mirror of `seed.sql` for the no-DB path |
+| `sample_pool.json` | mirror of the fixtures for the no-DB path |
 | `.env.example` | template for `.env` (the real one is git-ignored) |
-| `ailt9019.db` | generated, git-ignored |
 
 ## Try it
 
 ```bash
-python3 seed.py              # create + seed if needed, no-op if already populated
-python3 seed.py --reset      # drop both tables and rebuild from the fixtures
-python3 match.py alice_chen  # HK, Frontend
-python3 match.py peter_song  # SH, Frontend
-python3 match.py alice_chen --verbose   # one line per dropped profile, plus who survived
+python match.py alice_chen  # HK, Frontend
+python match.py peter_song  # SH, Frontend
+python match.py alice_chen --verbose   # one line per dropped profile, plus who survived
 ```
 
 `match.py` prints the pool counts, then the shortlist. By default the filter is
@@ -87,18 +82,17 @@ calling that `with_structured_output` relies on.
 fresh clone runs in fallback mode until they add their own key — which is
 enough to see the whole pipeline work, just without the model's wording.
 
-For a look at the raw data:
+For a look at the raw data (the same database the API writes to):
 
 ```bash
-sqlite3 ailt9019.db "SELECT display_name, city, preferred_role FROM profiles LIMIT 5;"
+export DATABASE_URL=$(sed -n 's/^DATABASE_URL=//p' .env)
+psql "$DATABASE_URL" -c "SELECT display_name, city, preferred_role FROM profiles LIMIT 5;"
 ```
-
-Or open `ailt9019.db` in DB Browser for SQLite / DBeaver.
 
 No database at all - read a JSON dump instead:
 
 ```bash
-python3 match.py --from-json sample_pool.json alice_chen
+python match.py --from-json sample_pool.json alice_chen
 ```
 
 ## Hard rules in the matcher
@@ -111,8 +105,8 @@ Only two, both in `filters.py` so they're visible and testable:
 Languages are **not** filtered. They're passed to the model as a signal, so a
 candidate whose role differs can still be suggested.
 
-`in_team` is set only by `seed.sql`. The logic never flips it, so the same input
-always yields the same pool and the same shortlist.
+`in_team` is set directly in the database. The logic never flips it, so the same
+input always yields the same pool and the same shortlist.
 
 ## How the team is assembled
 
@@ -135,18 +129,15 @@ intended behaviour, not a bug.
 
 | Error | Cause | Fix |
 |---|---|---|
-| `no such table: profiles` | database file missing or empty | `python3 seed.py` |
-| `no account with username '...'` | wrong handle, or DB not seeded | check `accounts` table; usernames look like `alice_chen` |
-| `JSONDecodeError` in `db._decode` | a fixture row's `languages` isn't valid JSON | fix the row in `seed.sql`, then `--reset` |
-| `UNIQUE constraint failed` | `seed.sql` ran twice | `python3 seed.py --reset` |
+| `RuntimeError: DATABASE_URL is not set` | `matching/.env` missing | `cp matching/.env.example matching/.env` |
+| `ModuleNotFoundError: psycopg` | driver not installed | `python -m pip install -r requirements.txt` from the repository root |
+| `no account with username '...'` | wrong handle, or not in the shared DB | check the `accounts` table with `psql` |
+| `JSONDecodeError` in `db._decode` | a row's `languages` isn't valid JSON | fix the row with `psql` |
+| `psycopg.OperationalError` | wrong URL, credentials, or network | check `DATABASE_URL`; a paused Render database also refuses connections |
 
-Reset from scratch:
-
-```bash
-python3 seed.py --reset
-```
-
-Nothing deletes `ailt9019.db` - `--reset` drops the tables and recreates them.
+There is no reset flag and no local file to rebuild: the shared database is
+edited directly with `psql`. Remember that every account and profile row is
+shared by everyone running the app.
 
 For the web UI, install the root `requirements.txt` into the shared
 environment. Set `MATCH_MODEL=deepseek:deepseek-flash`

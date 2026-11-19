@@ -1,8 +1,8 @@
 # Accounts and profile API
 
 This FastAPI backend adds registration, login, logout and authenticated profile
-reads/writes and teammate matching to the existing SQLite project. It uses the
-existing `accounts` and `profiles` tables and adds an `auth_sessions` table.
+reads/writes and teammate matching to the matching project. It uses the shared
+PostgreSQL `accounts` and `profiles` tables and adds an `auth_sessions` table.
 The web UI in `ui/` calls these APIs. Mutual-consent contact exchange remains
 future work; use synthetic contact details for this course demonstration.
 
@@ -30,24 +30,25 @@ Install and start:
 
 ```bash
 python -m pip install -r requirements.txt
-python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000
+python -m uvicorn backend.app:create_app --factory --host 127.0.0.1 --port 8000
 ```
 
 Open `http://127.0.0.1:8000/docs` for interactive API documentation. First call
 register, then login. Copy the returned `access_token` into **Authorize** to try
 the protected routes. `GET /health` returns `{"status":"ok"}`.
 
-On first startup, a missing database is created from `matching/schema.sql`
-without adding demo accounts. Existing accounts and profiles are preserved.
+On startup the backend connects to the PostgreSQL database in `DATABASE_URL`
+and creates only the `auth_sessions` table; `accounts` and `profiles` must
+already exist. Nothing is created on disk.
 
 ## Configuration
 
-The app reads process environment variables; it does not automatically load
-`.env` files.
+The app loads `matching/.env` on import (via `matching/matcher.py`) and also
+reads process environment variables, which take precedence over the file.
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `DB_PATH` | `matching/ailt9019.db` in this repository | SQLite file used by the backend |
+| `DATABASE_URL` | taken from `matching/.env` | PostgreSQL connection string; required, no local fallback |
 | `SESSION_TTL_SECONDS` | `3600` | Token lifetime, from 1 to 604800 seconds |
 | `ALLOWED_ORIGINS` | `http://localhost:8001,http://127.0.0.1:8001` | Comma-separated frontend origins allowed by CORS |
 
@@ -56,18 +57,19 @@ Uvicorn in PowerShell:
 
 ```powershell
 $env:ALLOWED_ORIGINS = "http://localhost:5173"
-$env:DB_PATH = "C:\path\to\demo.db"
+$env:DATABASE_URL = "postgresql://user:password@host/dbname"
+$env:SESSION_TTL_SECONDS = "86400"
 ```
 
 Or in a macOS/Linux shell:
 
 ```bash
 export ALLOWED_ORIGINS=http://localhost:5173
-export DB_PATH=/path/to/demo.db
+export DATABASE_URL=postgresql://user:password@host/dbname
 ```
 
-Omit `DB_PATH` to share the default database with the existing matching CLI.
-Use the actual frontend origin, including protocol and port: `localhost` and
+Omit `DATABASE_URL` and startup fails with a clear error - there is no SQLite
+fallback. Use the actual frontend origin, including protocol and port: `localhost` and
 `127.0.0.1` are different origins. Wildcard `*` origins are rejected. The API
 uses explicit Bearer headers, not login cookies; cookie credentials are disabled.
 For a deployed frontend/backend, serve the API over HTTPS.
@@ -92,9 +94,9 @@ Registration/login usernames are trimmed and lowercased. They must contain
 3-32 letters `a-z`, digits or underscores. Passwords must contain 8-128
 characters. The backend saves Argon2 password hashes, never the submitted
 password. Login tokens are opaque random values; only their SHA-256 digests
-are stored in SQLite. Expired or logged-out tokens cannot access protected routes.
-Accounts, saved profiles and unexpired sessions survive backend restarts when
-the same database file is used.
+are stored in PostgreSQL. Expired or logged-out tokens cannot access protected routes.
+Accounts, saved profiles and unexpired sessions survive backend restarts because
+they live in the shared database.
 
 The editable profile body is:
 
@@ -138,7 +140,7 @@ are marked `Cache-Control: no-store`.
 
 ## Frontend example
 
-The frontend sends requests; the backend checks identity and writes SQLite.
+The frontend sends requests; the backend checks identity and writes PostgreSQL.
 Hold the token in memory for this demo and send it on protected calls. A page
 reload clears this example's token, requiring another login; the saved profile
 remains in the database. Do not put the token into a URL.
@@ -191,33 +193,26 @@ token = null;
 ```
 
 Set `ALLOWED_ORIGINS` to the origin of the page running this code. The example
-password is public demo data; it is not a credential for any seeded account.
+password is public demo data; it is not a credential for any existing account.
 
-## Existing fixtures and matching
+## Existing data and matching
 
-To add the repository's 30 synthetic fixture profiles to a new demo database,
-run this **before** starting the API:
+The shared database already contains the 30 synthetic fixture profiles plus any
+accounts registered through the API. Fixture values such as `hash1` are
+placeholders, not valid login hashes. Register a new test account through the API
+to obtain usable login credentials. Starting the backend does not replace the
+fixture passwords or reset existing data.
 
-```bash
-python matching/seed.py
-```
-
-Fixture values such as `hash1` are placeholders, not valid login hashes. Register
-a new test account through the API to obtain usable login credentials. Starting
-the backend does not replace the fixture passwords or reset existing data.
-
-The matching CLI can read profiles saved by this API when both use the same
-database file. With the default database:
+The matching CLI reads the same PostgreSQL database, so it sees profiles saved
+by this API:
 
 ```bash
 python matching/match.py demo_student
 ```
 
-If you set `DB_PATH`, give both processes the same absolute path. Save a complete
-profile before trying to match the new account. `seed.py` does not add fixtures
-to an already-populated profile table. Its `--reset` option drops and recreates
-the account/profile tables: use a separate disposable database for reset-based
-experiments, not the file containing saved accounts and profiles.
+Save a complete profile before trying to match the new account. There is no
+reset command: the database is shared, and every row changed with `psql` affects
+all users.
 
 ## Tests
 
@@ -228,9 +223,10 @@ python -m pip install -r requirements.txt
 python -m unittest discover -s backend/tests -v
 ```
 
-The API tests use isolated temporary databases. They do not need an AI API key
-or a running frontend. The application factory is also available for isolated
-test/deployment configuration:
+The API tests use an isolated temporary SQLite file, injected through
+`create_app(db_path=...)`, so they never touch the shared database. They do not
+need an AI API key or a running frontend. The application factory is also
+available for isolated test/deployment configuration:
 
 ```python
 from backend.app import create_app

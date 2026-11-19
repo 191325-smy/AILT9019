@@ -9,10 +9,10 @@ This project has three parts:
 - **`backend/`** - FastAPI service for accounts, profiles, and matching
 - **`ui/`** - Web frontend interface
 
-Built for AILT9019 (AI Literacy II, HKU). Runs on SQLite, needs no server, and
-works with **zero installs** for the CLI. This is an AI application, so adding a
-DeepSeek API key is recommended; without one, matching still returns a ranked
-shortlist from the deterministic fallback.
+Built for AILT9019 (AI Literacy II, HKU). Accounts and profiles live in one
+shared PostgreSQL database. This is an AI application, so adding a DeepSeek API
+key is recommended; without one, matching still returns a ranked shortlist from
+the deterministic fallback.
 
 ## Quick Start
 
@@ -36,17 +36,22 @@ python -m pip install -r requirements.txt
 
 On Windows PowerShell the activate line is `.venv\Scripts\Activate.ps1`.
 
-The CLI, seeder and filter logic still run on the standard library alone; these
-packages are needed for the model call, the API and its tests.
+The filter logic and the `--from-json` CLI path run on the standard library
+alone; the packages above cover PostgreSQL, the model call, the API and its
+tests.
 
-### 3. Seed the Database
+### 3. Configure the Database
+
+Accounts and profiles live in the shared PostgreSQL database. Copy the env file
+once - it already contains the `DATABASE_URL`:
 
 ```bash
-python matching/seed.py     # builds matching/ailt9019.db from schema.sql + seed.sql
+cp matching/.env.example matching/.env
 ```
 
-Re-running is safe: it only seeds an empty database. `start-backend.sh` does
-this for you when `matching/ailt9019.db` is missing.
+The backend and the CLI read that file; without `DATABASE_URL` they stop with a
+clear error instead of creating a local file. The same file holds the optional
+`DEEPSEEK_API_KEY`.
 
 ### 4. Start the Backend
 
@@ -64,7 +69,7 @@ chmod +x start-backend.sh
 Or manually, from the repository root:
 ```bash
 source .venv/bin/activate
-python -m uvicorn backend.app:app --reload --host 127.0.0.1 --port 8000
+python -m uvicorn backend.app:create_app --factory --reload --host 127.0.0.1 --port 8000
 ```
 
 Backend will be at: http://localhost:8000
@@ -114,11 +119,12 @@ You can also use the matching engine directly from command line:
 
 ```bash
 cd matching
-python seed.py              # builds ailt9019.db from schema.sql + seed.sql
-python match.py alice_chen  # prints the filtered pool and the shortlist
+python match.py alice_chen  # reads the shared PostgreSQL database
 ```
 
-Requires Python 3.9+. There is nothing to `pip install` for the CLI.
+Requires Python 3.9+ and `pip install -r requirements.txt` (psycopg for
+PostgreSQL). `python match.py --from-json sample_pool.json alice_chen` runs
+against the JSON fixture with no database at all.
 
 ## API Endpoints
 
@@ -288,9 +294,6 @@ still completes with `source: fallback:<reason>` instead of a traceback.
 │   └── tests/            API tests
 ├── matching              The matching logic layer
 │   ├── SETUP.md          Detailed setup instructions
-│   ├── schema.sql        Database schema
-│   ├── seed.sql          30 synthetic profiles
-│   ├── seed.py           Database seeder
 │   ├── db.py             Database readers
 │   ├── filters.py        Hard constraints + signals
 │   ├── matcher.py        Model call + fallback
@@ -329,29 +332,28 @@ picks, source = matcher.pick(me, candidates)
 `matcher.pick()` returns `[{"profile": {...}, "reason": "..."}]` plus the
 `source` string, so an API layer can serialise it directly.
 
-`ailt9019.db` is generated and git-ignored — `python3 seed.py` recreates it in
-under a second. `python3 seed.py --reset` rebuilds it after a schema change.
-
 ## Data and scope
 
 This is a course demo, not a product:
 
-- All 30 profiles are **synthetic**. Names, emails and preferences in `seed.sql`
-  are invented; `contact_info` values are placeholders like `david@test.com`.
-- SQLite is a single file, chosen so the workflow is reproducible offline.
+- All 30 fixture profiles are **synthetic**. Names, emails and preferences in
+  the test fixtures are invented; `contact_info` values are placeholders like
+  `david@test.com`.
+- The shared PostgreSQL database is the only store - there is no local file and
+  no fallback.
 - The project has a CLI (`matching/match.py`), a FastAPI backend (`backend/`),
   and a web UI (`ui/`). All three can be used independently or together.
-- `in_team` is set only by `seed.sql`; the logic never flips it, so the same
-  input always produces the same pool.
+- `in_team` is set directly in the database; the logic never flips it, so the
+  same input always produces the same pool.
 
 ## When it breaks
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| `no such table: profiles` | no database file | `python3 seed.py` |
-| `no account with username '...'` | typo, or database not seeded | usernames look like `alice_chen` |
+| `DATABASE_URL is not set` | `matching/.env` missing | `cp matching/.env.example matching/.env` |
+| `no account with username '...'` | typo, or the account is not in the shared DB | usernames look like `alice_chen` |
+| `ModuleNotFoundError: psycopg` | driver not installed | `pip install -r requirements.txt` |
 | `source: fallback:ModuleNotFoundError` | key set but packages missing | `pip install -r requirements.txt` from the repository root |
 | `source: fallback:AuthenticationError` | bad or expired key | check `DEEPSEEK_API_KEY` in `matching/.env` |
-| `UNIQUE constraint failed` | `seed.sql` applied twice | `python3 seed.py --reset` |
 
 `matching/SETUP.md` has the longer version, including how to read the raw tables.

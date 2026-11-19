@@ -1,4 +1,9 @@
-"""Account and profile storage for SQLite and PostgreSQL."""
+"""Account and profile storage for PostgreSQL.
+
+The SQLite branch below exists only for the test suite, which injects a
+throwaway file through create_app(db_path=...). The running app always uses
+the shared PostgreSQL database from DATABASE_URL.
+"""
 
 import json
 import sqlite3
@@ -11,7 +16,30 @@ from matching import db as matching_db
 from .security import token_digest
 
 
-SCHEMA = Path(__file__).resolve().parents[1] / "matching" / "schema.sql"
+# Test-only SQLite definitions. The running app uses PostgreSQL, whose tables are
+# created outside this codebase; these constants let the test suite spin up a
+# throwaway database without any SQL files on disk.
+SQLITE_SCHEMA = """
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE accounts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL
+);
+
+CREATE TABLE profiles (
+    account_id INTEGER PRIMARY KEY,
+    display_name TEXT NOT NULL,
+    contact_info TEXT,
+    city TEXT,
+    preferred_role TEXT,
+    languages TEXT,
+    in_team INTEGER DEFAULT 0,
+    updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE
+);
+"""
 
 
 class DuplicateUsername(Exception):
@@ -88,9 +116,7 @@ class Store:
             existing = tables & {"accounts", "profiles"}
 
             if not existing:
-                conn.executescript(
-                    SCHEMA.read_text(encoding="utf-8")
-                )
+                conn.executescript(SQLITE_SCHEMA)
 
             elif existing != {"accounts", "profiles"}:
                 raise RuntimeError(

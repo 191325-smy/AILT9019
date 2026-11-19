@@ -3,54 +3,40 @@
 Everything SQL lives here and nowhere else, so the logic in match.py stays pure
 and testable without a database.
 
-Driver: sqlite3 - in the standard library, no install, no server. The database
-is one file (`ailt9019.db`) sitting next to this module.
-
-Override the location if you want it elsewhere:
-    DB_PATH=/tmp/demo.db python match.py alice_chen
+Driver: psycopg against the shared PostgreSQL database. The URL comes from
+DATABASE_URL (loaded from matching/.env). There is no local fallback: without
+the variable the matcher fails loudly instead of reading a different database.
 """
-
-"""Database readers for SQLite and PostgreSQL."""
 
 import json
 import os
-import sqlite3
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.getenv("DB_PATH", os.path.join(HERE, "ailt9019.db"))
-
-JSON_COLUMNS = ("languages",)
+JSON_COLUMNS = ("languages", "open_roles")
 
 PROFILE_FIELDS = (
     "account_id, display_name, contact_info, city, preferred_role, "
-    "languages, in_team"
+    "languages, in_team, programme, open_roles, programming, github, "
+    "debugging, web, ai_agent"
 )
 
 
 def get_conn():
-    """Open the configured database."""
+    """Open the shared PostgreSQL database."""
     database_url = os.getenv("DATABASE_URL")
 
-    if database_url:
-        import psycopg
-        from psycopg.rows import dict_row
-
-        return psycopg.connect(
-            database_url,
-            row_factory=dict_row,
+    if not database_url:
+        raise RuntimeError(
+            "DATABASE_URL is not set - copy matching/.env.example to "
+            "matching/.env and restart."
         )
 
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA foreign_keys = ON")
-    return conn
+    import psycopg
+    from psycopg.rows import dict_row
 
-
-def _placeholder(conn):
-    """Return the parameter placeholder for the active database."""
-    if conn.__class__.__module__.startswith("psycopg"):
-        return "%s"
-    return "?"
+    return psycopg.connect(
+        database_url,
+        row_factory=dict_row,
+    )
 
 
 def _decode(row):
@@ -73,13 +59,11 @@ def _decode(row):
 
 
 def load_profile(conn, account_id):
-    placeholder = _placeholder(conn)
-
     row = conn.execute(
         f"""
         SELECT {PROFILE_FIELDS}
         FROM profiles
-        WHERE account_id = {placeholder}
+        WHERE account_id = %s
         """,
         (account_id,),
     ).fetchone()
@@ -88,8 +72,6 @@ def load_profile(conn, account_id):
 
 
 def load_profile_by_username(conn, username):
-    placeholder = _placeholder(conn)
-
     fields = PROFILE_FIELDS.replace(", ", ", p.")
 
     row = conn.execute(
@@ -97,7 +79,7 @@ def load_profile_by_username(conn, username):
         SELECT p.{fields}
         FROM profiles p
         JOIN accounts a ON a.id = p.account_id
-        WHERE LOWER(a.username) = LOWER({placeholder})
+        WHERE LOWER(a.username) = LOWER(%s)
         """,
         (username,),
     ).fetchone()

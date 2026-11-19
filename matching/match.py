@@ -5,7 +5,7 @@ The work lives in two modules, this file only glues them together:
     matcher.py   one model call, with a deterministic fallback
 
 Run it:
-    python match.py alice_chen                         # against ailt9019.db
+    python match.py alice_chen                         # shared PostgreSQL database
     python match.py --from-json pool.json alice_chen   # against a JSON dump
     python match.py alice_chen --verbose               # one line per dropped/surviving profile
 
@@ -25,7 +25,7 @@ def _load_json(path):
     with open(path, encoding="utf-8") as f:
         rows = json.load(f)
     for row in rows:
-        for col in ("languages",):
+        for col in ("languages", "open_roles"):
             if isinstance(row.get(col), str):
                 row[col] = json.loads(row[col]) if row[col] else []
     return rows
@@ -70,7 +70,10 @@ def main(argv):
         try:
             me = db.load_profile_by_username(conn, username)
             if me is None:
-                print(f"no account with username {username!r} - run `python seed.py` first")
+                print(
+                    f"no account with username {username!r} - check matching/.env "
+                    "(DATABASE_URL) and the accounts table"
+                )
                 return 1
             pool = db.load_pool(conn)
         finally:

@@ -3,11 +3,13 @@
 Start `start-backend.bat` and `start-frontend.bat` on Windows, then open
 http://localhost:8001/index.html. Keep both server windows running.
 The scripts use the root `.venv` if it exists, otherwise Python on PATH.
-The backend requires Python 3.10+; dependencies are in the root `requirements.txt`.
+The backend requires Python 3.10+; dependencies are in the root `requirements.txt`
+and `matching/.env` must exist (copy it from `matching/.env.example`, which
+already holds the shared `DATABASE_URL`).
 
 Register a new username with a password of at least 8 characters. Use synthetic
 details: Demo Student, demo@example.com, HK, Frontend, English and Mandarin.
-Registration signs in and saves the profile using the real API. The seeded
+Registration signs in and saves the profile using the real API. The fixture
 classmates have placeholder password hashes and cannot be used for login.
 
 Check the saved profile on Dashboard and reload to verify persistence. Run
