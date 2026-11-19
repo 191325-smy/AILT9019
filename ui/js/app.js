@@ -211,19 +211,34 @@ function profileFromForm() {
     };
 }
 
+function setText(id, value) {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+}
+
 async function loadDashboard() {
     if (!currentUser || !authToken) return;
+    // An older cached dashboard has no programme/roles/skills rows and cannot be
+    // patched in place; reload once through a versioned URL to fetch the new HTML.
+    if (!document.getElementById('profile-programme')) {
+        const url = new URL(window.location.href);
+        if (url.searchParams.get('v') !== '4') {
+            url.searchParams.set('v', '4');
+            window.location.replace(url.toString());
+            return;
+        }
+    }
     document.getElementById('profile-username').textContent = currentUser.username;
     document.getElementById('user-display-name').textContent = currentUser.username;
     try {
         const response = await apiCall('/profiles/me');
         const profile = await response.json();
-        document.getElementById('user-display-name').textContent = profile.display_name;
-        document.getElementById('profile-city').textContent = profile.city;
-        document.getElementById('profile-role').textContent = profile.preferred_role;
-        document.getElementById('profile-languages').textContent = profile.languages.join(', ') || 'Not specified';
-        document.getElementById('profile-programme').textContent = profile.programme || 'Not specified';
-        document.getElementById('profile-roles').textContent = (profile.open_roles || []).join(', ') || 'Not specified';
+        setText('user-display-name', profile.display_name);
+        setText('profile-city', profile.city);
+        setText('profile-role', profile.preferred_role);
+        setText('profile-languages', (profile.languages || []).join(', ') || 'Not specified');
+        setText('profile-programme', profile.programme || 'Not specified');
+        setText('profile-roles', (profile.open_roles || []).join(', ') || 'Not specified');
         const skillLabels = {
             programming: 'Programming',
             github: 'GitHub',
@@ -234,11 +249,13 @@ async function loadDashboard() {
         const skills = Object.entries(skillLabels)
             .filter(([key]) => profile[key] === 1)
             .map(([, label]) => label);
-        document.getElementById('profile-skills').textContent = skills.join(', ') || 'None listed';
-        document.getElementById('profile-contact').textContent = profile.contact_info || 'Not provided';
+        setText('profile-skills', skills.join(', ') || 'None listed');
+        setText('profile-contact', profile.contact_info || 'Not provided');
         const badge = document.getElementById('profile-status');
-        badge.textContent = profile.in_team ? 'Already in a team' : 'Looking for teammates';
-        badge.className = profile.in_team ? 'badge badge-success' : 'badge badge-warning';
+        if (badge) {
+            badge.textContent = profile.in_team ? 'Already in a team' : 'Looking for teammates';
+            badge.className = profile.in_team ? 'badge badge-success' : 'badge badge-warning';
+        }
     } catch (error) {
         showAlert('error', error.status === 404 ? 'Please open Edit Profile and save your information before matching.' : error.message);
     }
@@ -465,7 +482,7 @@ function loadResults() {
                                 <span>${escapeHtml(match.city)}</span>
                             </div>
                             <div class="detail-item">
-                                <span class="detail-icon"></span>
+                                <span class="detail-icon">📧</span>
                                 <span>${escapeHtml(match.contact_info || 'Not provided')}</span>
                             </div>
                             ${match.shared_languages && match.shared_languages.length > 0 ? `
