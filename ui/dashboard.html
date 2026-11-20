@@ -23,7 +23,7 @@
         <div class="dashboard">
             <div class="dashboard-header">
                 <h1>Hello, <span id="user-display-name">User</span>! 👋</h1>
-                <p class="dashboard-subtitle">Find your perfect project teammates</p>
+                <p class="dashboard-subtitle">Build a balanced team for your next project</p>
             </div>
 
             <div class="dashboard-grid">
@@ -88,12 +88,13 @@
                     </div>
                     <div class="card-body">
                         <p class="match-description">
-                            Our AI-powered matching algorithm will find you the best teammates based on:
+                            The matcher finds classmates who fill the gaps in your team, then ranks the strongest top 5 by:
                         </p>
                         <ul class="match-features">
                             <li>✓ Same cohort city (HK or SH)</li>
-                            <li>✓ Complementary roles (Frontend, Backend, Database, etc.)</li>
-                            <li>✓ Shared languages for better communication</li>
+                            <li>✓ Roles your team is missing (Frontend, Backend, Database, Agentic Development)</li>
+                            <li>✓ Skills that fit you (programming, GitHub, debugging, web, AI agents)</li>
+                            <li>✓ Shared languages and programme diversity</li>
                             <li>✓ Availability (not already in a team)</li>
                         </ul>
                         <div class="model-toggle">
@@ -103,7 +104,7 @@
                                     <span class="model-toggle-state" id="use-model-state">On</span>
                                 </label>
                                 <p class="model-toggle-hint" id="use-model-hint">
-                                    Turn off to use the deterministic matcher, even when the server has an API key.
+                                    Off uses the deterministic scorer with the same signals and no API call.
                                 </p>
                             </div>
                             <label class="switch">
@@ -118,10 +119,10 @@
                 </div>
             </div>
 
-            <!-- How It Works -->
+            <!-- How Matching Works -->
             <div class="card how-it-works">
                 <div class="card-header">
-                    <h2>📋 How It Works</h2>
+                    <h2>📋 How Matching Works</h2>
                 </div>
                 <div class="card-body">
                     <div class="steps">
@@ -129,21 +130,21 @@
                             <div class="step-number">1</div>
                             <div class="step-content">
                                 <h3>Hard Filter</h3>
-                                <p>First, we filter out people who can't match with you (different city, already in a team, or yourself).</p>
+                                <p>We remove anyone who cannot join your team: a different cohort city, classmates already in a team, and yourself.</p>
                             </div>
                         </div>
                         <div class="step">
                             <div class="step-number">2</div>
                             <div class="step-content">
                                 <h3>Signal Analysis</h3>
-                                <p>For remaining candidates, we analyze shared languages and role compatibility.</p>
+                                <p>Each remaining classmate is scored on role gaps, complementary skills, open-role flexibility, shared languages, and programme mix.</p>
                             </div>
                         </div>
                         <div class="step">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <h3>AI Matching</h3>
-                                <p>Our AI model (or deterministic fallback) picks the top 5 teammates who best complement your skills.</p>
+                                <h3>Team Assembly</h3>
+                                <p>The AI model weighs those signals to assemble a balanced top 5. With the switch off, or no API key, a deterministic scorer applies the same rubric.</p>
                             </div>
                         </div>
                     </div>
