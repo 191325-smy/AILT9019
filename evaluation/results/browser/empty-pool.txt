@@ -1,0 +1,33 @@
+- navigation:
+  - link "🎯 Teammate Matcher":
+    - /url: dashboard.html
+  - link "Dashboard":
+    - /url: dashboard.html
+  - link "Edit Profile":
+    - /url: edit-profile.html?v=4
+  - link "Logout (evaluation_boundary)":
+    - /url: "#"
+- main:
+  - heading "🎉 Your Recommended Teammates" [level=1]
+  - paragraph:
+    - text: Matched for
+    - strong: evaluation_boundary
+    - text: (HK, Frontend)
+  - generic: "1"
+  - generic: Total Pool
+  - generic: "0"
+  - generic: Eligible
+  - generic: "1"
+  - generic: Filtered Out
+  - generic: "0"
+  - generic: Recommended
+  - heading "🔍 Filter Summary" [level=2]
+  - generic: 1 that's you
+  - heading "⭐ Top Recommendations" [level=2]
+  - generic "AI Model": No eligible candidates
+  - heading "No matches found" [level=3]
+  - link "← Back to Dashboard":
+    - /url: dashboard.html
+  - button "🔄 Run Again"
+- contentinfo:
+  - paragraph: AILT9019 - AI Literacy for Computing and Data Science | HKU 2026-27

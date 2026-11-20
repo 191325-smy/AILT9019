@@ -1,0 +1,105 @@
+- navigation:
+  - link "🎯 Teammate Matcher":
+    - /url: dashboard.html
+  - link "Dashboard":
+    - /url: dashboard.html
+  - link "Edit Profile":
+    - /url: edit-profile.html?v=4
+  - link "Logout (evaluation_browser)":
+    - /url: "#"
+- main:
+  - heading "🎉 Your Recommended Teammates" [level=1]
+  - paragraph:
+    - text: Matched for
+    - strong: evaluation_browser
+    - text: (SH, Frontend)
+  - generic: "31"
+  - generic: Total Pool
+  - generic: "14"
+  - generic: Eligible
+  - generic: "17"
+  - generic: Filtered Out
+  - generic: "5"
+  - generic: Recommended
+  - heading "🔍 Filter Summary" [level=2]
+  - generic: 13 different cohort (HK)
+  - generic: 3 already in a team
+  - generic: 1 that's you
+  - heading "⭐ Top Recommendations" [level=2]
+  - generic "AI Model": ⚙️ Deterministic (AI off)
+  - generic: "#1"
+  - heading "Zoe Shi" [level=3]
+  - generic: Frontend
+  - generic: 📍
+  - generic: SH
+  - generic: 📧
+  - generic: zoe@test.com
+  - generic: 🗣️
+  - generic: English
+  - strong: "Why:"
+  - text: Can cover Database, adds github and ai_agent, studies Applied AI rather than your Computer Science and shares English.
+  - link "📧 Contact":
+    - /url: mailto:zoe@test.com
+  - generic: "#2"
+  - heading "Queenie Tang" [level=3]
+  - generic: Backend
+  - generic: 📍
+  - generic: SH
+  - generic: 📧
+  - generic: queenie@test.com
+  - generic: 🗣️
+  - generic: English
+  - generic: ✨
+  - generic: Complementary Role
+  - strong: "Why:"
+  - text: Can cover Backend, adds github and ai_agent, studies AI and Data Science rather than your Computer Science and shares English.
+  - link "📧 Contact":
+    - /url: mailto:queenie@test.com
+  - generic: "#3"
+  - heading "Cody Lei" [level=3]
+  - generic: Agentic Development
+  - generic: 📍
+  - generic: SH
+  - generic: 📧
+  - generic: cody@test.com
+  - generic: ✨
+  - generic: Complementary Role
+  - strong: "Why:"
+  - text: Can cover Agentic Development and Backend, adds github and ai_agent and studies AI and Data Science rather than your Computer Science.
+  - link "📧 Contact":
+    - /url: mailto:cody@test.com
+  - generic: "#4"
+  - heading "Victor Qin" [level=3]
+  - generic: Backend
+  - generic: 📍
+  - generic: SH
+  - generic: 📧
+  - generic: victor@test.com
+  - generic: 🗣️
+  - generic: English
+  - generic: ✨
+  - generic: Complementary Role
+  - strong: "Why:"
+  - text: Can cover Backend and Database, adds debugging, studies Applied AI rather than your Computer Science and shares English.
+  - link "📧 Contact":
+    - /url: mailto:victor@test.com
+  - generic: "#5"
+  - heading "Bella Ma" [level=3]
+  - generic: Database
+  - generic: 📍
+  - generic: SH
+  - generic: 📧
+  - generic: bella@test.com
+  - generic: 🗣️
+  - generic: English
+  - generic: ✨
+  - generic: Complementary Role
+  - strong: "Why:"
+  - text: Can cover Database, adds debugging, studies Others rather than your Computer Science and shares English.
+  - link "📧 Contact":
+    - /url: mailto:bella@test.com
+  - link "← Back to Dashboard":
+    - /url: dashboard.html
+  - button "🔄 Run Again"
+- contentinfo:
+  - paragraph: AILT9019 - AI Literacy for Computing and Data Science | HKU 2026-27

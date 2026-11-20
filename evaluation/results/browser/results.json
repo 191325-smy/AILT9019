@@ -1,0 +1,52 @@
+{
+  "revision": "81886ac18511398f320b0e592828ea00c956d7cd",
+  "checked_at": "2026-11-20T12:10:52.534Z",
+  "transport": "Real browser and HTTP; existing FastAPI app factory with test-only disposable SQLite, not production PostgreSQL",
+  "cases": [
+    {
+      "id": "UI01",
+      "status": "PASS",
+      "check": "Registration saved programme, open roles and skills",
+      "evidence": "profile.txt"
+    },
+    {
+      "id": "UI02",
+      "status": "PASS",
+      "check": "Dashboard reload fetched persisted preferences",
+      "evidence": "profile.txt"
+    },
+    {
+      "id": "UI03",
+      "status": "PASS",
+      "check": "Latest webpage triggered real AI; five HK candidates and verified reasons",
+      "evidence": "ai-results.txt",
+      "live_api_calls": 1
+    },
+    {
+      "id": "UI04",
+      "status": "PASS",
+      "check": "Changed city to SH, AI off; five SH recommendations",
+      "evidence": "sh-ai-off.txt",
+      "live_api_calls": 0
+    },
+    {
+      "id": "UI05",
+      "status": "PASS",
+      "check": "Wrong password rejected with readable authentication error"
+    },
+    {
+      "id": "UI06",
+      "status": "PASS",
+      "check": "Logout/re-login restored edited city and preference fields",
+      "evidence": "relogin-profile.txt"
+    },
+    {
+      "id": "UI07",
+      "status": "PASS",
+      "check": "Only own profile; no eligible candidates or model call",
+      "evidence": "empty-pool.txt",
+      "live_api_calls": 0
+    }
+  ],
+  "live_api_calls": 1
+}

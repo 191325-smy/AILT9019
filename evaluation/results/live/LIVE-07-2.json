@@ -1,0 +1,249 @@
+{
+  "source": "deepseek:deepseek-flash",
+  "live_model": true,
+  "elapsed_seconds": 2.484,
+  "eligible": 12,
+  "picks": [
+    {
+      "profile": {
+        "account_id": 6,
+        "username": "frank_zhou",
+        "display_name": "Frank Zhou",
+        "contact_info": "frank@test.com",
+        "city": "HK",
+        "preferred_role": "Frontend",
+        "languages": [
+          "English",
+          "Cantonese"
+        ],
+        "in_team": 0,
+        "programme": "Applied AI",
+        "open_roles": [
+          "Frontend",
+          "Database"
+        ],
+        "programming": 1,
+        "github": 0,
+        "debugging": 0,
+        "web": 1,
+        "ai_agent": 0,
+        "signals": {
+          "shared_languages": [
+            "English"
+          ],
+          "role_fit": "complement",
+          "score": {
+            "total": 0.665,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.033,
+            "languages": 0.025,
+            "programme": 0.067,
+            "complements": [
+              "programming",
+              "web"
+            ],
+            "fills_roles": [
+              "Frontend",
+              "Database"
+            ]
+          }
+        }
+      },
+      "reason": "Frank Zhou can cover Frontend, brings programming and web development experience and comes from a different programme (Applied AI)."
+    },
+    {
+      "profile": {
+        "account_id": 14,
+        "username": "nathan_zheng",
+        "display_name": "Nathan Zheng",
+        "contact_info": "nathan@test.com",
+        "city": "HK",
+        "preferred_role": "Agentic Development",
+        "languages": [
+          "English"
+        ],
+        "in_team": 0,
+        "programme": "Applied AI",
+        "open_roles": [
+          "Agentic Development",
+          "Database"
+        ],
+        "programming": 0,
+        "github": 1,
+        "debugging": 0,
+        "web": 0,
+        "ai_agent": 1,
+        "signals": {
+          "shared_languages": [
+            "English"
+          ],
+          "role_fit": "complement",
+          "score": {
+            "total": 0.665,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.033,
+            "languages": 0.025,
+            "programme": 0.067,
+            "complements": [
+              "github",
+              "ai_agent"
+            ],
+            "fills_roles": [
+              "Agentic Development",
+              "Database"
+            ]
+          }
+        }
+      },
+      "reason": "Nathan Zheng can cover Agentic Development, brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+    },
+    {
+      "profile": {
+        "account_id": 2,
+        "username": "bob_liu",
+        "display_name": "Bob Liu",
+        "contact_info": "bob@test.com",
+        "city": "HK",
+        "preferred_role": "Backend",
+        "languages": [
+          "English"
+        ],
+        "in_team": 0,
+        "programme": "Applied AI",
+        "open_roles": [
+          "Backend",
+          "Database"
+        ],
+        "programming": 0,
+        "github": 1,
+        "debugging": 0,
+        "web": 0,
+        "ai_agent": 1,
+        "signals": {
+          "shared_languages": [
+            "English"
+          ],
+          "role_fit": "same",
+          "score": {
+            "total": 0.665,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.033,
+            "languages": 0.025,
+            "programme": 0.067,
+            "complements": [
+              "github",
+              "ai_agent"
+            ],
+            "fills_roles": [
+              "Database"
+            ]
+          }
+        }
+      },
+      "reason": "Bob Liu brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+    },
+    {
+      "profile": {
+        "account_id": 11,
+        "username": "karen_he",
+        "display_name": "Karen He",
+        "contact_info": "karen@test.com",
+        "city": "HK",
+        "preferred_role": "Frontend",
+        "languages": [
+          "Mandarin",
+          "English"
+        ],
+        "in_team": 0,
+        "programme": "Computer Science",
+        "open_roles": [
+          "Frontend",
+          "Agentic Development"
+        ],
+        "programming": 0,
+        "github": 1,
+        "debugging": 0,
+        "web": 0,
+        "ai_agent": 1,
+        "signals": {
+          "shared_languages": [
+            "English",
+            "Mandarin"
+          ],
+          "role_fit": "complement",
+          "score": {
+            "total": 0.623,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.033,
+            "languages": 0.05,
+            "programme": 0.0,
+            "complements": [
+              "github",
+              "ai_agent"
+            ],
+            "fills_roles": [
+              "Frontend",
+              "Agentic Development"
+            ]
+          }
+        }
+      },
+      "reason": "Karen He brings GitHub and AI-agent experience."
+    },
+    {
+      "profile": {
+        "account_id": 15,
+        "username": "olivia_liang",
+        "display_name": "Olivia Liang",
+        "contact_info": "olivia@test.com",
+        "city": "HK",
+        "preferred_role": "Other",
+        "languages": [
+          "Mandarin"
+        ],
+        "in_team": 0,
+        "programme": "Computer Science",
+        "open_roles": [
+          "Other",
+          "Agentic Development"
+        ],
+        "programming": 1,
+        "github": 0,
+        "debugging": 0,
+        "web": 1,
+        "ai_agent": 0,
+        "signals": {
+          "shared_languages": [
+            "Mandarin"
+          ],
+          "role_fit": "complement",
+          "score": {
+            "total": 0.598,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.033,
+            "languages": 0.025,
+            "programme": 0.0,
+            "complements": [
+              "programming",
+              "web"
+            ],
+            "fills_roles": [
+              "Agentic Development"
+            ]
+          }
+        }
+      },
+      "reason": "Olivia Liang brings programming and web development experience."
+    }
+  ],
+  "acceptance_errors": [],
+  "status": "PASS",
+  "id": "LIVE-07-2",
+  "student_id": 7,
+  "repeat": 2
+}

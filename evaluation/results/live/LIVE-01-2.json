@@ -1,0 +1,245 @@
+{
+  "source": "deepseek:deepseek-flash",
+  "live_model": true,
+  "elapsed_seconds": 2.406,
+  "eligible": 12,
+  "picks": [
+    {
+      "profile": {
+        "account_id": 14,
+        "username": "nathan_zheng",
+        "display_name": "Nathan Zheng",
+        "contact_info": "nathan@test.com",
+        "city": "HK",
+        "preferred_role": "Agentic Development",
+        "languages": [
+          "English"
+        ],
+        "in_team": 0,
+        "programme": "Applied AI",
+        "open_roles": [
+          "Agentic Development",
+          "Database"
+        ],
+        "programming": 0,
+        "github": 1,
+        "debugging": 0,
+        "web": 0,
+        "ai_agent": 1,
+        "signals": {
+          "shared_languages": [
+            "English"
+          ],
+          "role_fit": "complement",
+          "score": {
+            "total": 0.665,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.033,
+            "languages": 0.025,
+            "programme": 0.067,
+            "complements": [
+              "github",
+              "ai_agent"
+            ],
+            "fills_roles": [
+              "Agentic Development",
+              "Database"
+            ]
+          }
+        }
+      },
+      "reason": "Nathan Zheng can cover Agentic Development, brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+    },
+    {
+      "profile": {
+        "account_id": 6,
+        "username": "frank_zhou",
+        "display_name": "Frank Zhou",
+        "contact_info": "frank@test.com",
+        "city": "HK",
+        "preferred_role": "Frontend",
+        "languages": [
+          "English",
+          "Cantonese"
+        ],
+        "in_team": 0,
+        "programme": "Applied AI",
+        "open_roles": [
+          "Frontend",
+          "Database"
+        ],
+        "programming": 1,
+        "github": 0,
+        "debugging": 0,
+        "web": 1,
+        "ai_agent": 0,
+        "signals": {
+          "shared_languages": [
+            "English"
+          ],
+          "role_fit": "same",
+          "score": {
+            "total": 0.665,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.033,
+            "languages": 0.025,
+            "programme": 0.067,
+            "complements": [
+              "programming",
+              "web"
+            ],
+            "fills_roles": [
+              "Database"
+            ]
+          }
+        }
+      },
+      "reason": "Frank Zhou brings programming and web development experience and comes from a different programme (Applied AI)."
+    },
+    {
+      "profile": {
+        "account_id": 2,
+        "username": "bob_liu",
+        "display_name": "Bob Liu",
+        "contact_info": "bob@test.com",
+        "city": "HK",
+        "preferred_role": "Backend",
+        "languages": [
+          "English"
+        ],
+        "in_team": 0,
+        "programme": "Applied AI",
+        "open_roles": [
+          "Backend",
+          "Database"
+        ],
+        "programming": 0,
+        "github": 1,
+        "debugging": 0,
+        "web": 0,
+        "ai_agent": 1,
+        "signals": {
+          "shared_languages": [
+            "English"
+          ],
+          "role_fit": "complement",
+          "score": {
+            "total": 0.665,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.033,
+            "languages": 0.025,
+            "programme": 0.067,
+            "complements": [
+              "github",
+              "ai_agent"
+            ],
+            "fills_roles": [
+              "Backend",
+              "Database"
+            ]
+          }
+        }
+      },
+      "reason": "Bob Liu can cover Backend, brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+    },
+    {
+      "profile": {
+        "account_id": 12,
+        "username": "leo_gao",
+        "display_name": "Leo Gao",
+        "contact_info": "leo@test.com",
+        "city": "HK",
+        "preferred_role": "Backend",
+        "languages": [
+          "English"
+        ],
+        "in_team": 0,
+        "programme": "Others",
+        "open_roles": [
+          "Backend",
+          "Frontend"
+        ],
+        "programming": 1,
+        "github": 0,
+        "debugging": 0,
+        "web": 1,
+        "ai_agent": 0,
+        "signals": {
+          "shared_languages": [
+            "English"
+          ],
+          "role_fit": "complement",
+          "score": {
+            "total": 0.64,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.0,
+            "languages": 0.025,
+            "programme": 0.075,
+            "complements": [
+              "programming",
+              "web"
+            ],
+            "fills_roles": [
+              "Backend"
+            ]
+          }
+        }
+      },
+      "reason": "Leo Gao brings programming and web development experience and comes from a different programme (Others)."
+    },
+    {
+      "profile": {
+        "account_id": 4,
+        "username": "david_zhao",
+        "display_name": "David Zhao",
+        "contact_info": "david@test.com",
+        "city": "HK",
+        "preferred_role": "Agentic Development",
+        "languages": [
+          "Mandarin",
+          "English"
+        ],
+        "in_team": 0,
+        "programme": "Others",
+        "open_roles": [
+          "Agentic Development",
+          "Frontend"
+        ],
+        "programming": 0,
+        "github": 0,
+        "debugging": 1,
+        "web": 0,
+        "ai_agent": 0,
+        "signals": {
+          "shared_languages": [
+            "English",
+            "Mandarin"
+          ],
+          "role_fit": "complement",
+          "score": {
+            "total": 0.525,
+            "role": 0.4,
+            "skills": 0.0,
+            "flexibility": 0.0,
+            "languages": 0.05,
+            "programme": 0.075,
+            "complements": [],
+            "fills_roles": [
+              "Agentic Development"
+            ]
+          }
+        }
+      },
+      "reason": "David Zhao comes from a different programme (Others)."
+    }
+  ],
+  "acceptance_errors": [],
+  "status": "PASS",
+  "id": "LIVE-01-2",
+  "student_id": 1,
+  "repeat": 2
+}

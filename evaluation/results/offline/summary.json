@@ -1,0 +1,52 @@
+{
+  "summary": {
+    "total": 55,
+    "PASS": 51,
+    "FAIL": 4,
+    "ERROR": 0
+  },
+  "groups": {
+    "existing backend": {
+      "total": 25,
+      "PASS": 25,
+      "FAIL": 0,
+      "ERROR": 0
+    },
+    "CLI": {
+      "total": 2,
+      "PASS": 2,
+      "FAIL": 0,
+      "ERROR": 0
+    },
+    "cache simulation": {
+      "total": 2,
+      "PASS": 1,
+      "FAIL": 1,
+      "ERROR": 0
+    },
+    "model boundary": {
+      "total": 11,
+      "PASS": 9,
+      "FAIL": 2,
+      "ERROR": 0
+    },
+    "API extension": {
+      "total": 4,
+      "PASS": 4,
+      "FAIL": 0,
+      "ERROR": 0
+    },
+    "matching": {
+      "total": 7,
+      "PASS": 7,
+      "FAIL": 0,
+      "ERROR": 0
+    },
+    "preferences": {
+      "total": 4,
+      "PASS": 3,
+      "FAIL": 1,
+      "ERROR": 0
+    }
+  }
+}

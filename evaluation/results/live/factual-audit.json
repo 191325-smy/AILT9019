@@ -1,0 +1,291 @@
+{
+  "explanations_checked": 30,
+  "without_detected_claim_errors": 30,
+  "rows": [
+    {
+      "call": "LIVE-01-1",
+      "candidate_id": 14,
+      "reason": "Nathan Zheng can cover Agentic Development, brings GitHub and AI-agent experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-01-1",
+      "candidate_id": 6,
+      "reason": "Frank Zhou brings programming and web development experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-01-1",
+      "candidate_id": 2,
+      "reason": "Bob Liu can cover Backend, brings GitHub and AI-agent experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-01-1",
+      "candidate_id": 12,
+      "reason": "Leo Gao brings programming and web development experience and comes from a different programme (Others).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-01-1",
+      "candidate_id": 4,
+      "reason": "David Zhao brings debugging experience and comes from a different programme (Others).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-01-2",
+      "candidate_id": 14,
+      "reason": "Nathan Zheng can cover Agentic Development, brings GitHub and AI-agent experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-01-2",
+      "candidate_id": 6,
+      "reason": "Frank Zhou brings programming and web development experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-01-2",
+      "candidate_id": 2,
+      "reason": "Bob Liu can cover Backend, brings GitHub and AI-agent experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-01-2",
+      "candidate_id": 12,
+      "reason": "Leo Gao brings programming and web development experience and comes from a different programme (Others).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-01-2",
+      "candidate_id": 4,
+      "reason": "David Zhao comes from a different programme (Others).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-07-1",
+      "candidate_id": 6,
+      "reason": "Frank Zhou can cover Frontend, brings programming and web development experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-07-1",
+      "candidate_id": 14,
+      "reason": "Nathan Zheng can cover Agentic Development, brings GitHub and AI-agent experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-07-1",
+      "candidate_id": 2,
+      "reason": "Bob Liu brings GitHub and AI-agent experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-07-1",
+      "candidate_id": 11,
+      "reason": "Karen He brings GitHub and AI-agent experience.",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-07-1",
+      "candidate_id": 15,
+      "reason": "Olivia Liang brings programming and web development experience.",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-07-2",
+      "candidate_id": 6,
+      "reason": "Frank Zhou can cover Frontend, brings programming and web development experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-07-2",
+      "candidate_id": 14,
+      "reason": "Nathan Zheng can cover Agentic Development, brings GitHub and AI-agent experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-07-2",
+      "candidate_id": 2,
+      "reason": "Bob Liu brings GitHub and AI-agent experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-07-2",
+      "candidate_id": 11,
+      "reason": "Karen He brings GitHub and AI-agent experience.",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-07-2",
+      "candidate_id": 15,
+      "reason": "Olivia Liang brings programming and web development experience.",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-16-1",
+      "candidate_id": 27,
+      "reason": "Aaron Deng can cover Backend, brings programming and web development experience and comes from a different programme (Computer Science).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-16-1",
+      "candidate_id": 29,
+      "reason": "Cody Lei brings GitHub and AI-agent experience and comes from a different programme (AI and Data Science).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-16-1",
+      "candidate_id": 28,
+      "reason": "Bella Ma can cover Database and brings debugging experience.",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-16-1",
+      "candidate_id": 24,
+      "reason": "Xander Guo brings programming and web development experience.",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-16-1",
+      "candidate_id": 26,
+      "reason": "Zoe Shi brings GitHub and AI-agent experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-16-2",
+      "candidate_id": 27,
+      "reason": "Aaron Deng can cover Backend, brings programming and web development experience and comes from a different programme (Computer Science).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-16-2",
+      "candidate_id": 29,
+      "reason": "Cody Lei brings GitHub and AI-agent experience and comes from a different programme (AI and Data Science).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-16-2",
+      "candidate_id": 28,
+      "reason": "Bella Ma can cover Database and brings debugging experience.",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-16-2",
+      "candidate_id": 24,
+      "reason": "Xander Guo brings programming and web development experience.",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    },
+    {
+      "call": "LIVE-16-2",
+      "candidate_id": 26,
+      "reason": "Zoe Shi brings GitHub and AI-agent experience and comes from a different programme (Applied AI).",
+      "errors": [],
+      "check": "Defined skill/role/programme claims against synthetic attributes; not a human quality rating"
+    }
+  ],
+  "coverage_comparison": [
+    {
+      "call": "LIVE-01-1",
+      "ai": {
+        "roles": 4,
+        "programmes": 3
+      },
+      "fallback": {
+        "roles": 4,
+        "programmes": 3
+      },
+      "identical_ids": false
+    },
+    {
+      "call": "LIVE-01-2",
+      "ai": {
+        "roles": 4,
+        "programmes": 3
+      },
+      "fallback": {
+        "roles": 4,
+        "programmes": 3
+      },
+      "identical_ids": false
+    },
+    {
+      "call": "LIVE-07-1",
+      "ai": {
+        "roles": 4,
+        "programmes": 2
+      },
+      "fallback": {
+        "roles": 4,
+        "programmes": 3
+      },
+      "identical_ids": false
+    },
+    {
+      "call": "LIVE-07-2",
+      "ai": {
+        "roles": 4,
+        "programmes": 2
+      },
+      "fallback": {
+        "roles": 4,
+        "programmes": 3
+      },
+      "identical_ids": false
+    },
+    {
+      "call": "LIVE-16-1",
+      "ai": {
+        "roles": 4,
+        "programmes": 4
+      },
+      "fallback": {
+        "roles": 4,
+        "programmes": 4
+      },
+      "identical_ids": false
+    },
+    {
+      "call": "LIVE-16-2",
+      "ai": {
+        "roles": 4,
+        "programmes": 4
+      },
+      "fallback": {
+        "roles": 4,
+        "programmes": 4
+      },
+      "identical_ids": false
+    }
+  ],
+  "human_review": "Pending team review; no human sign-off is invented"
+}

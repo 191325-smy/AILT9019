@@ -1,0 +1,97 @@
+test_data_and_sessions_survive_app_restart (backend.tests.test_api.BackendAPITests.test_data_and_sessions_survive_app_restart) ... ok
+test_default_cors_accepts_the_recording_frontend (backend.tests.test_api.BackendAPITests.test_default_cors_accepts_the_recording_frontend) ... ok
+test_existing_seeded_database_is_preserved (backend.tests.test_api.BackendAPITests.test_existing_seeded_database_is_preserved) ... ok
+test_expired_session_cannot_be_used (backend.tests.test_api.BackendAPITests.test_expired_session_cannot_be_used) ... ok
+test_frontend_cors_preflight_uses_explicit_origin (backend.tests.test_api.BackendAPITests.test_frontend_cors_preflight_uses_explicit_origin) ... ok
+test_logout_revokes_only_the_current_session (backend.tests.test_api.BackendAPITests.test_logout_revokes_only_the_current_session) ... ok
+test_matches_can_disable_the_model_even_when_one_is_configured (backend.tests.test_api.BackendAPITests.test_matches_can_disable_the_model_even_when_one_is_configured) ... ok
+test_matches_handle_an_empty_eligible_pool (backend.tests.test_api.BackendAPITests.test_matches_handle_an_empty_eligible_pool) ... ok
+test_matches_require_login_and_a_saved_profile (backend.tests.test_api.BackendAPITests.test_matches_require_login_and_a_saved_profile) ... ok
+test_matches_use_the_same_database_as_accounts_and_profiles (backend.tests.test_api.BackendAPITests.test_matches_use_the_same_database_as_accounts_and_profiles) ... ok
+test_missing_and_invalid_credentials_cannot_read_or_write (backend.tests.test_api.BackendAPITests.test_missing_and_invalid_credentials_cannot_read_or_write) ... ok
+test_passwords_are_salted_hashes_and_not_returned (backend.tests.test_api.BackendAPITests.test_passwords_are_salted_hashes_and_not_returned) ... ok
+test_private_responses_are_not_cacheable (backend.tests.test_api.BackendAPITests.test_private_responses_are_not_cacheable) ... ok
+test_profile_accepts_matching_fields_and_validates_roles (backend.tests.test_api.BackendAPITests.test_profile_accepts_matching_fields_and_validates_roles) ... ok
+test_profile_text_is_stored_literally_and_empty_preferences_are_allowed (backend.tests.test_api.BackendAPITests.test_profile_text_is_stored_literally_and_empty_preferences_are_allowed) ... ok
+test_profile_update_preserves_account_and_team_status (backend.tests.test_api.BackendAPITests.test_profile_update_preserves_account_and_team_status) ... ok
+test_profile_validation_and_mass_assignment_rejection (backend.tests.test_api.BackendAPITests.test_profile_validation_and_mass_assignment_rejection) ... ok
+test_register_login_save_read_logout (backend.tests.test_api.BackendAPITests.test_register_login_save_read_logout) ... ok
+test_saved_data_is_visible_to_existing_matching_reader (backend.tests.test_api.BackendAPITests.test_saved_data_is_visible_to_existing_matching_reader) ... ok
+test_session_database_does_not_store_the_bearer_token (backend.tests.test_api.BackendAPITests.test_session_database_does_not_store_the_bearer_token) ... ok
+test_tampered_token_is_rejected (backend.tests.test_api.BackendAPITests.test_tampered_token_is_rejected) ... ok
+test_username_and_password_validation (backend.tests.test_api.BackendAPITests.test_username_and_password_validation) ... ok
+test_username_case_normalization_and_duplicate_rejection (backend.tests.test_api.BackendAPITests.test_username_case_normalization_and_duplicate_rejection) ... ok
+test_users_only_read_and_modify_their_own_profiles (backend.tests.test_api.BackendAPITests.test_users_only_read_and_modify_their_own_profiles) ... ok
+test_wrong_password_and_unknown_account_have_same_error (backend.tests.test_api.BackendAPITests.test_wrong_password_and_unknown_account_have_same_error) ... ok
+test_all_invalid (test_cases.MatchingCases.test_all_invalid) ... ok
+test_all_profiles (test_cases.MatchingCases.test_all_profiles) ... ok
+test_duplicate_roles_allowed (test_cases.MatchingCases.test_duplicate_roles_allowed) ... ok
+test_empty_evidence (test_cases.MatchingCases.test_empty_evidence) ... ok
+test_hallucinated_evidence (test_cases.MatchingCases.test_hallucinated_evidence) ... ok
+test_hard_filters (test_cases.MatchingCases.test_hard_filters) ... ok
+test_invalid_duplicate (test_cases.MatchingCases.test_invalid_duplicate) ... ok
+test_invalid_schema (test_cases.MatchingCases.test_invalid_schema) ... ok
+test_json_cli (test_cases.MatchingCases.test_json_cli) ... ok
+test_language_preference (test_cases.MatchingCases.test_language_preference) ... ok
+test_legacy_and_null_candidate (test_cases.MatchingCases.test_legacy_and_null_candidate) ... ok
+test_model_disabled (test_cases.MatchingCases.test_model_disabled) ... ok
+test_open_roles (test_cases.MatchingCases.test_open_roles) ... ok
+test_payload_and_evidence (test_cases.MatchingCases.test_payload_and_evidence) ... ok
+test_pool_sizes (test_cases.MatchingCases.test_pool_sizes) ... ok
+test_programme_rarity (test_cases.MatchingCases.test_programme_rarity) ... ok
+test_short_output (test_cases.MatchingCases.test_short_output) ... FAIL
+test_skill_preference (test_cases.MatchingCases.test_skill_preference) ... ok
+test_timeout (test_cases.MatchingCases.test_timeout) ... ok
+test_too_many (test_cases.MatchingCases.test_too_many) ... ok
+test_unknown_json_user (test_cases.MatchingCases.test_unknown_json_user) ... ok
+test_unknown_student_skill (test_cases.MatchingCases.test_unknown_student_skill) ... FAIL
+test_unsupported_skill (test_cases.MatchingCases.test_unsupported_skill) ... FAIL
+test_weighted_example (test_cases.MatchingCases.test_weighted_example) ... ok
+test_cache_refresh (test_cases.APICases.test_cache_refresh) ... ok
+test_clear_preferences (test_cases.APICases.test_clear_preferences) ... ok
+test_empty_demo_case (test_cases.APICases.test_empty_demo_case) ... ok
+test_fields_reach_matcher (test_cases.APICases.test_fields_reach_matcher) ... ok
+test_multi_instance_revoke (test_cases.APICases.test_multi_instance_revoke) ... FAIL
+test_new_validation (test_cases.APICases.test_new_validation) ... ok
+
+======================================================================
+FAIL: test_short_output (test_cases.MatchingCases.test_short_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<REPO>\evaluation\test_cases.py", line 162, in test_short_output
+    validate_picks(self.me,c,p)
+  File "<REPO>\evaluation\common.py", line 56, in validate_picks
+    require(len(picks) == expected_count, f"Expected {expected_count} candidates; got {len(picks)}")
+  File "<REPO>\evaluation\common.py", line 52, in require
+    raise AssertionError(message)
+AssertionError: Expected 5 candidates; got 1
+
+======================================================================
+FAIL: test_unknown_student_skill (test_cases.MatchingCases.test_unknown_student_skill)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<REPO>\evaluation\test_cases.py", line 112, in test_unknown_student_skill
+    self.assertNotIn('programming',r['complements'],'Unknown skill is treated as an established lack.')
+AssertionError: 'programming' unexpectedly found in ['programming'] : Unknown skill is treated as an established lack.
+
+======================================================================
+FAIL: test_unsupported_skill (test_cases.MatchingCases.test_unsupported_skill)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<REPO>\evaluation\test_cases.py", line 188, in test_unsupported_skill
+    validate_picks(self.me,c,p);self.assertNotIn('account_id',p[0]['reason'])
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'account_id' unexpectedly found in 'Synthetic 1 brings account_id experience.'
+
+======================================================================
+FAIL: test_multi_instance_revoke (test_cases.APICases.test_multi_instance_revoke)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<REPO>\evaluation\test_cases.py", line 276, in test_multi_instance_revoke
+    self.assertIsNone(stale,'Another process/instance retains the token until cached expiry.')
+AssertionError: {'id': 1, 'username': 'evaluation_user'} is not None : Another process/instance retains the token until cached expiry.
+
+----------------------------------------------------------------------
+Ran 55 tests in 4.755s
+
+FAILED (failures=4)

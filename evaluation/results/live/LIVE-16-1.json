@@ -1,0 +1,246 @@
+{
+  "source": "deepseek:deepseek-flash",
+  "live_model": true,
+  "elapsed_seconds": 2.719,
+  "eligible": 13,
+  "picks": [
+    {
+      "profile": {
+        "account_id": 27,
+        "username": "aaron_deng",
+        "display_name": "Aaron Deng",
+        "contact_info": "aaron@test.com",
+        "city": "SH",
+        "preferred_role": "Backend",
+        "languages": [
+          "Mandarin"
+        ],
+        "in_team": 0,
+        "programme": "Computer Science",
+        "open_roles": [
+          "Backend",
+          "Agentic Development"
+        ],
+        "programming": 1,
+        "github": 0,
+        "debugging": 0,
+        "web": 1,
+        "ai_agent": 0,
+        "signals": {
+          "shared_languages": [
+            "Mandarin"
+          ],
+          "role_fit": "complement",
+          "score": {
+            "total": 0.675,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.033,
+            "languages": 0.025,
+            "programme": 0.077,
+            "complements": [
+              "programming",
+              "web"
+            ],
+            "fills_roles": [
+              "Backend",
+              "Agentic Development"
+            ]
+          }
+        }
+      },
+      "reason": "Aaron Deng can cover Backend, brings programming and web development experience and comes from a different programme (Computer Science)."
+    },
+    {
+      "profile": {
+        "account_id": 29,
+        "username": "cody_lei",
+        "display_name": "Cody Lei",
+        "contact_info": "cody@test.com",
+        "city": "SH",
+        "preferred_role": "Agentic Development",
+        "languages": [
+          "Mandarin"
+        ],
+        "in_team": 0,
+        "programme": "AI and Data Science",
+        "open_roles": [
+          "Agentic Development",
+          "Backend"
+        ],
+        "programming": 0,
+        "github": 1,
+        "debugging": 0,
+        "web": 0,
+        "ai_agent": 1,
+        "signals": {
+          "shared_languages": [
+            "Mandarin"
+          ],
+          "role_fit": "complement",
+          "score": {
+            "total": 0.668,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.033,
+            "languages": 0.025,
+            "programme": 0.069,
+            "complements": [
+              "github",
+              "ai_agent"
+            ],
+            "fills_roles": [
+              "Agentic Development",
+              "Backend"
+            ]
+          }
+        }
+      },
+      "reason": "Cody Lei brings GitHub and AI-agent experience and comes from a different programme (AI and Data Science)."
+    },
+    {
+      "profile": {
+        "account_id": 28,
+        "username": "bella_ma",
+        "display_name": "Bella Ma",
+        "contact_info": "bella@test.com",
+        "city": "SH",
+        "preferred_role": "Database",
+        "languages": [
+          "English",
+          "Mandarin"
+        ],
+        "in_team": 0,
+        "programme": "Others",
+        "open_roles": [
+          "Database",
+          "Frontend"
+        ],
+        "programming": 0,
+        "github": 0,
+        "debugging": 1,
+        "web": 0,
+        "ai_agent": 0,
+        "signals": {
+          "shared_languages": [
+            "English",
+            "Mandarin"
+          ],
+          "role_fit": "complement",
+          "score": {
+            "total": 0.45,
+            "role": 0.4,
+            "skills": 0.0,
+            "flexibility": 0.0,
+            "languages": 0.05,
+            "programme": 0.0,
+            "complements": [],
+            "fills_roles": [
+              "Database"
+            ]
+          }
+        }
+      },
+      "reason": "Bella Ma can cover Database and brings debugging experience."
+    },
+    {
+      "profile": {
+        "account_id": 24,
+        "username": "xander_guo",
+        "display_name": "Xander Guo",
+        "contact_info": "xander@test.com",
+        "city": "SH",
+        "preferred_role": "Agentic Development",
+        "languages": [
+          "English",
+          "Mandarin"
+        ],
+        "in_team": 0,
+        "programme": "Others",
+        "open_roles": [
+          "Agentic Development",
+          "Frontend"
+        ],
+        "programming": 1,
+        "github": 0,
+        "debugging": 0,
+        "web": 1,
+        "ai_agent": 0,
+        "signals": {
+          "shared_languages": [
+            "English",
+            "Mandarin"
+          ],
+          "role_fit": "complement",
+          "score": {
+            "total": 0.59,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.0,
+            "languages": 0.05,
+            "programme": 0.0,
+            "complements": [
+              "programming",
+              "web"
+            ],
+            "fills_roles": [
+              "Agentic Development"
+            ]
+          }
+        }
+      },
+      "reason": "Xander Guo brings programming and web development experience."
+    },
+    {
+      "profile": {
+        "account_id": 26,
+        "username": "zoe_shi",
+        "display_name": "Zoe Shi",
+        "contact_info": "zoe@test.com",
+        "city": "SH",
+        "preferred_role": "Frontend",
+        "languages": [
+          "English"
+        ],
+        "in_team": 0,
+        "programme": "Applied AI",
+        "open_roles": [
+          "Frontend",
+          "Database"
+        ],
+        "programming": 0,
+        "github": 1,
+        "debugging": 0,
+        "web": 0,
+        "ai_agent": 1,
+        "signals": {
+          "shared_languages": [
+            "English"
+          ],
+          "role_fit": "same",
+          "score": {
+            "total": 0.668,
+            "role": 0.4,
+            "skills": 0.14,
+            "flexibility": 0.033,
+            "languages": 0.025,
+            "programme": 0.069,
+            "complements": [
+              "github",
+              "ai_agent"
+            ],
+            "fills_roles": [
+              "Database"
+            ]
+          }
+        }
+      },
+      "reason": "Zoe Shi brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+    }
+  ],
+  "acceptance_errors": [],
+  "status": "PASS",
+  "id": "LIVE-16-1",
+  "student_id": 16,
+  "repeat": 1
+}

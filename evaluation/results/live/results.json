@@ -1,0 +1,1750 @@
+{
+  "metadata": {
+    "revision": "81886ac18511398f320b0e592828ea00c956d7cd",
+    "checked_at": "2026-11-20T20:06:15+08:00",
+    "python": "3.12.14",
+    "platform": "Windows",
+    "source": [
+      {
+        "path": ".gitignore",
+        "sha256": "a84bce18b4976cbb2f1a0b3d752f50bfabd4113b43a1e0f9c12600215a9ebbc9",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "README.md",
+        "sha256": "fbb8f5ec13440b5dddae3ca3789caf2a7314f2138d0cf2aa8573fc23b7a38050",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "RECORDING.md",
+        "sha256": "54981aa05ccbfb9abdc626a0e2ce9c1cd207216b199be88a9e5f456aaefb48f4",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/README.md",
+        "sha256": "eaa2504f1a70cf31e885f025c9cbff3c8db8743c9ce4bb10ae4f4da85b3f0071",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/TESTING.md",
+        "sha256": "0d837d2fd1d57ec83fd4128d900f6c00534be35cc6d9b32e6709a159246b9677",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/__init__.py",
+        "sha256": "ea976b2eb43bf93dfb5715a8377c20c8d2e5fb206bb5f37ce07221ca53ce2364",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/app.py",
+        "sha256": "8d4f958689fb1d0a84a55943600caee5b1f8d89bd7cf067ffc954dd790be526c",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/models.py",
+        "sha256": "0a848b45e02cff905cf73f58975c9b083fe58f5cd131f3b0680480c1c9083b26",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/security.py",
+        "sha256": "f157fd870baaaa6ba86a1260dc101de26f29c67211165e77f39835a645189740",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/store.py",
+        "sha256": "3b934b37a6ab32d4af53274f63f1bb62f863f86d6414d35d763e3d87f1012c75",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/tests/__init__.py",
+        "sha256": "fafd1fe31c6334fb8bb03a90ce6b566b0f0a53737a0e7eabf37bbd5ced241b31",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/tests/test_api.py",
+        "sha256": "2c63081c93fc0c7239036bf8cce529fc46226d3bb6f240b66c3f429e9d9507f2",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/.env.example",
+        "sha256": "002b77cc15a642203ec863fb22690d0d346c088bae99707c83cf638d2c0b1fdf",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/.gitignore",
+        "sha256": "51d57239a611e6c1e632949390bc76145b6f3fe6249d11ffab754ed61ba1106c",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/SETUP.md",
+        "sha256": "64c0e3439b4e2cb9f299bbe530ba9c5ecdc90cebba48a2c50f7c6ab2cadefcb6",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/db.py",
+        "sha256": "21b78d4b23142916bce0bfd3179be9a03acef1ebd0d32cf86fc9a3a2e1da860d",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/filters.py",
+        "sha256": "11892fd7ac89fef0029c9d4f9cc18c76446ea92f3f4844787afb8e52f4194ec1",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/match.py",
+        "sha256": "93d787f9c028e7aea2d12b01142eefaf7b47c5f86784219557b9d99e0524e4cc",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/matcher.py",
+        "sha256": "7eb3a87b11a02378e88e0ddb3db201c7ad96dda904759935ea1b0ca0ccdbed6d",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/sample_pool.json",
+        "sha256": "0427309176366cc7cafdf57b516a750797b0f7747273143969342d72a1b7cd8c",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/scoring.py",
+        "sha256": "8336fc187ecc310ee746bee72a47f1b767ae8438fafa69c7535f21564229c42a",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "requirements.txt",
+        "sha256": "dd285b797e636b2958afa9e35d222255f82ead53918ef01bb13479eadae95831",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "start-backend.bat",
+        "sha256": "3aa2d77affe680d8cf4404ca95df74d1384352f7908525d9ea615ec8588afec0",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "start-backend.sh",
+        "sha256": "83db55788f1670a8e60b82b2f8a35d552444b5b3dd06312981cc89d71028b83a",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "start-frontend.bat",
+        "sha256": "9ebc39b764d8cb751fa2699fc4249ba4c4e29426bac688c9a6ad0dc2c969e22a",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "start-frontend.sh",
+        "sha256": "9cbb082669027b2632ed41910c01cdf4b12273c8669423ef91568dbdf0693dd6",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/README.md",
+        "sha256": "42b57aae404f4aa2b91c52a0323e76a5aaeda2e504e67ae566c26a49a97293b4",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/css/style.css",
+        "sha256": "bb1060c0f7ea2e22ebc9b54e0919b95d04148db74a0ff80f3fba899910907d66",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/dashboard.html",
+        "sha256": "46187cb4f4d4ad270c46bb82beb54d13517a225589855c07e6fad7f7ece768c8",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/data/mock-data.json",
+        "sha256": "939380c11fd18ce9ac00a7d96b5ba52271f5127a3cecdd0706b0ffad8d07e109",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/edit-profile.html",
+        "sha256": "28fd288b520dfc1a1ee3ab0170916625f13a39979943faf9fd6e1e818c6bb92a",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/index.html",
+        "sha256": "5e59be01f25306f3170145ec095d78ecb3de3a59a49fc593a8d7c0c55dcb2cb7",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/js/app.js",
+        "sha256": "96223813b33db0684bae485ce7af76134f4fbab1e1f6440d320c5c6cd4360171",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/register.html",
+        "sha256": "3f03c9a045982a69ec753958de60656e07d08d7427017d5d561fe05125b21ec0",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/results.html",
+        "sha256": "39f38786859f2e63a25b22aaa936a5b1de44abb6f61dbb26ad0e1fc200d6f222",
+        "baseline_blob_matches": true
+      }
+    ],
+    "evaluation_hashes": {
+      "common.py": "bd99cb16fd910816b0664ac50cc187e534150c33393ce74f27c8e062d7cb9358",
+      "demo_app.py": "ccbf0a54f7dc0319263028ea11b785be79d0fa868fca9806d7a8e57e64869416",
+      "run_evaluation.py": "050ea78655893eaa4230d2dbb2011a294346faf1aac0d15682cc3f78aaa6f3d3",
+      "SOURCE.json": "a48da9266eca834eb413a75a927fb697e7631e85d65443e8f5d026da43c2733b",
+      "summarize.py": "fcc6f46a0758e835cef9ad73d99fc036502b8325233a5afeb1f8f74309ffbed7",
+      "test_cases.py": "4012386bbb6da82e66a5c0287e95259d0d5bb48c597f19c589ae5849dba57245",
+      "fixtures/enriched_profiles.json": "4bc82b0df78eefb1122096acb7221c1e2ba8288b0629d9591446f982eeabcdba"
+    },
+    "packages": {
+      "annotated-doc": "0.0.7",
+      "annotated-types": "0.8.0",
+      "anyio": "4.16.0",
+      "argon2-cffi": "25.1.0",
+      "argon2-cffi-bindings": "26.2.0",
+      "certifi": "2026.10.23",
+      "cffi": "2.1.1",
+      "charset-normalizer": "3.5.2",
+      "click": "8.5.1",
+      "distro": "1.9.0",
+      "fastapi": "0.162.0",
+      "h11": "0.16.0",
+      "httpcore": "1.0.9",
+      "httpcore2": "2.16.2",
+      "httpx": "0.28.1",
+      "httpx2": "2.16.2",
+      "idna": "3.20",
+      "jiter": "0.19.0",
+      "jsonpatch": "1.47",
+      "jsonpointer": "3.12",
+      "langchain": "1.5.2",
+      "langchain-core": "1.8.3",
+      "langchain-deepseek": "1.2.1",
+      "langchain-openai": "1.8.3",
+      "langchain-protocol": "0.0.21",
+      "langgraph": "1.2.23",
+      "langgraph-checkpoint": "4.3.2",
+      "langgraph-prebuilt": "1.1.3",
+      "langgraph-sdk": "0.4.14",
+      "langsmith": "0.15.0",
+      "openai": "3.55.1",
+      "opentelemetry-api": "1.45.2",
+      "orjson": "3.13.0",
+      "ormsgpack": "1.13.1",
+      "packaging": "26.3",
+      "pip": "25.0.1",
+      "psycopg": "3.3.9",
+      "psycopg-binary": "3.3.9",
+      "psycopg-pool": "3.3.3",
+      "pwdlib": "0.3.1",
+      "pycparser": "3.12",
+      "pydantic": "2.14.1",
+      "pydantic_core": "2.50.1",
+      "python-dotenv": "1.2.4",
+      "PyYAML": "6.0.3",
+      "regex": "2026.11.19",
+      "requests": "2.34.2",
+      "requests-toolbelt": "1.0.0",
+      "sniffio": "1.3.1",
+      "starlette": "1.10.0",
+      "tenacity": "9.2.1",
+      "tiktoken": "0.14.0",
+      "truststore": "0.10.5",
+      "typing_extensions": "4.16.0",
+      "typing-inspection": "0.4.5",
+      "tzdata": "2026.6",
+      "urllib3": "2.8.0",
+      "uuid_utils": "0.19.0",
+      "uvicorn": "0.54.0",
+      "websockets": "17.4",
+      "xxhash": "4.1.0",
+      "zstandard": "0.25.0"
+    },
+    "source_acquisition": "Verified immutable GitHub source snapshot"
+  },
+  "model": "deepseek:deepseek-flash",
+  "mode": "real API",
+  "summary": {
+    "total": 6,
+    "PASS": 6,
+    "FAIL": 0,
+    "ERROR": 0
+  },
+  "calls": [
+    {
+      "source": "deepseek:deepseek-flash",
+      "live_model": true,
+      "elapsed_seconds": 2.953,
+      "eligible": 12,
+      "picks": [
+        {
+          "profile": {
+            "account_id": 14,
+            "username": "nathan_zheng",
+            "display_name": "Nathan Zheng",
+            "contact_info": "nathan@test.com",
+            "city": "HK",
+            "preferred_role": "Agentic Development",
+            "languages": [
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Agentic Development",
+              "Database"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.665,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.067,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Agentic Development",
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Nathan Zheng can cover Agentic Development, brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+        },
+        {
+          "profile": {
+            "account_id": 6,
+            "username": "frank_zhou",
+            "display_name": "Frank Zhou",
+            "contact_info": "frank@test.com",
+            "city": "HK",
+            "preferred_role": "Frontend",
+            "languages": [
+              "English",
+              "Cantonese"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Frontend",
+              "Database"
+            ],
+            "programming": 1,
+            "github": 0,
+            "debugging": 0,
+            "web": 1,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "same",
+              "score": {
+                "total": 0.665,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.067,
+                "complements": [
+                  "programming",
+                  "web"
+                ],
+                "fills_roles": [
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Frank Zhou brings programming and web development experience and comes from a different programme (Applied AI)."
+        },
+        {
+          "profile": {
+            "account_id": 2,
+            "username": "bob_liu",
+            "display_name": "Bob Liu",
+            "contact_info": "bob@test.com",
+            "city": "HK",
+            "preferred_role": "Backend",
+            "languages": [
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Backend",
+              "Database"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.665,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.067,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Backend",
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Bob Liu can cover Backend, brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+        },
+        {
+          "profile": {
+            "account_id": 12,
+            "username": "leo_gao",
+            "display_name": "Leo Gao",
+            "contact_info": "leo@test.com",
+            "city": "HK",
+            "preferred_role": "Backend",
+            "languages": [
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Others",
+            "open_roles": [
+              "Backend",
+              "Frontend"
+            ],
+            "programming": 1,
+            "github": 0,
+            "debugging": 0,
+            "web": 1,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.64,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.0,
+                "languages": 0.025,
+                "programme": 0.075,
+                "complements": [
+                  "programming",
+                  "web"
+                ],
+                "fills_roles": [
+                  "Backend"
+                ]
+              }
+            }
+          },
+          "reason": "Leo Gao brings programming and web development experience and comes from a different programme (Others)."
+        },
+        {
+          "profile": {
+            "account_id": 4,
+            "username": "david_zhao",
+            "display_name": "David Zhao",
+            "contact_info": "david@test.com",
+            "city": "HK",
+            "preferred_role": "Agentic Development",
+            "languages": [
+              "Mandarin",
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Others",
+            "open_roles": [
+              "Agentic Development",
+              "Frontend"
+            ],
+            "programming": 0,
+            "github": 0,
+            "debugging": 1,
+            "web": 0,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "English",
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.525,
+                "role": 0.4,
+                "skills": 0.0,
+                "flexibility": 0.0,
+                "languages": 0.05,
+                "programme": 0.075,
+                "complements": [],
+                "fills_roles": [
+                  "Agentic Development"
+                ]
+              }
+            }
+          },
+          "reason": "David Zhao brings debugging experience and comes from a different programme (Others)."
+        }
+      ],
+      "acceptance_errors": [],
+      "status": "PASS",
+      "id": "LIVE-01-1",
+      "student_id": 1,
+      "repeat": 1
+    },
+    {
+      "source": "deepseek:deepseek-flash",
+      "live_model": true,
+      "elapsed_seconds": 2.406,
+      "eligible": 12,
+      "picks": [
+        {
+          "profile": {
+            "account_id": 14,
+            "username": "nathan_zheng",
+            "display_name": "Nathan Zheng",
+            "contact_info": "nathan@test.com",
+            "city": "HK",
+            "preferred_role": "Agentic Development",
+            "languages": [
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Agentic Development",
+              "Database"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.665,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.067,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Agentic Development",
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Nathan Zheng can cover Agentic Development, brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+        },
+        {
+          "profile": {
+            "account_id": 6,
+            "username": "frank_zhou",
+            "display_name": "Frank Zhou",
+            "contact_info": "frank@test.com",
+            "city": "HK",
+            "preferred_role": "Frontend",
+            "languages": [
+              "English",
+              "Cantonese"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Frontend",
+              "Database"
+            ],
+            "programming": 1,
+            "github": 0,
+            "debugging": 0,
+            "web": 1,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "same",
+              "score": {
+                "total": 0.665,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.067,
+                "complements": [
+                  "programming",
+                  "web"
+                ],
+                "fills_roles": [
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Frank Zhou brings programming and web development experience and comes from a different programme (Applied AI)."
+        },
+        {
+          "profile": {
+            "account_id": 2,
+            "username": "bob_liu",
+            "display_name": "Bob Liu",
+            "contact_info": "bob@test.com",
+            "city": "HK",
+            "preferred_role": "Backend",
+            "languages": [
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Backend",
+              "Database"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.665,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.067,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Backend",
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Bob Liu can cover Backend, brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+        },
+        {
+          "profile": {
+            "account_id": 12,
+            "username": "leo_gao",
+            "display_name": "Leo Gao",
+            "contact_info": "leo@test.com",
+            "city": "HK",
+            "preferred_role": "Backend",
+            "languages": [
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Others",
+            "open_roles": [
+              "Backend",
+              "Frontend"
+            ],
+            "programming": 1,
+            "github": 0,
+            "debugging": 0,
+            "web": 1,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.64,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.0,
+                "languages": 0.025,
+                "programme": 0.075,
+                "complements": [
+                  "programming",
+                  "web"
+                ],
+                "fills_roles": [
+                  "Backend"
+                ]
+              }
+            }
+          },
+          "reason": "Leo Gao brings programming and web development experience and comes from a different programme (Others)."
+        },
+        {
+          "profile": {
+            "account_id": 4,
+            "username": "david_zhao",
+            "display_name": "David Zhao",
+            "contact_info": "david@test.com",
+            "city": "HK",
+            "preferred_role": "Agentic Development",
+            "languages": [
+              "Mandarin",
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Others",
+            "open_roles": [
+              "Agentic Development",
+              "Frontend"
+            ],
+            "programming": 0,
+            "github": 0,
+            "debugging": 1,
+            "web": 0,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "English",
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.525,
+                "role": 0.4,
+                "skills": 0.0,
+                "flexibility": 0.0,
+                "languages": 0.05,
+                "programme": 0.075,
+                "complements": [],
+                "fills_roles": [
+                  "Agentic Development"
+                ]
+              }
+            }
+          },
+          "reason": "David Zhao comes from a different programme (Others)."
+        }
+      ],
+      "acceptance_errors": [],
+      "status": "PASS",
+      "id": "LIVE-01-2",
+      "student_id": 1,
+      "repeat": 2
+    },
+    {
+      "source": "deepseek:deepseek-flash",
+      "live_model": true,
+      "elapsed_seconds": 2.625,
+      "eligible": 12,
+      "picks": [
+        {
+          "profile": {
+            "account_id": 6,
+            "username": "frank_zhou",
+            "display_name": "Frank Zhou",
+            "contact_info": "frank@test.com",
+            "city": "HK",
+            "preferred_role": "Frontend",
+            "languages": [
+              "English",
+              "Cantonese"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Frontend",
+              "Database"
+            ],
+            "programming": 1,
+            "github": 0,
+            "debugging": 0,
+            "web": 1,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.665,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.067,
+                "complements": [
+                  "programming",
+                  "web"
+                ],
+                "fills_roles": [
+                  "Frontend",
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Frank Zhou can cover Frontend, brings programming and web development experience and comes from a different programme (Applied AI)."
+        },
+        {
+          "profile": {
+            "account_id": 14,
+            "username": "nathan_zheng",
+            "display_name": "Nathan Zheng",
+            "contact_info": "nathan@test.com",
+            "city": "HK",
+            "preferred_role": "Agentic Development",
+            "languages": [
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Agentic Development",
+              "Database"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.665,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.067,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Agentic Development",
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Nathan Zheng can cover Agentic Development, brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+        },
+        {
+          "profile": {
+            "account_id": 2,
+            "username": "bob_liu",
+            "display_name": "Bob Liu",
+            "contact_info": "bob@test.com",
+            "city": "HK",
+            "preferred_role": "Backend",
+            "languages": [
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Backend",
+              "Database"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "same",
+              "score": {
+                "total": 0.665,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.067,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Bob Liu brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+        },
+        {
+          "profile": {
+            "account_id": 11,
+            "username": "karen_he",
+            "display_name": "Karen He",
+            "contact_info": "karen@test.com",
+            "city": "HK",
+            "preferred_role": "Frontend",
+            "languages": [
+              "Mandarin",
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Computer Science",
+            "open_roles": [
+              "Frontend",
+              "Agentic Development"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "English",
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.623,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.05,
+                "programme": 0.0,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Frontend",
+                  "Agentic Development"
+                ]
+              }
+            }
+          },
+          "reason": "Karen He brings GitHub and AI-agent experience."
+        },
+        {
+          "profile": {
+            "account_id": 15,
+            "username": "olivia_liang",
+            "display_name": "Olivia Liang",
+            "contact_info": "olivia@test.com",
+            "city": "HK",
+            "preferred_role": "Other",
+            "languages": [
+              "Mandarin"
+            ],
+            "in_team": 0,
+            "programme": "Computer Science",
+            "open_roles": [
+              "Other",
+              "Agentic Development"
+            ],
+            "programming": 1,
+            "github": 0,
+            "debugging": 0,
+            "web": 1,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.598,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.0,
+                "complements": [
+                  "programming",
+                  "web"
+                ],
+                "fills_roles": [
+                  "Agentic Development"
+                ]
+              }
+            }
+          },
+          "reason": "Olivia Liang brings programming and web development experience."
+        }
+      ],
+      "acceptance_errors": [],
+      "status": "PASS",
+      "id": "LIVE-07-1",
+      "student_id": 7,
+      "repeat": 1
+    },
+    {
+      "source": "deepseek:deepseek-flash",
+      "live_model": true,
+      "elapsed_seconds": 2.484,
+      "eligible": 12,
+      "picks": [
+        {
+          "profile": {
+            "account_id": 6,
+            "username": "frank_zhou",
+            "display_name": "Frank Zhou",
+            "contact_info": "frank@test.com",
+            "city": "HK",
+            "preferred_role": "Frontend",
+            "languages": [
+              "English",
+              "Cantonese"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Frontend",
+              "Database"
+            ],
+            "programming": 1,
+            "github": 0,
+            "debugging": 0,
+            "web": 1,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.665,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.067,
+                "complements": [
+                  "programming",
+                  "web"
+                ],
+                "fills_roles": [
+                  "Frontend",
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Frank Zhou can cover Frontend, brings programming and web development experience and comes from a different programme (Applied AI)."
+        },
+        {
+          "profile": {
+            "account_id": 14,
+            "username": "nathan_zheng",
+            "display_name": "Nathan Zheng",
+            "contact_info": "nathan@test.com",
+            "city": "HK",
+            "preferred_role": "Agentic Development",
+            "languages": [
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Agentic Development",
+              "Database"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.665,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.067,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Agentic Development",
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Nathan Zheng can cover Agentic Development, brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+        },
+        {
+          "profile": {
+            "account_id": 2,
+            "username": "bob_liu",
+            "display_name": "Bob Liu",
+            "contact_info": "bob@test.com",
+            "city": "HK",
+            "preferred_role": "Backend",
+            "languages": [
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Backend",
+              "Database"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "same",
+              "score": {
+                "total": 0.665,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.067,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Bob Liu brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+        },
+        {
+          "profile": {
+            "account_id": 11,
+            "username": "karen_he",
+            "display_name": "Karen He",
+            "contact_info": "karen@test.com",
+            "city": "HK",
+            "preferred_role": "Frontend",
+            "languages": [
+              "Mandarin",
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Computer Science",
+            "open_roles": [
+              "Frontend",
+              "Agentic Development"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "English",
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.623,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.05,
+                "programme": 0.0,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Frontend",
+                  "Agentic Development"
+                ]
+              }
+            }
+          },
+          "reason": "Karen He brings GitHub and AI-agent experience."
+        },
+        {
+          "profile": {
+            "account_id": 15,
+            "username": "olivia_liang",
+            "display_name": "Olivia Liang",
+            "contact_info": "olivia@test.com",
+            "city": "HK",
+            "preferred_role": "Other",
+            "languages": [
+              "Mandarin"
+            ],
+            "in_team": 0,
+            "programme": "Computer Science",
+            "open_roles": [
+              "Other",
+              "Agentic Development"
+            ],
+            "programming": 1,
+            "github": 0,
+            "debugging": 0,
+            "web": 1,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.598,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.0,
+                "complements": [
+                  "programming",
+                  "web"
+                ],
+                "fills_roles": [
+                  "Agentic Development"
+                ]
+              }
+            }
+          },
+          "reason": "Olivia Liang brings programming and web development experience."
+        }
+      ],
+      "acceptance_errors": [],
+      "status": "PASS",
+      "id": "LIVE-07-2",
+      "student_id": 7,
+      "repeat": 2
+    },
+    {
+      "source": "deepseek:deepseek-flash",
+      "live_model": true,
+      "elapsed_seconds": 2.719,
+      "eligible": 13,
+      "picks": [
+        {
+          "profile": {
+            "account_id": 27,
+            "username": "aaron_deng",
+            "display_name": "Aaron Deng",
+            "contact_info": "aaron@test.com",
+            "city": "SH",
+            "preferred_role": "Backend",
+            "languages": [
+              "Mandarin"
+            ],
+            "in_team": 0,
+            "programme": "Computer Science",
+            "open_roles": [
+              "Backend",
+              "Agentic Development"
+            ],
+            "programming": 1,
+            "github": 0,
+            "debugging": 0,
+            "web": 1,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.675,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.077,
+                "complements": [
+                  "programming",
+                  "web"
+                ],
+                "fills_roles": [
+                  "Backend",
+                  "Agentic Development"
+                ]
+              }
+            }
+          },
+          "reason": "Aaron Deng can cover Backend, brings programming and web development experience and comes from a different programme (Computer Science)."
+        },
+        {
+          "profile": {
+            "account_id": 29,
+            "username": "cody_lei",
+            "display_name": "Cody Lei",
+            "contact_info": "cody@test.com",
+            "city": "SH",
+            "preferred_role": "Agentic Development",
+            "languages": [
+              "Mandarin"
+            ],
+            "in_team": 0,
+            "programme": "AI and Data Science",
+            "open_roles": [
+              "Agentic Development",
+              "Backend"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.668,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.069,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Agentic Development",
+                  "Backend"
+                ]
+              }
+            }
+          },
+          "reason": "Cody Lei brings GitHub and AI-agent experience and comes from a different programme (AI and Data Science)."
+        },
+        {
+          "profile": {
+            "account_id": 28,
+            "username": "bella_ma",
+            "display_name": "Bella Ma",
+            "contact_info": "bella@test.com",
+            "city": "SH",
+            "preferred_role": "Database",
+            "languages": [
+              "English",
+              "Mandarin"
+            ],
+            "in_team": 0,
+            "programme": "Others",
+            "open_roles": [
+              "Database",
+              "Frontend"
+            ],
+            "programming": 0,
+            "github": 0,
+            "debugging": 1,
+            "web": 0,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "English",
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.45,
+                "role": 0.4,
+                "skills": 0.0,
+                "flexibility": 0.0,
+                "languages": 0.05,
+                "programme": 0.0,
+                "complements": [],
+                "fills_roles": [
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Bella Ma can cover Database and brings debugging experience."
+        },
+        {
+          "profile": {
+            "account_id": 24,
+            "username": "xander_guo",
+            "display_name": "Xander Guo",
+            "contact_info": "xander@test.com",
+            "city": "SH",
+            "preferred_role": "Agentic Development",
+            "languages": [
+              "English",
+              "Mandarin"
+            ],
+            "in_team": 0,
+            "programme": "Others",
+            "open_roles": [
+              "Agentic Development",
+              "Frontend"
+            ],
+            "programming": 1,
+            "github": 0,
+            "debugging": 0,
+            "web": 1,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "English",
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.59,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.0,
+                "languages": 0.05,
+                "programme": 0.0,
+                "complements": [
+                  "programming",
+                  "web"
+                ],
+                "fills_roles": [
+                  "Agentic Development"
+                ]
+              }
+            }
+          },
+          "reason": "Xander Guo brings programming and web development experience."
+        },
+        {
+          "profile": {
+            "account_id": 26,
+            "username": "zoe_shi",
+            "display_name": "Zoe Shi",
+            "contact_info": "zoe@test.com",
+            "city": "SH",
+            "preferred_role": "Frontend",
+            "languages": [
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Frontend",
+              "Database"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "same",
+              "score": {
+                "total": 0.668,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.069,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Zoe Shi brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+        }
+      ],
+      "acceptance_errors": [],
+      "status": "PASS",
+      "id": "LIVE-16-1",
+      "student_id": 16,
+      "repeat": 1
+    },
+    {
+      "source": "deepseek:deepseek-flash",
+      "live_model": true,
+      "elapsed_seconds": 2.468,
+      "eligible": 13,
+      "picks": [
+        {
+          "profile": {
+            "account_id": 27,
+            "username": "aaron_deng",
+            "display_name": "Aaron Deng",
+            "contact_info": "aaron@test.com",
+            "city": "SH",
+            "preferred_role": "Backend",
+            "languages": [
+              "Mandarin"
+            ],
+            "in_team": 0,
+            "programme": "Computer Science",
+            "open_roles": [
+              "Backend",
+              "Agentic Development"
+            ],
+            "programming": 1,
+            "github": 0,
+            "debugging": 0,
+            "web": 1,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.675,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.077,
+                "complements": [
+                  "programming",
+                  "web"
+                ],
+                "fills_roles": [
+                  "Backend",
+                  "Agentic Development"
+                ]
+              }
+            }
+          },
+          "reason": "Aaron Deng can cover Backend, brings programming and web development experience and comes from a different programme (Computer Science)."
+        },
+        {
+          "profile": {
+            "account_id": 29,
+            "username": "cody_lei",
+            "display_name": "Cody Lei",
+            "contact_info": "cody@test.com",
+            "city": "SH",
+            "preferred_role": "Agentic Development",
+            "languages": [
+              "Mandarin"
+            ],
+            "in_team": 0,
+            "programme": "AI and Data Science",
+            "open_roles": [
+              "Agentic Development",
+              "Backend"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.668,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.069,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Agentic Development",
+                  "Backend"
+                ]
+              }
+            }
+          },
+          "reason": "Cody Lei brings GitHub and AI-agent experience and comes from a different programme (AI and Data Science)."
+        },
+        {
+          "profile": {
+            "account_id": 28,
+            "username": "bella_ma",
+            "display_name": "Bella Ma",
+            "contact_info": "bella@test.com",
+            "city": "SH",
+            "preferred_role": "Database",
+            "languages": [
+              "English",
+              "Mandarin"
+            ],
+            "in_team": 0,
+            "programme": "Others",
+            "open_roles": [
+              "Database",
+              "Frontend"
+            ],
+            "programming": 0,
+            "github": 0,
+            "debugging": 1,
+            "web": 0,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "English",
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.45,
+                "role": 0.4,
+                "skills": 0.0,
+                "flexibility": 0.0,
+                "languages": 0.05,
+                "programme": 0.0,
+                "complements": [],
+                "fills_roles": [
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Bella Ma can cover Database and brings debugging experience."
+        },
+        {
+          "profile": {
+            "account_id": 24,
+            "username": "xander_guo",
+            "display_name": "Xander Guo",
+            "contact_info": "xander@test.com",
+            "city": "SH",
+            "preferred_role": "Agentic Development",
+            "languages": [
+              "English",
+              "Mandarin"
+            ],
+            "in_team": 0,
+            "programme": "Others",
+            "open_roles": [
+              "Agentic Development",
+              "Frontend"
+            ],
+            "programming": 1,
+            "github": 0,
+            "debugging": 0,
+            "web": 1,
+            "ai_agent": 0,
+            "signals": {
+              "shared_languages": [
+                "English",
+                "Mandarin"
+              ],
+              "role_fit": "complement",
+              "score": {
+                "total": 0.59,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.0,
+                "languages": 0.05,
+                "programme": 0.0,
+                "complements": [
+                  "programming",
+                  "web"
+                ],
+                "fills_roles": [
+                  "Agentic Development"
+                ]
+              }
+            }
+          },
+          "reason": "Xander Guo brings programming and web development experience."
+        },
+        {
+          "profile": {
+            "account_id": 26,
+            "username": "zoe_shi",
+            "display_name": "Zoe Shi",
+            "contact_info": "zoe@test.com",
+            "city": "SH",
+            "preferred_role": "Frontend",
+            "languages": [
+              "English"
+            ],
+            "in_team": 0,
+            "programme": "Applied AI",
+            "open_roles": [
+              "Frontend",
+              "Database"
+            ],
+            "programming": 0,
+            "github": 1,
+            "debugging": 0,
+            "web": 0,
+            "ai_agent": 1,
+            "signals": {
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "same",
+              "score": {
+                "total": 0.668,
+                "role": 0.4,
+                "skills": 0.14,
+                "flexibility": 0.033,
+                "languages": 0.025,
+                "programme": 0.069,
+                "complements": [
+                  "github",
+                  "ai_agent"
+                ],
+                "fills_roles": [
+                  "Database"
+                ]
+              }
+            }
+          },
+          "reason": "Zoe Shi brings GitHub and AI-agent experience and comes from a different programme (Applied AI)."
+        }
+      ],
+      "acceptance_errors": [],
+      "status": "PASS",
+      "id": "LIVE-16-2",
+      "student_id": 16,
+      "repeat": 2
+    }
+  ],
+  "qualification": "Six calls on three synthetic profiles; connectivity/structural checks, not a real-student suitability or fairness study. Semantic review is recorded separately."
+}

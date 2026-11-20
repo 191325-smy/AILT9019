@@ -1,0 +1,31 @@
+{
+  "reviewed_revision": "81886ac18511398f320b0e592828ea00c956d7cd",
+  "reviewed_at": "2026-11-20T20:16:16+08:00",
+  "application_files_unchanged": true,
+  "source_files_verified": 35,
+  "scope": "Only evaluation/ is to be published; no runtime fixes, private env or database",
+  "checks": {
+    "python_syntax": "PASS",
+    "json_parsing": "PASS",
+    "case_catalogue_counts": "PASS",
+    "evidence_revision_alignment": "PASS",
+    "local_document_links": "PASS",
+    "configured_secret_absent": "PASS",
+    "fresh_results_preserve_failures": "PASS"
+  },
+  "changes_from_review": [
+    "Run directly from published clone; do not checkout away evaluation files",
+    "Lock versions come from actual test execution metadata",
+    "Evidence versions must agree before summary generation",
+    "Validators remain active under Python optimization",
+    "Source manifest rejects extra application modules"
+  ],
+  "product_outcome": {
+    "total": 55,
+    "PASS": 51,
+    "FAIL": 4,
+    "ERROR": 0
+  },
+  "human_team_approval": "Not claimed; assistant tool-based review only",
+  "fresh_git_clone_verified": true
+}

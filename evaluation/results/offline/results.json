@@ -1,0 +1,2323 @@
+{
+  "metadata": {
+    "revision": "81886ac18511398f320b0e592828ea00c956d7cd",
+    "checked_at": "2026-11-20T20:16:16+08:00",
+    "python": "3.12.14",
+    "platform": "Windows",
+    "source": [
+      {
+        "path": ".gitignore",
+        "sha256": "a84bce18b4976cbb2f1a0b3d752f50bfabd4113b43a1e0f9c12600215a9ebbc9",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "README.md",
+        "sha256": "fbb8f5ec13440b5dddae3ca3789caf2a7314f2138d0cf2aa8573fc23b7a38050",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "RECORDING.md",
+        "sha256": "54981aa05ccbfb9abdc626a0e2ce9c1cd207216b199be88a9e5f456aaefb48f4",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/README.md",
+        "sha256": "eaa2504f1a70cf31e885f025c9cbff3c8db8743c9ce4bb10ae4f4da85b3f0071",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/TESTING.md",
+        "sha256": "0d837d2fd1d57ec83fd4128d900f6c00534be35cc6d9b32e6709a159246b9677",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/__init__.py",
+        "sha256": "ea976b2eb43bf93dfb5715a8377c20c8d2e5fb206bb5f37ce07221ca53ce2364",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/app.py",
+        "sha256": "8d4f958689fb1d0a84a55943600caee5b1f8d89bd7cf067ffc954dd790be526c",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/models.py",
+        "sha256": "0a848b45e02cff905cf73f58975c9b083fe58f5cd131f3b0680480c1c9083b26",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/security.py",
+        "sha256": "f157fd870baaaa6ba86a1260dc101de26f29c67211165e77f39835a645189740",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/store.py",
+        "sha256": "3b934b37a6ab32d4af53274f63f1bb62f863f86d6414d35d763e3d87f1012c75",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/tests/__init__.py",
+        "sha256": "fafd1fe31c6334fb8bb03a90ce6b566b0f0a53737a0e7eabf37bbd5ced241b31",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "backend/tests/test_api.py",
+        "sha256": "2c63081c93fc0c7239036bf8cce529fc46226d3bb6f240b66c3f429e9d9507f2",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/.env.example",
+        "sha256": "002b77cc15a642203ec863fb22690d0d346c088bae99707c83cf638d2c0b1fdf",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/.gitignore",
+        "sha256": "51d57239a611e6c1e632949390bc76145b6f3fe6249d11ffab754ed61ba1106c",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/SETUP.md",
+        "sha256": "64c0e3439b4e2cb9f299bbe530ba9c5ecdc90cebba48a2c50f7c6ab2cadefcb6",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/db.py",
+        "sha256": "21b78d4b23142916bce0bfd3179be9a03acef1ebd0d32cf86fc9a3a2e1da860d",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/filters.py",
+        "sha256": "11892fd7ac89fef0029c9d4f9cc18c76446ea92f3f4844787afb8e52f4194ec1",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/match.py",
+        "sha256": "93d787f9c028e7aea2d12b01142eefaf7b47c5f86784219557b9d99e0524e4cc",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/matcher.py",
+        "sha256": "7eb3a87b11a02378e88e0ddb3db201c7ad96dda904759935ea1b0ca0ccdbed6d",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/sample_pool.json",
+        "sha256": "0427309176366cc7cafdf57b516a750797b0f7747273143969342d72a1b7cd8c",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "matching/scoring.py",
+        "sha256": "8336fc187ecc310ee746bee72a47f1b767ae8438fafa69c7535f21564229c42a",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "requirements.txt",
+        "sha256": "dd285b797e636b2958afa9e35d222255f82ead53918ef01bb13479eadae95831",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "start-backend.bat",
+        "sha256": "3aa2d77affe680d8cf4404ca95df74d1384352f7908525d9ea615ec8588afec0",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "start-backend.sh",
+        "sha256": "83db55788f1670a8e60b82b2f8a35d552444b5b3dd06312981cc89d71028b83a",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "start-frontend.bat",
+        "sha256": "9ebc39b764d8cb751fa2699fc4249ba4c4e29426bac688c9a6ad0dc2c969e22a",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "start-frontend.sh",
+        "sha256": "9cbb082669027b2632ed41910c01cdf4b12273c8669423ef91568dbdf0693dd6",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/README.md",
+        "sha256": "42b57aae404f4aa2b91c52a0323e76a5aaeda2e504e67ae566c26a49a97293b4",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/css/style.css",
+        "sha256": "bb1060c0f7ea2e22ebc9b54e0919b95d04148db74a0ff80f3fba899910907d66",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/dashboard.html",
+        "sha256": "46187cb4f4d4ad270c46bb82beb54d13517a225589855c07e6fad7f7ece768c8",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/data/mock-data.json",
+        "sha256": "939380c11fd18ce9ac00a7d96b5ba52271f5127a3cecdd0706b0ffad8d07e109",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/edit-profile.html",
+        "sha256": "28fd288b520dfc1a1ee3ab0170916625f13a39979943faf9fd6e1e818c6bb92a",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/index.html",
+        "sha256": "5e59be01f25306f3170145ec095d78ecb3de3a59a49fc593a8d7c0c55dcb2cb7",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/js/app.js",
+        "sha256": "96223813b33db0684bae485ce7af76134f4fbab1e1f6440d320c5c6cd4360171",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/register.html",
+        "sha256": "3f03c9a045982a69ec753958de60656e07d08d7427017d5d561fe05125b21ec0",
+        "baseline_blob_matches": true
+      },
+      {
+        "path": "ui/results.html",
+        "sha256": "39f38786859f2e63a25b22aaa936a5b1de44abb6f61dbb26ad0e1fc200d6f222",
+        "baseline_blob_matches": true
+      }
+    ],
+    "evaluation_hashes": {
+      "common.py": "bd99cb16fd910816b0664ac50cc187e534150c33393ce74f27c8e062d7cb9358",
+      "demo_app.py": "ccbf0a54f7dc0319263028ea11b785be79d0fa868fca9806d7a8e57e64869416",
+      "run_evaluation.py": "ca2082b5783174b22158fc9187ffe798b1116a5d84661641bd903d29bf425ffa",
+      "SOURCE.json": "b96d5b04453050daa9207b2b843cd8049be2cd2d27533e978af0fe2e5654dc8a",
+      "summarize.py": "da6f088cc27e85bf9621bbeb2d42cf7b54ce2813a9bf5f6e41b8674a4b6bd6cc",
+      "test_cases.py": "601e238bf4b6ea27b6493b6e58899ece591f9c29b2ed18ef6136abff7478fb3c",
+      "fixtures/enriched_profiles.json": "4bc82b0df78eefb1122096acb7221c1e2ba8288b0629d9591446f982eeabcdba"
+    },
+    "packages": {
+      "annotated-doc": "0.0.7",
+      "annotated-types": "0.8.0",
+      "anyio": "4.16.0",
+      "argon2-cffi": "25.1.0",
+      "argon2-cffi-bindings": "26.2.0",
+      "certifi": "2026.10.23",
+      "cffi": "2.1.1",
+      "charset-normalizer": "3.5.2",
+      "click": "8.5.1",
+      "distro": "1.9.0",
+      "fastapi": "0.162.0",
+      "h11": "0.16.0",
+      "httpcore": "1.0.9",
+      "httpcore2": "2.16.2",
+      "httpx": "0.28.1",
+      "httpx2": "2.16.2",
+      "idna": "3.20",
+      "jiter": "0.19.0",
+      "jsonpatch": "1.47",
+      "jsonpointer": "3.12",
+      "langchain": "1.5.2",
+      "langchain-core": "1.8.3",
+      "langchain-deepseek": "1.2.1",
+      "langchain-openai": "1.8.3",
+      "langchain-protocol": "0.0.21",
+      "langgraph": "1.2.23",
+      "langgraph-checkpoint": "4.3.2",
+      "langgraph-prebuilt": "1.1.3",
+      "langgraph-sdk": "0.4.14",
+      "langsmith": "0.15.0",
+      "openai": "3.55.1",
+      "opentelemetry-api": "1.45.2",
+      "orjson": "3.13.0",
+      "ormsgpack": "1.13.1",
+      "packaging": "26.3",
+      "pip": "25.0.1",
+      "psycopg": "3.3.9",
+      "psycopg-binary": "3.3.9",
+      "psycopg-pool": "3.3.3",
+      "pwdlib": "0.3.1",
+      "pycparser": "3.12",
+      "pydantic": "2.14.1",
+      "pydantic_core": "2.50.1",
+      "python-dotenv": "1.2.4",
+      "PyYAML": "6.0.3",
+      "regex": "2026.11.19",
+      "requests": "2.34.2",
+      "requests-toolbelt": "1.0.0",
+      "sniffio": "1.3.1",
+      "starlette": "1.10.0",
+      "tenacity": "9.2.1",
+      "tiktoken": "0.14.0",
+      "truststore": "0.10.5",
+      "typing_extensions": "4.16.0",
+      "typing-inspection": "0.4.5",
+      "tzdata": "2026.6",
+      "urllib3": "2.8.0",
+      "uuid_utils": "0.19.0",
+      "uvicorn": "0.54.0",
+      "websockets": "17.4",
+      "xxhash": "4.1.0",
+      "zstandard": "0.25.0"
+    },
+    "source_acquisition": "Final offline evidence from a fresh Git clone; all baseline files verified against GitHub blob SHA"
+  },
+  "mode": "offline",
+  "live_api_tested": false,
+  "storage": "Disposable SQLite; cache logic simulated over SQLite, not PostgreSQL integration",
+  "summary": {
+    "total": 55,
+    "PASS": 51,
+    "FAIL": 4,
+    "ERROR": 0
+  },
+  "cases": [
+    {
+      "id": "API-data_and_sessions_survive_app_restart",
+      "title": "data and sessions survive app restart",
+      "input": "Existing backend fixture/profile and HTTP calls in test_data_and_sessions_survive_app_restart",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.235,
+      "test": "backend.tests.test_api.BackendAPITests.test_data_and_sessions_survive_app_restart",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-default_cors_accepts_the_recording_frontend",
+      "title": "default cors accepts the recording frontend",
+      "input": "Existing backend fixture/profile and HTTP calls in test_default_cors_accepts_the_recording_frontend",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.031,
+      "test": "backend.tests.test_api.BackendAPITests.test_default_cors_accepts_the_recording_frontend",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-existing_seeded_database_is_preserved",
+      "title": "existing seeded database is preserved",
+      "input": "Existing backend fixture/profile and HTTP calls in test_existing_seeded_database_is_preserved",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.219,
+      "test": "backend.tests.test_api.BackendAPITests.test_existing_seeded_database_is_preserved",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-expired_session_cannot_be_used",
+      "title": "expired session cannot be used",
+      "input": "Existing backend fixture/profile and HTTP calls in test_expired_session_cannot_be_used",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.14,
+      "test": "backend.tests.test_api.BackendAPITests.test_expired_session_cannot_be_used",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-frontend_cors_preflight_uses_explicit_origin",
+      "title": "frontend cors preflight uses explicit origin",
+      "input": "Existing backend fixture/profile and HTTP calls in test_frontend_cors_preflight_uses_explicit_origin",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.047,
+      "test": "backend.tests.test_api.BackendAPITests.test_frontend_cors_preflight_uses_explicit_origin",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-logout_revokes_only_the_current_session",
+      "title": "logout revokes only the current session",
+      "input": "Existing backend fixture/profile and HTTP calls in test_logout_revokes_only_the_current_session",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.188,
+      "test": "backend.tests.test_api.BackendAPITests.test_logout_revokes_only_the_current_session",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-matches_can_disable_the_model_even_when_one_is_configured",
+      "title": "matches can disable the model even when one is configured",
+      "input": "Existing backend fixture/profile and HTTP calls in test_matches_can_disable_the_model_even_when_one_is_configured",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.171,
+      "test": "backend.tests.test_api.BackendAPITests.test_matches_can_disable_the_model_even_when_one_is_configured",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-matches_handle_an_empty_eligible_pool",
+      "title": "matches handle an empty eligible pool",
+      "input": "Existing backend fixture/profile and HTTP calls in test_matches_handle_an_empty_eligible_pool",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.141,
+      "test": "backend.tests.test_api.BackendAPITests.test_matches_handle_an_empty_eligible_pool",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-matches_require_login_and_a_saved_profile",
+      "title": "matches require login and a saved profile",
+      "input": "Existing backend fixture/profile and HTTP calls in test_matches_require_login_and_a_saved_profile",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.141,
+      "test": "backend.tests.test_api.BackendAPITests.test_matches_require_login_and_a_saved_profile",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-matches_use_the_same_database_as_accounts_and_profiles",
+      "title": "matches use the same database as accounts and profiles",
+      "input": "Existing backend fixture/profile and HTTP calls in test_matches_use_the_same_database_as_accounts_and_profiles",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.14,
+      "test": "backend.tests.test_api.BackendAPITests.test_matches_use_the_same_database_as_accounts_and_profiles",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-missing_and_invalid_credentials_cannot_read_or_write",
+      "title": "missing and invalid credentials cannot read or write",
+      "input": "Existing backend fixture/profile and HTTP calls in test_missing_and_invalid_credentials_cannot_read_or_write",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.063,
+      "test": "backend.tests.test_api.BackendAPITests.test_missing_and_invalid_credentials_cannot_read_or_write",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-passwords_are_salted_hashes_and_not_returned",
+      "title": "passwords are salted hashes and not returned",
+      "input": "Existing backend fixture/profile and HTTP calls in test_passwords_are_salted_hashes_and_not_returned",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.203,
+      "test": "backend.tests.test_api.BackendAPITests.test_passwords_are_salted_hashes_and_not_returned",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-private_responses_are_not_cacheable",
+      "title": "private responses are not cacheable",
+      "input": "Existing backend fixture/profile and HTTP calls in test_private_responses_are_not_cacheable",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.141,
+      "test": "backend.tests.test_api.BackendAPITests.test_private_responses_are_not_cacheable",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-profile_accepts_matching_fields_and_validates_roles",
+      "title": "profile accepts matching fields and validates roles",
+      "input": "Existing backend fixture/profile and HTTP calls in test_profile_accepts_matching_fields_and_validates_roles",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.187,
+      "test": "backend.tests.test_api.BackendAPITests.test_profile_accepts_matching_fields_and_validates_roles",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-profile_text_is_stored_literally_and_empty_preferences_are_allowed",
+      "title": "profile text is stored literally and empty preferences are allowed",
+      "input": "Existing backend fixture/profile and HTTP calls in test_profile_text_is_stored_literally_and_empty_preferences_are_allowed",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.141,
+      "test": "backend.tests.test_api.BackendAPITests.test_profile_text_is_stored_literally_and_empty_preferences_are_allowed",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-profile_update_preserves_account_and_team_status",
+      "title": "profile update preserves account and team status",
+      "input": "Existing backend fixture/profile and HTTP calls in test_profile_update_preserves_account_and_team_status",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.172,
+      "test": "backend.tests.test_api.BackendAPITests.test_profile_update_preserves_account_and_team_status",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-profile_validation_and_mass_assignment_rejection",
+      "title": "profile validation and mass assignment rejection",
+      "input": "Existing backend fixture/profile and HTTP calls in test_profile_validation_and_mass_assignment_rejection",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.171,
+      "test": "backend.tests.test_api.BackendAPITests.test_profile_validation_and_mass_assignment_rejection",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-register_login_save_read_logout",
+      "title": "register login save read logout",
+      "input": "Existing backend fixture/profile and HTTP calls in test_register_login_save_read_logout",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.172,
+      "test": "backend.tests.test_api.BackendAPITests.test_register_login_save_read_logout",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-saved_data_is_visible_to_existing_matching_reader",
+      "title": "saved data is visible to existing matching reader",
+      "input": "Existing backend fixture/profile and HTTP calls in test_saved_data_is_visible_to_existing_matching_reader",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.141,
+      "test": "backend.tests.test_api.BackendAPITests.test_saved_data_is_visible_to_existing_matching_reader",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-session_database_does_not_store_the_bearer_token",
+      "title": "session database does not store the bearer token",
+      "input": "Existing backend fixture/profile and HTTP calls in test_session_database_does_not_store_the_bearer_token",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.141,
+      "test": "backend.tests.test_api.BackendAPITests.test_session_database_does_not_store_the_bearer_token",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-tampered_token_is_rejected",
+      "title": "tampered token is rejected",
+      "input": "Existing backend fixture/profile and HTTP calls in test_tampered_token_is_rejected",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.14,
+      "test": "backend.tests.test_api.BackendAPITests.test_tampered_token_is_rejected",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-username_and_password_validation",
+      "title": "username and password validation",
+      "input": "Existing backend fixture/profile and HTTP calls in test_username_and_password_validation",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.094,
+      "test": "backend.tests.test_api.BackendAPITests.test_username_and_password_validation",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-username_case_normalization_and_duplicate_rejection",
+      "title": "username case normalization and duplicate rejection",
+      "input": "Existing backend fixture/profile and HTTP calls in test_username_case_normalization_and_duplicate_rejection",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.156,
+      "test": "backend.tests.test_api.BackendAPITests.test_username_case_normalization_and_duplicate_rejection",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-users_only_read_and_modify_their_own_profiles",
+      "title": "users only read and modify their own profiles",
+      "input": "Existing backend fixture/profile and HTTP calls in test_users_only_read_and_modify_their_own_profiles",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.235,
+      "test": "backend.tests.test_api.BackendAPITests.test_users_only_read_and_modify_their_own_profiles",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "API-wrong_password_and_unknown_account_have_same_error",
+      "title": "wrong password and unknown account have same error",
+      "input": "Existing backend fixture/profile and HTTP calls in test_wrong_password_and_unknown_account_have_same_error",
+      "expected": "Assertions in the existing backend test must pass; see backend/tests/test_api.py.",
+      "group": "existing backend",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.14,
+      "test": "backend.tests.test_api.BackendAPITests.test_wrong_password_and_unknown_account_have_same_error",
+      "actual": {
+        "assertions": "passed"
+      },
+      "failure": null
+    },
+    {
+      "id": "C01",
+      "title": "JSON CLI works without dependencies or DB",
+      "input": "Run enriched fixture through match.py --from-json with -S and no key.",
+      "expected": "Readable five-result fallback with no database or traceback.",
+      "group": "CLI",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.047,
+      "test": "test_cases.MatchingCases.test_json_cli",
+      "actual": {
+        "exit_code": 0,
+        "stdout": "\nme: Alice Chen (HK, Frontend)\npool: 30   kept: 12   dropped: 18\n  dropped: 14 different cohort (SH), 3 already in a team, 1 that's you\n\nshortlist: 5 of 12   (source: fallback:no DEEPSEEK_API_KEY or MATCH_MODEL)\n  1. Karen He       Frontend             karen@test.com\n     reason: Can cover Agentic Development, adds github and ai_agent, studies Computer Science rather than your AI and Data Science and shares English and Mandarin.\n  2. Bob Liu        Backend              bob@test.com\n     reason: Can cover Backend and Database, adds github and ai_agent, studies Applied AI rather than your AI and Data Science and shares English.\n  3. Olivia Liang   Other                olivia@test.com\n     reason: Can cover Agentic Development, adds programming and web, studies Computer Science rather than your AI and Data Science and shares Mandarin.\n  4. Frank Zhou     Frontend             frank@test.com\n     reason: Can cover Database, adds programming and web, studies Applied AI rather than your AI and Data Science and shares English.\n  5. Nathan Zheng   Agentic Development  nathan@test.com\n     reason: Can cover Agentic Development and Database, adds github and ai_agent, studies Applied AI rather than your AI and Data Science and shares English.\n",
+        "stderr": ""
+      },
+      "failure": null
+    },
+    {
+      "id": "C02",
+      "title": "Unknown JSON user is a readable error",
+      "input": "JSON CLI with no_such_student.",
+      "expected": "Exit 1 with a readable error, no traceback.",
+      "group": "CLI",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.047,
+      "test": "test_cases.MatchingCases.test_unknown_json_user",
+      "actual": {
+        "exit_code": 1,
+        "stdout": "no profile named 'no_such_student' in <REPO>\\evaluation\\fixtures\\enriched_profiles.json\n",
+        "stderr": ""
+      },
+      "failure": null
+    },
+    {
+      "id": "K01",
+      "title": "Cache refresh after own profile save and logout",
+      "input": "Enable production cache logic over a disposable SQLite transport; save/update and revoke a session.",
+      "expected": "Own update is immediately visible and own logout invalidates the cached session.",
+      "group": "cache simulation",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.156,
+      "test": "test_cases.APICases.test_cache_refresh",
+      "actual": {
+        "name": "Changed",
+        "logged_out_status": 401
+      },
+      "failure": null
+    },
+    {
+      "id": "K02",
+      "title": "Revocation across two cache instances",
+      "input": "Two Store instances share a test DB and cache one token; first revokes it.",
+      "expected": "Second instance should reject the revoked session rather than use its stale cache.",
+      "group": "cache simulation",
+      "gap": "G04",
+      "status": "FAIL",
+      "duration_seconds": 0.141,
+      "test": "test_cases.APICases.test_multi_instance_revoke",
+      "actual": {
+        "other_instance_still_accepts": true
+      },
+      "failure": "Traceback (most recent call last):\n  File \"<REPO>\\evaluation\\test_cases.py\", line 276, in test_multi_instance_revoke\n    self.assertIsNone(stale,'Another process/instance retains the token until cached expiry.')\nAssertionError: {'id': 1, 'username': 'evaluation_user'} is not None : Another process/instance retains the token until cached expiry.\n"
+    },
+    {
+      "id": "M01",
+      "title": "Model toggle prevents provider invocation",
+      "input": "Configure a model but call pick(use_model=False).",
+      "expected": "No provider resolution; five deterministic picks with disabled label.",
+      "group": "model boundary",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_model_disabled",
+      "actual": {
+        "eligible": 13,
+        "ids": [
+          11,
+          2,
+          15,
+          6,
+          14
+        ],
+        "source": "fallback:model disabled",
+        "reasons": [
+          "Can cover Agentic Development, adds github and ai_agent, studies Computer Science rather than your AI and Data Science and shares English and Mandarin.",
+          "Can cover Backend and Database, adds github and ai_agent, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Agentic Development, adds programming and web, studies Computer Science rather than your AI and Data Science and shares Mandarin.",
+          "Can cover Database, adds programming and web, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Agentic Development and Database, adds github and ai_agent, studies Applied AI rather than your AI and Data Science and shares English."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "M02",
+      "title": "Provider timeout falls back",
+      "input": "Simulated provider raises TimeoutError.",
+      "expected": "Five eligible nonblank results; fallback source and no crash.",
+      "group": "model boundary",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_timeout",
+      "actual": {
+        "eligible": 13,
+        "ids": [
+          11,
+          2,
+          15,
+          6,
+          14
+        ],
+        "source": "fallback:TimeoutError",
+        "reasons": [
+          "Can cover Agentic Development, adds github and ai_agent, studies Computer Science rather than your AI and Data Science and shares English and Mandarin.",
+          "Can cover Backend and Database, adds github and ai_agent, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Agentic Development, adds programming and web, studies Computer Science rather than your AI and Data Science and shares Mandarin.",
+          "Can cover Database, adds programming and web, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Agentic Development and Database, adds github and ai_agent, studies Applied AI rather than your AI and Data Science and shares English."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "M03",
+      "title": "Verified structured evidence and private payload",
+      "input": "Simulated response names an eligible role/skill/programme; inspect actual model payload.",
+      "expected": "Reason cites valid facts; real schema used; payload excludes contacts, hashes and fallback score.",
+      "group": "model boundary",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_payload_and_evidence",
+      "actual": {
+        "eligible": 6,
+        "ids": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source": "evaluation:simulated",
+        "reasons": [
+          "Synthetic 1 can cover Backend, brings programming experience and comes from a different programme (Applied AI).",
+          "Synthetic 2 brings programming experience and comes from a different programme (Applied AI).",
+          "Synthetic 3 brings programming experience and comes from a different programme (Applied AI).",
+          "Synthetic 4 brings programming experience and comes from a different programme (Applied AI).",
+          "Synthetic 5 brings programming experience and comes from a different programme (Applied AI)."
+        ],
+        "payload": {
+          "me": {
+            "display_name": "Evaluation Student",
+            "city": "HK",
+            "programme": "AI and Data Science",
+            "preferred_role": "Frontend",
+            "open_roles": [
+              "Frontend"
+            ],
+            "skills": {
+              "programming": 0,
+              "github": 0,
+              "debugging": 0,
+              "web": 0,
+              "ai_agent": 0
+            },
+            "languages": [
+              "English",
+              "Mandarin"
+            ]
+          },
+          "candidates": [
+            {
+              "account_id": 1,
+              "display_name": "Synthetic 1",
+              "city": "HK",
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "programme": "Applied AI",
+              "preferred_role": "Backend",
+              "open_roles": [
+                "Backend"
+              ],
+              "skills": {
+                "programming": 1,
+                "github": 0,
+                "debugging": 0,
+                "web": 0,
+                "ai_agent": 0
+              },
+              "languages": [
+                "English"
+              ],
+              "fills_roles": [
+                "Backend"
+              ],
+              "complements": [
+                "programming"
+              ]
+            },
+            {
+              "account_id": 2,
+              "display_name": "Synthetic 2",
+              "city": "HK",
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "programme": "Applied AI",
+              "preferred_role": "Backend",
+              "open_roles": [
+                "Backend"
+              ],
+              "skills": {
+                "programming": 1,
+                "github": 0,
+                "debugging": 0,
+                "web": 0,
+                "ai_agent": 0
+              },
+              "languages": [
+                "English"
+              ],
+              "fills_roles": [
+                "Backend"
+              ],
+              "complements": [
+                "programming"
+              ]
+            },
+            {
+              "account_id": 3,
+              "display_name": "Synthetic 3",
+              "city": "HK",
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "programme": "Applied AI",
+              "preferred_role": "Backend",
+              "open_roles": [
+                "Backend"
+              ],
+              "skills": {
+                "programming": 1,
+                "github": 0,
+                "debugging": 0,
+                "web": 0,
+                "ai_agent": 0
+              },
+              "languages": [
+                "English"
+              ],
+              "fills_roles": [
+                "Backend"
+              ],
+              "complements": [
+                "programming"
+              ]
+            },
+            {
+              "account_id": 4,
+              "display_name": "Synthetic 4",
+              "city": "HK",
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "programme": "Applied AI",
+              "preferred_role": "Backend",
+              "open_roles": [
+                "Backend"
+              ],
+              "skills": {
+                "programming": 1,
+                "github": 0,
+                "debugging": 0,
+                "web": 0,
+                "ai_agent": 0
+              },
+              "languages": [
+                "English"
+              ],
+              "fills_roles": [
+                "Backend"
+              ],
+              "complements": [
+                "programming"
+              ]
+            },
+            {
+              "account_id": 5,
+              "display_name": "Synthetic 5",
+              "city": "HK",
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "programme": "Applied AI",
+              "preferred_role": "Backend",
+              "open_roles": [
+                "Backend"
+              ],
+              "skills": {
+                "programming": 1,
+                "github": 0,
+                "debugging": 0,
+                "web": 0,
+                "ai_agent": 0
+              },
+              "languages": [
+                "English"
+              ],
+              "fills_roles": [
+                "Backend"
+              ],
+              "complements": [
+                "programming"
+              ]
+            },
+            {
+              "account_id": 6,
+              "display_name": "Synthetic 6",
+              "city": "HK",
+              "shared_languages": [
+                "English"
+              ],
+              "role_fit": "complement",
+              "programme": "Applied AI",
+              "preferred_role": "Backend",
+              "open_roles": [
+                "Backend"
+              ],
+              "skills": {
+                "programming": 1,
+                "github": 0,
+                "debugging": 0,
+                "web": 0,
+                "ai_agent": 0
+              },
+              "languages": [
+                "English"
+              ],
+              "fills_roles": [
+                "Backend"
+              ],
+              "complements": [
+                "programming"
+              ]
+            }
+          ]
+        },
+        "schema": "Shortlist"
+      },
+      "failure": null
+    },
+    {
+      "id": "M04",
+      "title": "Invalid and duplicate IDs removed",
+      "input": "Simulated unknown ID, repeated valid ID and five distinct valid IDs.",
+      "expected": "Return five unique eligible IDs only.",
+      "group": "model boundary",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_invalid_duplicate",
+      "actual": {
+        "eligible": 6,
+        "ids": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source": "evaluation:simulated",
+        "reasons": [
+          "Synthetic 1 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 2 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 3 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 4 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 5 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "M05",
+      "title": "All-invalid output falls back",
+      "input": "Model returns only an out-of-pool ID.",
+      "expected": "Five deterministic picks and an explicit fallback source.",
+      "group": "model boundary",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.016,
+      "test": "test_cases.MatchingCases.test_all_invalid",
+      "actual": {
+        "eligible": 13,
+        "ids": [
+          11,
+          2,
+          15,
+          6,
+          14
+        ],
+        "source": "fallback:no valid ids returned",
+        "reasons": [
+          "Can cover Agentic Development, adds github and ai_agent, studies Computer Science rather than your AI and Data Science and shares English and Mandarin.",
+          "Can cover Backend and Database, adds github and ai_agent, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Agentic Development, adds programming and web, studies Computer Science rather than your AI and Data Science and shares Mandarin.",
+          "Can cover Database, adds programming and web, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Agentic Development and Database, adds github and ai_agent, studies Applied AI rather than your AI and Data Science and shares English."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "M06",
+      "title": "Oversized output capped",
+      "input": "Model returns six eligible people.",
+      "expected": "At most five recommendations.",
+      "group": "model boundary",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_too_many",
+      "actual": {
+        "eligible": 6,
+        "ids": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source": "evaluation:simulated",
+        "reasons": [
+          "Synthetic 1 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 2 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 3 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 4 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 5 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "M07",
+      "title": "Short valid output supplies five",
+      "input": "Six eligible people; model returns ID 1 twice and invalid ID 999999.",
+      "expected": "Five unique eligible recommendations after validation/fallback.",
+      "group": "model boundary",
+      "gap": "G01",
+      "status": "FAIL",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_short_output",
+      "actual": {
+        "eligible": 6,
+        "ids": [
+          1
+        ],
+        "source": "evaluation:simulated",
+        "reasons": [
+          "Synthetic 1 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English."
+        ]
+      },
+      "failure": "Traceback (most recent call last):\n  File \"<REPO>\\evaluation\\test_cases.py\", line 162, in test_short_output\n    validate_picks(self.me,c,p)\n  File \"<REPO>\\evaluation\\common.py\", line 56, in validate_picks\n    require(len(picks) == expected_count, f\"Expected {expected_count} candidates; got {len(picks)}\")\n  File \"<REPO>\\evaluation\\common.py\", line 52, in require\n    raise AssertionError(message)\nAssertionError: Expected 5 candidates; got 1\n"
+    },
+    {
+      "id": "M08",
+      "title": "Empty evidence produces nonblank verified sentences",
+      "input": "Five valid IDs, blank roles and empty skills/programme flags.",
+      "expected": "Application produces five nonblank reasons from verified profile facts.",
+      "group": "model boundary",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_empty_evidence",
+      "actual": {
+        "eligible": 6,
+        "ids": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source": "evaluation:simulated",
+        "reasons": [
+          "Synthetic 1 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 2 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 3 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 4 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 5 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "M09",
+      "title": "Invented role and absent skill claims are rejected",
+      "input": "Model claims Database, AI-agent skills and a different programme for same-programme Backend candidates with skills=0.",
+      "expected": "Reasons do not repeat the invented facts and remain nonblank.",
+      "group": "model boundary",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_hallucinated_evidence",
+      "actual": {
+        "eligible": 6,
+        "ids": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source": "evaluation:simulated",
+        "reasons": [
+          "Synthetic 1 can cover Backend and shares English.",
+          "Synthetic 2 can cover Backend and shares English.",
+          "Synthetic 3 can cover Backend and shares English.",
+          "Synthetic 4 can cover Backend and shares English.",
+          "Synthetic 5 can cover Backend and shares English."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "M10",
+      "title": "Malformed response schema falls back",
+      "input": "Structured output has a noninteger account_id.",
+      "expected": "Real Pydantic validation rejects it; matching falls back safely.",
+      "group": "model boundary",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_invalid_schema",
+      "actual": {
+        "eligible": 13,
+        "ids": [
+          11,
+          2,
+          15,
+          6,
+          14
+        ],
+        "source": "fallback:ValidationError",
+        "reasons": [
+          "Can cover Agentic Development, adds github and ai_agent, studies Computer Science rather than your AI and Data Science and shares English and Mandarin.",
+          "Can cover Backend and Database, adds github and ai_agent, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Agentic Development, adds programming and web, studies Computer Science rather than your AI and Data Science and shares Mandarin.",
+          "Can cover Database, adds programming and web, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Agentic Development and Database, adds github and ai_agent, studies Applied AI rather than your AI and Data Science and shares English."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "M11",
+      "title": "Only the five defined skills may be explained",
+      "input": "Candidate ID is 1; model names account_id as a skill.",
+      "expected": "An ID field must not become a skill claim in the explanation.",
+      "group": "model boundary",
+      "gap": "G03",
+      "status": "FAIL",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_unsupported_skill",
+      "actual": {
+        "eligible": 6,
+        "ids": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source": "evaluation:simulated",
+        "reasons": [
+          "Synthetic 1 brings account_id experience.",
+          "Synthetic 2 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 3 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 4 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Synthetic 5 can cover Backend, studies Applied AI rather than your AI and Data Science and shares English."
+        ]
+      },
+      "failure": "Traceback (most recent call last):\n  File \"<REPO>\\evaluation\\test_cases.py\", line 188, in test_unsupported_skill\n    validate_picks(self.me,c,p);self.assertNotIn('account_id',p[0]['reason'])\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'account_id' unexpectedly found in 'Synthetic 1 brings account_id experience.'\n"
+    },
+    {
+      "id": "P01",
+      "title": "All new preference values round-trip",
+      "input": "Save programme, flexible roles and all five skill flags, then read and match.",
+      "expected": "Values persist exactly and saved preferences reach the existing matcher payload.",
+      "group": "API extension",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.141,
+      "test": "test_cases.APICases.test_fields_reach_matcher",
+      "actual": {
+        "saved_preferences": {
+          "programme": "Computer Science",
+          "open_roles": [
+            "Backend",
+            "Database"
+          ],
+          "programming": 1,
+          "github": 0,
+          "debugging": 1,
+          "web": 0,
+          "ai_agent": 1
+        },
+        "count": 5
+      },
+      "failure": null
+    },
+    {
+      "id": "P02",
+      "title": "New preference validation",
+      "input": "Invalid programme, out-of-range/bool skill flags and open_roles missing preferred_role.",
+      "expected": "422 for each invalid input; valid profile can still be saved afterwards.",
+      "group": "API extension",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.14,
+      "test": "test_cases.APICases.test_new_validation",
+      "actual": {
+        "invalid_statuses": [
+          422,
+          422,
+          422,
+          422
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "P03",
+      "title": "Clearing open roles and skills is preserved",
+      "input": "Save flexible roles and skills, then save open_roles=[] and programming=0.",
+      "expected": "Explicit zero and empty list persist; omitted optional fields preserve prior values.",
+      "group": "API extension",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.141,
+      "test": "test_cases.APICases.test_clear_preferences",
+      "actual": {
+        "open_roles": [],
+        "programming": 0
+      },
+      "failure": null
+    },
+    {
+      "id": "P04",
+      "title": "Empty-candidate browser-demo boundary",
+      "input": "Register and save the only profile in a disposable database, then POST /matches.",
+      "expected": "200 with no eligible candidates, empty picks and source=empty.",
+      "group": "API extension",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.14,
+      "test": "test_cases.APICases.test_empty_demo_case",
+      "actual": {
+        "picks": [],
+        "source": "empty",
+        "stats": {
+          "total_pool": 1,
+          "eligible": 0,
+          "filtered_out": 1
+        },
+        "filter_summary": {
+          "that's you": 1
+        }
+      },
+      "failure": null
+    },
+    {
+      "id": "R01",
+      "title": "Hard exclusions and soft language",
+      "input": "Self, SH, placed HK and Cantonese-only HK candidate.",
+      "expected": "Only the unplaced other HK candidate remains; lack of shared language does not exclude.",
+      "group": "matching",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.015,
+      "test": "test_cases.MatchingCases.test_hard_filters",
+      "actual": {
+        "eligible": 1,
+        "ids": [
+          3
+        ],
+        "source": "fallback:no DEEPSEEK_API_KEY or MATCH_MODEL",
+        "reasons": [
+          "Can cover Backend and studies Applied AI rather than your AI and Data Science."
+        ],
+        "drops": [
+          "that's you",
+          "different cohort (SH)",
+          "already in a team"
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "R02",
+      "title": "Empty and undersized pools",
+      "input": "Separate pools of 0, 1, 2, 4 and 5 eligible people.",
+      "expected": "Return exactly min(5, eligible), with no invented people.",
+      "group": "matching",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_pool_sizes",
+      "actual": {
+        "0": {
+          "count": 0,
+          "source": "empty"
+        },
+        "1": {
+          "count": 1,
+          "source": "fallback:no DEEPSEEK_API_KEY or MATCH_MODEL"
+        },
+        "2": {
+          "count": 2,
+          "source": "fallback:no DEEPSEEK_API_KEY or MATCH_MODEL"
+        },
+        "4": {
+          "count": 4,
+          "source": "fallback:no DEEPSEEK_API_KEY or MATCH_MODEL"
+        },
+        "5": {
+          "count": 5,
+          "source": "fallback:no DEEPSEEK_API_KEY or MATCH_MODEL"
+        }
+      },
+      "failure": null
+    },
+    {
+      "id": "R03",
+      "title": "Legacy and enriched 30-profile sweeps",
+      "input": "Each of 30 legacy profiles and 30 enriched variants, twice.",
+      "expected": "All 60 queries satisfy count, eligibility, uniqueness and explanation invariants; deterministic repeats agree.",
+      "group": "matching",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_all_profiles",
+      "actual": {
+        "queries": [
+          {
+            "dataset": "legacy",
+            "student_id": 1,
+            "eligible": 12,
+            "ids": [
+              4,
+              7,
+              8,
+              2,
+              12
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 2,
+            "eligible": 12,
+            "ids": [
+              1,
+              4,
+              8,
+              6,
+              11
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 3,
+            "eligible": 13,
+            "ids": [
+              6,
+              2,
+              4,
+              1,
+              7
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 4,
+            "eligible": 12,
+            "ids": [
+              1,
+              7,
+              8,
+              11,
+              2
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 5,
+            "eligible": 12,
+            "ids": [
+              1,
+              4,
+              7,
+              13,
+              11
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 6,
+            "eligible": 12,
+            "ids": [
+              2,
+              4,
+              8,
+              7,
+              12
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 7,
+            "eligible": 12,
+            "ids": [
+              1,
+              4,
+              8,
+              11,
+              6
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 8,
+            "eligible": 12,
+            "ids": [
+              1,
+              2,
+              4,
+              6,
+              7
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 9,
+            "eligible": 13,
+            "ids": [
+              1,
+              7,
+              13,
+              11,
+              2
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 10,
+            "eligible": 12,
+            "ids": [
+              6,
+              13,
+              2,
+              4,
+              1
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 11,
+            "eligible": 12,
+            "ids": [
+              4,
+              7,
+              8,
+              2,
+              12
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 12,
+            "eligible": 12,
+            "ids": [
+              1,
+              4,
+              8,
+              6,
+              11
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 13,
+            "eligible": 12,
+            "ids": [
+              1,
+              4,
+              7,
+              6,
+              11
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 14,
+            "eligible": 12,
+            "ids": [
+              1,
+              2,
+              8,
+              6,
+              7
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 15,
+            "eligible": 12,
+            "ids": [
+              1,
+              4,
+              7,
+              13,
+              11
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 16,
+            "eligible": 13,
+            "ids": [
+              28,
+              19,
+              22,
+              24,
+              27
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 17,
+            "eligible": 13,
+            "ids": [
+              28,
+              16,
+              19,
+              21,
+              24
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 18,
+            "eligible": 13,
+            "ids": [
+              27,
+              29,
+              16,
+              19,
+              22
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 19,
+            "eligible": 13,
+            "ids": [
+              28,
+              16,
+              22,
+              27,
+              17
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 20,
+            "eligible": 14,
+            "ids": [
+              27,
+              28,
+              29,
+              16,
+              17
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 21,
+            "eligible": 13,
+            "ids": [
+              28,
+              17,
+              19,
+              22,
+              24
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 22,
+            "eligible": 13,
+            "ids": [
+              28,
+              16,
+              19,
+              24,
+              29
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 23,
+            "eligible": 13,
+            "ids": [
+              27,
+              29,
+              16,
+              19,
+              22
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 24,
+            "eligible": 13,
+            "ids": [
+              28,
+              16,
+              22,
+              27,
+              17
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 25,
+            "eligible": 13,
+            "ids": [
+              27,
+              28,
+              29,
+              16,
+              17
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 26,
+            "eligible": 13,
+            "ids": [
+              28,
+              17,
+              19,
+              22,
+              24
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 27,
+            "eligible": 13,
+            "ids": [
+              28,
+              29,
+              16,
+              18,
+              19
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 28,
+            "eligible": 13,
+            "ids": [
+              16,
+              19,
+              22,
+              24,
+              27
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 29,
+            "eligible": 13,
+            "ids": [
+              27,
+              28,
+              16,
+              18,
+              22
+            ]
+          },
+          {
+            "dataset": "legacy",
+            "student_id": 30,
+            "eligible": 13,
+            "ids": [
+              28,
+              16,
+              17,
+              19,
+              21
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 1,
+            "eligible": 12,
+            "ids": [
+              11,
+              2,
+              15,
+              6,
+              14
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 2,
+            "eligible": 12,
+            "ids": [
+              12,
+              15,
+              6,
+              4,
+              7
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 3,
+            "eligible": 13,
+            "ids": [
+              5,
+              8,
+              14,
+              13,
+              2
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 4,
+            "eligible": 12,
+            "ids": [
+              5,
+              11,
+              2,
+              6,
+              14
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 5,
+            "eligible": 12,
+            "ids": [
+              15,
+              12,
+              6,
+              4,
+              7
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 6,
+            "eligible": 12,
+            "ids": [
+              11,
+              5,
+              8,
+              1,
+              7
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 7,
+            "eligible": 12,
+            "ids": [
+              8,
+              14,
+              12,
+              2,
+              6
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 8,
+            "eligible": 12,
+            "ids": [
+              6,
+              15,
+              1,
+              7,
+              12
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 9,
+            "eligible": 13,
+            "ids": [
+              11,
+              8,
+              2,
+              14,
+              4
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 10,
+            "eligible": 12,
+            "ids": [
+              5,
+              8,
+              11,
+              12,
+              15
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 11,
+            "eligible": 12,
+            "ids": [
+              6,
+              12,
+              15,
+              1,
+              13
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 12,
+            "eligible": 12,
+            "ids": [
+              11,
+              2,
+              14,
+              7,
+              8
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 13,
+            "eligible": 12,
+            "ids": [
+              11,
+              12,
+              15,
+              8,
+              6
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 14,
+            "eligible": 12,
+            "ids": [
+              12,
+              6,
+              1,
+              4,
+              7
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 15,
+            "eligible": 12,
+            "ids": [
+              5,
+              8,
+              14,
+              2,
+              1
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 16,
+            "eligible": 13,
+            "ids": [
+              27,
+              23,
+              29,
+              30,
+              21
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 17,
+            "eligible": 13,
+            "ids": [
+              24,
+              30,
+              27,
+              28,
+              22
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 18,
+            "eligible": 13,
+            "ids": [
+              23,
+              29,
+              28,
+              17,
+              16
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 19,
+            "eligible": 13,
+            "ids": [
+              24,
+              29,
+              30,
+              21,
+              26
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 20,
+            "eligible": 14,
+            "ids": [
+              30,
+              27,
+              21,
+              25,
+              18
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 21,
+            "eligible": 13,
+            "ids": [
+              26,
+              23,
+              22,
+              28,
+              19
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 22,
+            "eligible": 13,
+            "ids": [
+              24,
+              23,
+              27,
+              29,
+              21
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 23,
+            "eligible": 13,
+            "ids": [
+              24,
+              21,
+              28,
+              27,
+              16
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 24,
+            "eligible": 13,
+            "ids": [
+              29,
+              26,
+              23,
+              17,
+              22
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 25,
+            "eligible": 13,
+            "ids": [
+              30,
+              27,
+              24,
+              23,
+              26
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 26,
+            "eligible": 13,
+            "ids": [
+              21,
+              24,
+              30,
+              27,
+              28
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 27,
+            "eligible": 13,
+            "ids": [
+              29,
+              26,
+              28,
+              22,
+              23
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 28,
+            "eligible": 13,
+            "ids": [
+              27,
+              21,
+              23,
+              29,
+              17
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 29,
+            "eligible": 13,
+            "ids": [
+              24,
+              27,
+              18,
+              30,
+              28
+            ]
+          },
+          {
+            "dataset": "enriched",
+            "student_id": 30,
+            "eligible": 13,
+            "ids": [
+              23,
+              17,
+              28,
+              29,
+              26
+            ]
+          }
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "R04",
+      "title": "Open roles add useful coverage",
+      "input": "Frontend-preferred candidate also offers Database; other candidates repeat Frontend.",
+      "expected": "Flexible candidate is retained and recommended before identical Frontend-only candidates.",
+      "group": "matching",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_open_roles",
+      "actual": {
+        "eligible": 2,
+        "ids": [
+          1,
+          2
+        ],
+        "source": "fallback:no DEEPSEEK_API_KEY or MATCH_MODEL",
+        "reasons": [
+          "Can cover Database, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Studies Applied AI rather than your AI and Data Science and shares English."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "R05",
+      "title": "Known missing skill increases preference",
+      "input": "Two otherwise equal Backend candidates; only Zulu has programming=1, student has programming=0.",
+      "expected": "Zulu precedes Alpha; explanation can cite programming.",
+      "group": "matching",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_skill_preference",
+      "actual": {
+        "eligible": 2,
+        "ids": [
+          2,
+          1
+        ],
+        "source": "fallback:no DEEPSEEK_API_KEY or MATCH_MODEL",
+        "reasons": [
+          "Can cover Backend, adds programming, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Backend, studies Applied AI rather than your AI and Data Science and shares English."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "R06",
+      "title": "Language preference remains soft",
+      "input": "Identical candidates, one shares two languages and one shares none.",
+      "expected": "Both retained; shared-language candidate preferred on an otherwise equal tie.",
+      "group": "matching",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_language_preference",
+      "actual": {
+        "eligible": 2,
+        "ids": [
+          2,
+          1
+        ],
+        "source": "fallback:no DEEPSEEK_API_KEY or MATCH_MODEL",
+        "reasons": [
+          "Can cover Backend, studies Applied AI rather than your AI and Data Science and shares English and Mandarin.",
+          "Can cover Backend and studies Applied AI rather than your AI and Data Science."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "R07",
+      "title": "Duplicate roles may fill remaining slots",
+      "input": "Six eligible Backend-only candidates.",
+      "expected": "Five distinct candidates returned; role diversity is not a hard exclusion.",
+      "group": "matching",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_duplicate_roles_allowed",
+      "actual": {
+        "eligible": 6,
+        "ids": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "source": "fallback:no DEEPSEEK_API_KEY or MATCH_MODEL",
+        "reasons": [
+          "Can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Backend, studies Applied AI rather than your AI and Data Science and shares English.",
+          "Can cover Backend, studies Applied AI rather than your AI and Data Science and shares English."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "S01",
+      "title": "Declared weighted score on hand-calculated example",
+      "input": "Backend+Database, one missing skill, one shared language; different programme has share .25.",
+      "expected": "role=.400, skills=.070, flexibility=.033, languages=.025, programme=.075; total=.603.",
+      "group": "preferences",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_weighted_example",
+      "actual": {
+        "total": 0.603,
+        "role": 0.4,
+        "skills": 0.07,
+        "flexibility": 0.033,
+        "languages": 0.025,
+        "programme": 0.075,
+        "complements": [
+          "programming"
+        ],
+        "fills_roles": [
+          "Backend",
+          "Database"
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "S02",
+      "title": "Rare programmes gain preference",
+      "input": "Same eligible role and skills, candidates from a common versus rare different programme.",
+      "expected": "Rarer different programme has higher programme contribution, same-programme contribution is zero.",
+      "group": "preferences",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.016,
+      "test": "test_cases.MatchingCases.test_programme_rarity",
+      "actual": {
+        "common": 0.02,
+        "rare": 0.08,
+        "same": 0.0
+      },
+      "failure": null
+    },
+    {
+      "id": "S03",
+      "title": "Legacy attributes and null candidate skills",
+      "input": "Legacy profiles lack programme/open_roles/skills; another candidate has null skill flags.",
+      "expected": "Matching remains usable; no candidate skill is invented from null values.",
+      "group": "preferences",
+      "gap": null,
+      "status": "PASS",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_legacy_and_null_candidate",
+      "actual": {
+        "eligible": 13,
+        "ids": [
+          4,
+          7,
+          8,
+          2,
+          12
+        ],
+        "source": "fallback:no DEEPSEEK_API_KEY or MATCH_MODEL",
+        "reasons": [
+          "Can cover Agentic Development and shares English and Mandarin.",
+          "Can cover Backend and shares English and Mandarin.",
+          "Can cover Database and shares English.",
+          "Can cover Backend and shares English.",
+          "Can cover Backend and shares English."
+        ]
+      },
+      "failure": null
+    },
+    {
+      "id": "S04",
+      "title": "Unknown student skills are neutral",
+      "input": "Student programming=None (unknown); candidate programming=1.",
+      "expected": "An unknown student skill is not reported as a known missing-skill complement, as stated by the prompt/docs.",
+      "group": "preferences",
+      "gap": "G02",
+      "status": "FAIL",
+      "duration_seconds": 0.0,
+      "test": "test_cases.MatchingCases.test_unknown_student_skill",
+      "actual": {
+        "total": 0.595,
+        "role": 0.4,
+        "skills": 0.07,
+        "flexibility": 0.0,
+        "languages": 0.025,
+        "programme": 0.1,
+        "complements": [
+          "programming"
+        ],
+        "fills_roles": [
+          "Backend"
+        ]
+      },
+      "failure": "Traceback (most recent call last):\n  File \"<REPO>\\evaluation\\test_cases.py\", line 112, in test_unknown_student_skill\n    self.assertNotIn('programming',r['complements'],'Unknown skill is treated as an established lack.')\nAssertionError: 'programming' unexpectedly found in ['programming'] : Unknown skill is treated as an established lack.\n"
+    }
+  ]
+}

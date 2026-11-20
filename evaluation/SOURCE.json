@@ -1,0 +1,146 @@
+{
+  "revision": "81886ac18511398f320b0e592828ea00c956d7cd",
+  "acquisition": "Final offline evidence from a fresh Git clone; all baseline files verified against GitHub blob SHA",
+  "files": [
+    {
+      "path": ".gitignore",
+      "git_blob_sha": "53ebbe926a0dccaf97511e43b8d98b77bbdb249c"
+    },
+    {
+      "path": "README.md",
+      "git_blob_sha": "fbb4a41a4517242d3d50261f95db4eec294414ad"
+    },
+    {
+      "path": "RECORDING.md",
+      "git_blob_sha": "8d431b90126943218830f2d84c60bb2c1363d019"
+    },
+    {
+      "path": "backend/README.md",
+      "git_blob_sha": "f4e7b4ab9be4cfcf9f0a6324c4149ee91d54eaf6"
+    },
+    {
+      "path": "backend/TESTING.md",
+      "git_blob_sha": "ff48c675aea5ff563ce9f515a7b286030612f5d7"
+    },
+    {
+      "path": "backend/__init__.py",
+      "git_blob_sha": "481b79fda4d3ca3ed416d111eb1acf5a2270ce68"
+    },
+    {
+      "path": "backend/app.py",
+      "git_blob_sha": "c4787b281b1f5fd1916df81db0e964c091a7bf79"
+    },
+    {
+      "path": "backend/models.py",
+      "git_blob_sha": "51c40bf34e90879a2971a5d0c3e8c02bed49ec87"
+    },
+    {
+      "path": "backend/security.py",
+      "git_blob_sha": "4ca1ed270b8932a5a63f2e303bd37e37db59618d"
+    },
+    {
+      "path": "backend/store.py",
+      "git_blob_sha": "2a48098a9cd8c9666e9dc28e50e25a5defb1a836"
+    },
+    {
+      "path": "backend/tests/__init__.py",
+      "git_blob_sha": "70759bd540dc5b2b23b9244a92872020b117e1b3"
+    },
+    {
+      "path": "backend/tests/test_api.py",
+      "git_blob_sha": "30a741fe7b52a6f38e31d82d63c8e48a6174039c"
+    },
+    {
+      "path": "matching/.env.example",
+      "git_blob_sha": "197a5fe2626dce0dcbe3d30447a97bef9b26c7d6"
+    },
+    {
+      "path": "matching/.gitignore",
+      "git_blob_sha": "0363ab8dfa398c784a8e781ec5cdd46fdd6604b5"
+    },
+    {
+      "path": "matching/SETUP.md",
+      "git_blob_sha": "eff0479f9a39e3711a07c470581fc3e4ee9b4990"
+    },
+    {
+      "path": "matching/db.py",
+      "git_blob_sha": "74f12189a236c276761fceb725d8b7bd99cf3ef0"
+    },
+    {
+      "path": "matching/filters.py",
+      "git_blob_sha": "c64957506a91ec889df8a9fb4e5a7e627e8d2b05"
+    },
+    {
+      "path": "matching/match.py",
+      "git_blob_sha": "39b9b1ae11b11d30465f7ef1990c7a2730b52a43"
+    },
+    {
+      "path": "matching/matcher.py",
+      "git_blob_sha": "9b60a044d3fced945750599f41d9c26d76cc8507"
+    },
+    {
+      "path": "matching/sample_pool.json",
+      "git_blob_sha": "2a9d0632ed891c8befbda92569d58db3e0f3c333"
+    },
+    {
+      "path": "matching/scoring.py",
+      "git_blob_sha": "2254ecc79fa28ad954032a8ce0a01b7293c9e65c"
+    },
+    {
+      "path": "requirements.txt",
+      "git_blob_sha": "d4c92d420c8f04af648b2cf15f573e7c3505e5d9"
+    },
+    {
+      "path": "start-backend.bat",
+      "git_blob_sha": "de3d656edb68b375abb13cffa6acde8255829ce6"
+    },
+    {
+      "path": "start-backend.sh",
+      "git_blob_sha": "91c3cae4b166a6ceeaf1abcd964186b579ae316f"
+    },
+    {
+      "path": "start-frontend.bat",
+      "git_blob_sha": "a00e3d9ee3b6143d12582e4a94bb996f032fa6fd"
+    },
+    {
+      "path": "start-frontend.sh",
+      "git_blob_sha": "5ca8b995aaf60c7be20aa04f5eabbac1d18c6178"
+    },
+    {
+      "path": "ui/README.md",
+      "git_blob_sha": "7cd5a464bf7c6f032b4254eb13361aeb60840f56"
+    },
+    {
+      "path": "ui/css/style.css",
+      "git_blob_sha": "8872c5fd6dcafeb615139a5e0cfb8916af450cb7"
+    },
+    {
+      "path": "ui/dashboard.html",
+      "git_blob_sha": "92cd2e519de8a92e3638e2770b08f25847800435"
+    },
+    {
+      "path": "ui/data/mock-data.json",
+      "git_blob_sha": "be911ab972c0c0833eed149af4ddd3417dfb0417"
+    },
+    {
+      "path": "ui/edit-profile.html",
+      "git_blob_sha": "4a85107cdcffa0177f24f585974b7a014479a1d1"
+    },
+    {
+      "path": "ui/index.html",
+      "git_blob_sha": "79704817f83d88656404f48ceb93cd09a592e51d"
+    },
+    {
+      "path": "ui/js/app.js",
+      "git_blob_sha": "6e7d74562c66dc8f383921d8cc298eb4bff7e3a2"
+    },
+    {
+      "path": "ui/register.html",
+      "git_blob_sha": "d7a52ffa039055c1f963d381cc8cd1148552aaec"
+    },
+    {
+      "path": "ui/results.html",
+      "git_blob_sha": "8d082543ed06e483a4a3523f55e06868465c6f8e"
+    }
+  ]
+}

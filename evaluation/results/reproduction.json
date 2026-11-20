@@ -1,0 +1,19 @@
+{
+  "revision": "81886ac18511398f320b0e592828ea00c956d7cd",
+  "checked_at": "2026-11-20T20:16:16+08:00",
+  "source_files_verified": 35,
+  "source_acquisition": "Fresh Git clone using git -c http.version=HTTP/1.1 clone --depth 1",
+  "git_clone_exit_code": 0,
+  "environment": "Recorded Windows Python 3.12.14 environment; requirements identical to original clean install",
+  "pip_check_result": "No broken requirements found.",
+  "offline_command": "python evaluation/run_evaluation.py",
+  "offline_exit_code": 1,
+  "offline_result": {
+    "total": 55,
+    "PASS": 51,
+    "FAIL": 4,
+    "ERROR": 0
+  },
+  "postgresql_integration_tested": false,
+  "scope": "Fresh-clone offline rerun; live/browser checks use identical verified source in the preceding isolated checkout"
+}

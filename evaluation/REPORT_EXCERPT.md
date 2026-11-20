@@ -1,0 +1,15 @@
+# Suggested report text based on recorded evidence
+
+Review and adapt this text; enter the actual team members responsible for checking it. These are measured results, not a claim of human sign-off.
+
+## Section 3 Evaluation and test results
+
+We evaluated application commit `81886ac` using synthetic student profiles. Success criteria were same-cohort eligibility, exclusion of self and already-placed students, five unique recommendations when available, nonblank factual explanations, saved-profile integrity, and safe handling of invalid input and model-service failures. We also tested the new programme, open-role and skill preferences. The offline suite comprised 55 cases, including 25 existing API cases and 30 additional acceptance cases: 51 passed, 4 failed and 0 encountered runner errors. One sweep case evaluated all 30 original profiles and 30 enriched variants, repeating each query twice; these 60 inputs are not counted as 60 extra test cases.
+
+Of six direct DeepSeek Flash calls on three enriched synthetic profiles, 6 met the criteria for five unique eligible recommendations with nonblank reasons. The automatic audit found no detected unsupported defined claims in 30/30 returned explanations; this is not a human assessment of usefulness or student satisfaction. Median client-side latency was 2.554 seconds (range 2.406–2.953). 7/7 browser scenarios passed, including registration, preference persistence, a separate live-AI run, city editing with AI disabled, authentication rejection, re-login, and an empty eligible pool. See evaluation/results/ for inputs, expected/observed outputs, logs, responses and screenshots.
+
+## Section 4 Reproducibility, failure cases and limitations
+
+Installation from the repository requirements and pip check succeeded in the recorded clean Windows Python 3.12.14 environment. We then reran the same acceptance suite in a separate fresh Git clone, with identical totals, and recorded exact package versions in evaluation/requirements-tested.txt. All 35 application source files were checked against the immutable baseline. Live/browser checks used the same verified application files and the application's test-only SQLite injection with disposable synthetic data. Shared PostgreSQL and deployed-service operation remain unverified.
+
+The suite exposed four failures: partial valid model output is not topped up to five; unknown student skills are treated as known gaps; an adversarial model response can use a non-skill numeric field as a skill; and logout in one cache instance is not immediately observed in another. The last issue was reproduced with two cache instances over a disposable SQLite transport and is conditional on multi-instance operation. Proposed improvements are validated-count fallback, explicit unknown-skill handling, a whitelist of allowed skill keys, and shared/revalidated session revocation, each followed by the same regression cases. Availability overlap and mutual consent remain scope limitations. The sample is synthetic and small, so these results establish observed behaviour rather than real-student matching quality.

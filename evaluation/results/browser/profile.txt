@@ -1,0 +1,58 @@
+- navigation:
+  - link "🎯 Teammate Matcher":
+    - /url: dashboard.html
+  - link "Dashboard":
+    - /url: dashboard.html
+  - link "Edit Profile":
+    - /url: edit-profile.html?v=4
+  - link "Logout (evaluation_browser)":
+    - /url: "#"
+- main:
+  - heading "Hello, Evaluation Browser! 👋" [level=1]
+  - paragraph: Build a balanced team for your next project
+  - heading "👤 Your Profile" [level=2]
+  - link "Edit":
+    - /url: edit-profile.html?v=4
+  - generic: "Username:"
+  - generic: evaluation_browser
+  - generic: "City:"
+  - generic: HK
+  - generic: "Role:"
+  - generic: Frontend
+  - generic: "Languages:"
+  - generic: English
+  - generic: "Programme:"
+  - generic: Computer Science
+  - generic: "Can fill:"
+  - generic: Database, Frontend
+  - generic: "Skills:"
+  - generic: Programming, Web
+  - generic: "Contact:"
+  - generic: evaluation@test.com
+  - generic: "Status:"
+  - generic: Looking for teammates
+  - heading "🎯 Find Teammates" [level=2]
+  - paragraph: "The matcher finds classmates who fill the gaps in your team, then ranks the strongest top 5 by:"
+  - list:
+    - listitem: ✓ Same cohort city (HK or SH)
+    - listitem: ✓ Roles your team is missing (Frontend, Backend, Database, Agentic Development)
+    - listitem: ✓ Skills that fit you (programming, GitHub, debugging, web, AI agents)
+    - listitem: ✓ Shared languages and programme diversity
+    - listitem: ✓ Availability (not already in a team)
+  - text: Use AI model
+  - generic: "Off"
+  - paragraph: Off uses the deterministic scorer with the same signals and no API call.
+  - checkbox "Use AI model Off"
+  - button "🔍 Run Matching Algorithm"
+  - heading "📋 How Matching Works" [level=2]
+  - generic: "1"
+  - heading "Hard Filter" [level=3]
+  - paragraph: "We remove anyone who cannot join your team: a different cohort city, classmates already in a team, and yourself."
+  - generic: "2"
+  - heading "Signal Analysis" [level=3]
+  - paragraph: Each remaining classmate is scored on role gaps, complementary skills, open-role flexibility, shared languages, and programme mix.
+  - generic: "3"
+  - heading "Team Assembly" [level=3]
+  - paragraph: The AI model weighs those signals to assemble a balanced top 5. With the switch off, or no API key, a deterministic scorer applies the same rubric.
+- contentinfo:
+  - paragraph: AILT9019 - AI Literacy for Computing and Data Science | HKU 2026-27
